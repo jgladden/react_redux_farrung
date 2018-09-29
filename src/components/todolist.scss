@@ -1,0 +1,19 @@
+.todoCollection {
+  padding: 10px;
+
+  li {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  p {
+    text-transform: uppercase;
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,23 @@
+.collectionControls {
+  padding: 10px;
+  margin: 10px;
+  border: 1px solid #ccc;
+  background: #dfdfdf;
+
+  p {
+    text-transform: uppercase;
+    font-size: 18px;
+    padding-bottom: 10px;
+  }
+
+  input {
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    padding: 5px;
+    background: #fff;
+  }
+
+  button {
+    margin-left: 20px;
+  }
+}
