@@ -6,12 +6,11 @@ import {
   REMOVE_PORTFOLIO_ITEM 
 } from '../constants/action_types';
 
-const api = 'http://farrung.com/api/portfolio1/';
+const api = 'http://farrung.com/api/allportfolio/';
 
-export function fetchPortfolioType(type) {
-  let url = api + type;
+export function fetchPortfolio() {
   return function(dispatch) {
-    return jsonFetch(url).then(data => {
+    return jsonFetch(api).then(data => {
       dispatch(addPortfolioType(data));
     });
   };

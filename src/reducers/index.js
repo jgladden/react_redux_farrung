@@ -16,10 +16,7 @@ export default (state, action) => {
       return ({
         ...state,
         portfolio: {
-          ...state.portfolio,
-          [state.selected_portfolio_type]: {
           ...action.payload
-          }
         }
       });
     case ADD_PORTFOLIO_ITEM:

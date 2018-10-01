@@ -1,11 +1,11 @@
 import React from 'react';
-import TodoControls from '../containers/TodoControls';
-import TodoCollection from '../containers/TodoCollection';
+import NavItems from '../containers/NavItems';
+import PortfolioFilter from '../containers/PortfolioFilter';
 
 const App = props => (
   <React.Fragment>
-    <TodoControls />
-    <TodoCollection />
+    <NavItems />
+    <PortfolioFilter />
   </React.Fragment>
 );
 
