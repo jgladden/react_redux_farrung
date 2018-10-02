@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import reducer from '../reducers';
 
 const initialState = {
-  selected_portfolio_type: 'online',
+  portfolio_type: 'online',
   portfolio: {}
 };
 

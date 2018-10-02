@@ -1,9 +1,10 @@
 import { Router } from 'director';
-import { setPortfolioType } from './actions';
+import { setPortfolioType, setPortfolioId } from './actions';
 import { store } from './store';
 
 Router({
-  '/portfolio/:type': type => store.dispatch(setPortfolioType({type}))
+  '/portfolio/:type': type => store.dispatch(setPortfolioType({type})),
+  '/portfolio/:type/:id': (type, id) => store.dispatch(setPortfolioId({id}))
 })
 .configure({
   notfound: () => {}, 
@@ -12,10 +13,12 @@ Router({
 
 const router = () => {
   const {
-    selected_portfolio_type: type
+    portfolio_type: type,
+    portfolio_id: id
   } = store.getState();
 
   let path = `/portfolio/${type}`;
+  if(id) path = `${path}/${id}`;
 
   if (path !== window.location.pathname) 
     window.history.pushState(null, null, path);

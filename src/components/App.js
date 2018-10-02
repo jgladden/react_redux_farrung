@@ -1,11 +1,13 @@
 import React from 'react';
-import NavItems from '../containers/NavItems';
-import PortfolioFilter from '../containers/PortfolioFilter';
+import PortfolioNavContainer from '../containers/PortfolioNavContainer';
+import PortfolioListContainer from '../containers/PortfolioListContainer';
+import PortfolioDetailContainer from '../containers/PortfolioDetailContainer';
 
 const App = () => (
   <React.Fragment>
-    <NavItems />
-    <PortfolioFilter />
+    <PortfolioNavContainer />
+    <PortfolioDetailContainer />
+    <PortfolioListContainer />
   </React.Fragment>
 );
 

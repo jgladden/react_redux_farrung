@@ -10,7 +10,8 @@ class PortfolioList extends Component {
 
   render() {
     const {
-      portfolio
+      portfolio,
+      setPortfolioId
     } = this.props;
 
     if(!portfolio) 
@@ -22,6 +23,7 @@ class PortfolioList extends Component {
           <PortfolioItem
             key={id}
             {...portfolio[id]}
+            handleClick={() => setPortfolioId(id)}
           />
         ))}
       </ul>
@@ -31,6 +33,7 @@ class PortfolioList extends Component {
 
 PortfolioList.propTypes = {
   fetchPortfolio: PropTypes.func.isRequired,
+  setPortfolioId: PropTypes.func.isRequired,
   portfolio: PropTypes.object.isRequired
 };
 

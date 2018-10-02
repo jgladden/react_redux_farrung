@@ -1,6 +1,7 @@
 import {
+  FETCH_PORTFOLIO,
+  SET_PORTFOLIO_ID,
   SET_PORTFOLIO_TYPE,
-  ADD_PORTFOLIO_TYPE,
   ADD_PORTFOLIO_ITEM,
   REMOVE_PORTFOLIO_ITEM
 } from '../constants/action_types';
@@ -8,21 +9,24 @@ import {
 export default (state, action) => {
   switch (action.type) {
   case SET_PORTFOLIO_TYPE: {
-    let { type } = action.payload;
-    let portfolioType = Object.keys(state.portfolio);
-    let inValidType = portfolioType.indexOf(type) == -1;
-    if(inValidType) return state;
     return ({
       ...state,
-      selected_portfolio_type: type
+      portfolio_type: action.payload.type
     });
   }
-  case ADD_PORTFOLIO_TYPE: {
+  case SET_PORTFOLIO_ID: {
+    return({
+      ...state,
+      portfolio_id: action.payload.id
+    })
+  }
+  case FETCH_PORTFOLIO: {
+    let {
+      portfolio
+    } = action.payload;
     return ({
       ...state,
-      portfolio: {
-        ...action.payload
-      }
+      portfolio
     });
   }
   case ADD_PORTFOLIO_ITEM: {
