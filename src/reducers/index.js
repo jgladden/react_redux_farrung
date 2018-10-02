@@ -8,9 +8,13 @@ import {
 export default (state, action) => {
   switch (action.type) {
   case SET_PORTFOLIO_TYPE: {
+    let { type } = action.payload;
+    let portfolioType = Object.keys(state.portfolio);
+    let inValidType = portfolioType.indexOf(type) == -1;
+    if(inValidType) return state;
     return ({
       ...state,
-      selected_portfolio_type: action.payload.type
+      selected_portfolio_type: type
     });
   }
   case ADD_PORTFOLIO_TYPE: {
