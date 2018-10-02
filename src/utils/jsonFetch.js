@@ -14,4 +14,4 @@ export function jsonFetch(url, options) {
     })
     .catch(reject);
   });
-};
+}

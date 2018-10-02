@@ -1,5 +1,5 @@
 import './portfoliolist.scss';
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PortfolioItem from './PortfolioItem';
 
@@ -25,12 +25,13 @@ class PortfolioList extends Component {
           />
         ))}
       </ul>
-    )
+    );
   }
 }
 
 PortfolioList.propTypes = {
-  fetchPortfolio: PropTypes.func.isRequired
-}
+  fetchPortfolio: PropTypes.func.isRequired,
+  portfolio: PropTypes.object.isRequired
+};
 
 export default PortfolioList;

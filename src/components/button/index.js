@@ -19,8 +19,8 @@ class Button extends Component {
 }
 
 Button.propTypes = {
-    handleClick: PropTypes.func.isRequired,
-    label: PropTypes.string.isRequired
+  handleClick: PropTypes.func.isRequired,
+  label: PropTypes.string.isRequired
 };
 
 export default Button;

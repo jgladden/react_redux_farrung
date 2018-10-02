@@ -4,12 +4,24 @@ const webpack = require('webpack');
 const assetcontext = 'src/assets';
 
 module.exports = { 
-  entry: ['babel-polyfill', __dirname + '/src/index.js'],
+  entry: [
+    'babel-polyfill', 
+    __dirname + '/src/index.js'
+  ],
   output: {
     path: __dirname + '/dist',
+    publicPath: '/',
     filename: 'js/bundle.js'
   },
+  resolve: {
+    alias: {
+      director: __dirname + '/node_modules/director/build/director'
+    }
+  },
   devtool: 'source-map',
+  devServer: {
+    historyApiFallback: true
+  },  
   module: {
     rules: [
       {

@@ -1,5 +1,4 @@
 import React from 'react';
-import Button from './button';
 import PropTypes from 'prop-types';
 
 const PortfolioItem = ({title, description}) => (
@@ -10,12 +9,10 @@ const PortfolioItem = ({title, description}) => (
   </li>
 );
 
-
 PortfolioItem.propTypes = {
-    description: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired
-}
-
+  description: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
+};
 
 export default PortfolioItem;
 

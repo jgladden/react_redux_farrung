@@ -1,24 +1,23 @@
-import React from 'react';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from '../actions';
 import PortfolioList from '../components/PortfolioList';
 
 const getVisiblePortfolio = (portfolio, type) => {
-  return portfolio[type] ? portfolio[type] : {}
+  return portfolio[type] ? portfolio[type] : {};
 };
 
 const mapStateToProps = state => ({
-    portfolio: getVisiblePortfolio(state.portfolio, state.selected_portfolio_type)
+  portfolio: getVisiblePortfolio(state.portfolio, state.selected_portfolio_type)
 });
 
 
 const mapDispatchToProps = dispatch => {
   return {
     fetchPortfolio: () => {
-      dispatch(fetchPortfolio())
+      dispatch(fetchPortfolio());
     }
-  }
-}
+  };
+};
 
 export default connect(
   mapStateToProps,

@@ -12,18 +12,18 @@ const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
     {portfolioTypes.map(type => (
       <li key={type}>
         <Button 
-          handleClick={e => setPortfolioType({type})}
+          handleClick={() => setPortfolioType({type})}
           label={type}
         />
       </li>
     ))}
     </ul>
-  )
+  );
 };
 
 PortfolioNav.propTypes = {
   portfolioTypes: PropTypes.array.isRequired,
   setPortfolioType: PropTypes.func.isRequired
-}
+};
 
 export default PortfolioNav;

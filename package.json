@@ -45,6 +45,7 @@
     "webpack-dev-server": "^2.4.2"
   },
   "dependencies": {
+    "director": "^1.2.8",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-redux": "^5.0.7",
