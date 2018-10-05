@@ -1,28 +1,36 @@
-import {
-  FETCH_PORTFOLIO,
-  ADD_PORTFOLIO_ITEM,
-  REMOVE_PORTFOLIO_ITEM
-} from '../constants/action_types';
+import * as types from '../constants/action_types';
 
 const portfolio = (state = {}, action) => {
   switch (action.type) {
-  case FETCH_PORTFOLIO: {
-    return ({
-      ...action.payload.portfolio
-    });
+  case types.FETCH_PORTFOLIO_REQUEST: {
+    return {
+      fetching: 1
+    };
   }
-  case ADD_PORTFOLIO_ITEM: {
+  case types.FETCH_PORTFOLIO_SUCCESS: {
+    return { 
+      items: {
+        ...action.payload 
+      }
+    };
+  }
+  case types.FETCH_PORTFOLIO_FAILURE: {
+    return { 
+      error: action.payload.toString()
+    };
+  }
+  case types.ADD_PORTFOLIO_ITEM: {
     let { type, item } = action.payload;
     let portfolio = {...state};
-    portfolio[type][item.id] = item;
+    portfolio.items[type][item.id] = item;
     return {
       ...portfolio
     };
   }
-  case REMOVE_PORTFOLIO_ITEM: {
+  case types.REMOVE_PORTFOLIO_ITEM: {
     let { type, id } = action.payload;
     let portfolio = {...state};
-    delete portfolio[type][id];
+    delete portfolio.items[type][id];
     return {
       ...portfolio
     };

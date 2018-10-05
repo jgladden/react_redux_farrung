@@ -10,19 +10,24 @@ class PortfolioList extends Component {
 
   render() {
     const {
-      portfolio,
+      items,
+      fetching,
+      error,
       setPortfolioId
     } = this.props;
 
-    if(!portfolio) 
+    if(fetching) 
       return(<p>...loading</p>);
+
+    if(error)
+      return(<p>{error}</p>);
     
     return (
       <ul className="portfolioList">
-        {Object.keys(portfolio).map(id => (
+        {Object.keys(items).map(id => (
           <PortfolioItem
             key={id}
-            {...portfolio[id]}
+            {...items[id]}
             handleClick={() => setPortfolioId(id)}
           />
         ))}
@@ -34,7 +39,9 @@ class PortfolioList extends Component {
 PortfolioList.propTypes = {
   fetchPortfolio: PropTypes.func.isRequired,
   setPortfolioId: PropTypes.func.isRequired,
-  portfolio: PropTypes.object.isRequired
+  items: PropTypes.object.isRequired,
+  error: PropTypes.string,
+  fetching: PropTypes.number
 };
 
 export default PortfolioList;

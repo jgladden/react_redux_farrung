@@ -1,46 +1,50 @@
-import { jsonFetch } from '../utils/jsonFetch';
-import { 
-  FETCH_PORTFOLIO,
-  SET_PORTFOLIO_TYPE,
-  SET_PORTFOLIO_ID,
-  ADD_PORTFOLIO_ITEM, 
-  REMOVE_PORTFOLIO_ITEM 
-} from '../constants/action_types';
+import 'whatwg-fetch';
+import * as types from '../constants/action_types';
 
 const api = 'http://farrung.com/api/allportfolio/';
 
 export function fetchPortfolio() {
-  return function(dispatch) {
-    return jsonFetch(api).then(data => {
-      dispatch(portfolioResults({portfolio: data}));
-    });
+  return dispatch => {
+    dispatch(fetchPortfolioRequest());
+    return fetch(api)
+      .then(res => res.json())
+      .then(body => dispatch(fetchPortfolioSuccess(body)))
+      .catch(ex => dispatch(fetchPortfolioFailure(ex)));
   };
 }
 
-export const portfolioResults = payload => ({
-  type: FETCH_PORTFOLIO,
+export const fetchPortfolioRequest = () => ({
+  type: types.FETCH_PORTFOLIO_REQUEST
+});
+
+export const fetchPortfolioSuccess = payload => ({
+  type: types.FETCH_PORTFOLIO_SUCCESS,
   payload
 });
 
+export const fetchPortfolioFailure = payload => ({
+  type: types.FETCH_PORTFOLIO_FAILURE,
+  payload
+});
 
 export const setPortfolioType = payload => ({
-  type: SET_PORTFOLIO_TYPE,
+  type: types.SET_PORTFOLIO_TYPE,
   payload
 });
 
 export const setPortfolioId = payload => ({
-  type: SET_PORTFOLIO_ID,
+  type: types.SET_PORTFOLIO_ID,
   payload
 });
 
 
 export const addPortfolioItem = payload => ({
-  type: ADD_PORTFOLIO_ITEM,
+  type: types.ADD_PORTFOLIO_ITEM,
   payload
 });
 
 export const removeTodo = payload => ({
-  type: REMOVE_PORTFOLIO_ITEM,
+  type: types.REMOVE_PORTFOLIO_ITEM,
   payload
 });
 
