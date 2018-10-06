@@ -1,7 +1,6 @@
 import 'whatwg-fetch';
 import * as types from '../constants/action_types';
-
-const api = 'http://farrung.com/api/allportfolio/';
+import { api } from '../constants/config';
 
 export function fetchPortfolio() {
   return dispatch => {
