@@ -1,7 +1,7 @@
 import './portfolionav.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../components/Button';
+import Button from './Button';
 import Loading from './Loading';
 
 const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
