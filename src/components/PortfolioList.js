@@ -2,6 +2,8 @@ import './portfoliolist.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import PortfolioItem from './PortfolioItem';
+import Loading from './Loading';
+import Error from './Error';
 
 class PortfolioList extends Component {
   componentDidMount() {
@@ -17,10 +19,10 @@ class PortfolioList extends Component {
     } = this.props;
 
     if(fetching) 
-      return(<p>...loading</p>);
+      return (<Loading />);
 
     if(error)
-      return(<p>{error}</p>);
+      return (<Error error={error} />);
     
     return (
       <ul className="portfolioList">

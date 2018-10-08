@@ -2,10 +2,11 @@ import './portfolionav.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../components/Button';
+import Loading from './Loading';
 
 const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
   if(!portfolioTypes.length)
-    return (<p>loading</p>);
+    return (<Loading />);
 
   return (
     <ul className="portfolioNav">
