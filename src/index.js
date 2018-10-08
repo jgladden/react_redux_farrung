@@ -2,18 +2,28 @@ import './index.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import App from './components/App';
 import router from './router';
 import { store } from './store';
+import PortfolioNavContainer from './containers/PortfolioNavContainer';
+import PortfolioListContainer from './containers/PortfolioListContainer';
+import PortfolioDetailContainer from './containers/PortfolioDetailContainer';
 
 store.subscribe(router);
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <React.Fragment>
+      <PortfolioNavContainer />
+      <PortfolioDetailContainer />
+      <PortfolioListContainer />
+    </React.Fragment>
   </Provider>, 
   document.getElementById('react-application')
 );
+
+
+
+
 
 
 

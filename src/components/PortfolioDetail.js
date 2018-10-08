@@ -2,11 +2,7 @@ import './portfoliodetail.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const PortfolioDetail = props => {
-  const {
-    id,
-    title
-  } = props.portfolioDetails;
+const PortfolioDetail = ({portfolioDetails: { id, title }}) => {
   if(!id) return null;
   return (
     <div id='portfolioDetail'>

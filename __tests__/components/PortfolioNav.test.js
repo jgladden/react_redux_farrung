@@ -6,11 +6,9 @@ import Button from '../../src/components/button';
 
 
 describe('<PortfolioNav />', () => {
-  describe('render()', () => {
-    test('renders the component', () => {
-      const wrapper = shallow(<PortfolioNav portfolioTypes={['online', 'print']} setPortfolioType={()=>{}} />);
-      expect(wrapper.exists()).toBe(true);
-    });
+  test('renders the component', () => {
+    const wrapper = shallow(<PortfolioNav portfolioTypes={['online', 'print']} setPortfolioType={()=>{}} />);
+    expect(wrapper.exists()).toBe(true);
   });
 });
 
