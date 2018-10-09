@@ -1,10 +1,8 @@
 import { combineReducers } from 'redux';
 import portfolio from './portfolio';
-import portfolio_type from './portfolio_type';
-import portfolio_id from './portfolio_id';
+import display_portfolio from './display_portfolio';
 
 export default combineReducers({
   portfolio,
-  portfolio_type,
-  portfolio_id
+  display_portfolio
 });

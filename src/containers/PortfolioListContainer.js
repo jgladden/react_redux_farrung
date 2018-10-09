@@ -1,13 +1,13 @@
 import { connect } from 'react-redux';
 import { fetchPortfolio, setPortfolioId } from '../actions';
-import PortfolioList from '../components/PortfolioList';
+import PortfolioList from '../components/PortfolioList/';
 
 const getVisiblePortfolio = (items, type) => {
   return typeof items !== 'undefined' && items[type] ? items[type] : {};
 };
 
 const mapStateToProps = state => ({
-  items: getVisiblePortfolio(state.portfolio.items, state.portfolio_type),
+  items: getVisiblePortfolio(state.portfolio.items, state.display_portfolio.type),
   fetching: state.portfolio.fetching,
   error: state.portfolio.error
 });

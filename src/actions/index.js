@@ -1,6 +1,6 @@
 import 'whatwg-fetch';
-import * as types from '../constants/action_types';
-import { api } from '../constants/config';
+import * as types from './types';
+import { api } from '../config';
 
 export function fetchPortfolio() {
   return dispatch => {

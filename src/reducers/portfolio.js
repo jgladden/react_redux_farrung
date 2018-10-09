@@ -1,4 +1,4 @@
-import * as types from '../constants/action_types';
+import * as types from '../actions/types';
 
 const portfolio = (state = {}, action) => {
   switch (action.type) {

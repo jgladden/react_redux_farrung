@@ -1,9 +1,9 @@
-import './portfoliolist.scss';
+import './styles.scss';
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import PortfolioItem from './PortfolioItem';
-import Loading from './Loading';
-import Error from './Error';
+import PortfolioItem from '../PortfolioItem';
+import Loading from '../Loading';
+import Error from '../Error';
 
 class PortfolioList extends Component {
   componentDidMount() {

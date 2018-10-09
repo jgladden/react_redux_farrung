@@ -1,6 +1,6 @@
+import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import './button.scss';
 
 const Button = ({handleClick, label}) => (
   <button onClick={handleClick}>

@@ -1,8 +1,8 @@
-import './portfolionav.scss';
+import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from './Button';
-import Loading from './Loading';
+import Button from '../Button';
+import Loading from '../Loading';
 
 const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
   if(!portfolioTypes.length)

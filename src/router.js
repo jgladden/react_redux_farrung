@@ -13,9 +13,9 @@ Router({
 
 const router = () => {
   const {
-    portfolio_type: type,
-    portfolio_id: id
-  } = store.getState();
+    type,
+    id
+  } = store.getState().display_portfolio;
 
   let path = `/portfolio/${type}`;
   if(id) path = `${path}/${id}`;
