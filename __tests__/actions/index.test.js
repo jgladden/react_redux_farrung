@@ -35,7 +35,7 @@ describe('event actions', () => {
   });
   
   test('setportfoliotype dispatches correct action / payload', () => {
-    const payload = 'online';
+    const payload = { type: 'online' };
     const expectedActions = [
       { type: types.SET_PORTFOLIO_TYPE, payload }
     ];
@@ -44,7 +44,7 @@ describe('event actions', () => {
   });
 
   test('setportfolioid dispatches correct action / payload', () => {
-    const payload = 22;
+    const payload = { id: 22 };
     const expectedActions = [
       { type: types.SET_PORTFOLIO_ID, payload }        
     ];
