@@ -1,8 +1,7 @@
 import React from 'react';
-import { shallow, mount } from 'enzyme';
-import toJson from 'enzyme-to-json';
+import { shallow } from 'enzyme';
 import PortfolioNav from '../../src/components/PortfolioNav';
-import Button from '../../src/components/button';
+import Button from '../../src/components/Button';
 
 const props = {
   portfolioTypes: ['online', 'print'],
@@ -10,12 +9,12 @@ const props = {
 }
 
 describe('Portfolio Nav', () => {
-  const portfolionav = mount(<PortfolioNav {...props} />);
+  const portfolionav = shallow(<PortfolioNav {...props} />);
   test('renders the component', () => {
     expect(portfolionav.exists()).toBe(true);
   });
   test('renders buttons for each portfolio type', () => {
-    expect(portfolionav.find('button')).toHaveLength(2);
+    expect(portfolionav.find(Button)).toHaveLength(2);
   });
 });
 
@@ -23,7 +22,7 @@ describe('Portfolio Nav Button', () => {
   const type = props.portfolioTypes[0];
   const func = () => props.setPortfolioType({type});
   const mockOnClick = jest.fn(func);
-  const navbutton = mount(
+  const navbutton = shallow(
     <Button
       handleClick={mockOnClick}
       label={type}
