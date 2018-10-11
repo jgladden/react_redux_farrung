@@ -3,13 +3,13 @@ import { shallow } from 'enzyme';
 import PortfolioNav from '../../src/components/PortfolioNav';
 import Button from '../../src/components/Button';
 
-const props = {
-  portfolioTypes: ['online', 'print'],
-  setPortfolioType: type => type
-}
-
 describe('Portfolio Nav', () => {
-  const portfolionav = shallow(<PortfolioNav {...props} />);
+  const portfolionav = shallow(
+    <PortfolioNav
+      portfolioTypes={['online', 'print']}
+      setPortfolioType={() => {}}
+     />
+  );
   test('renders the component', () => {
     expect(portfolionav.exists()).toBe(true);
   });
@@ -19,13 +19,12 @@ describe('Portfolio Nav', () => {
 });
 
 describe('Portfolio Nav Button', () => {
-  const type = props.portfolioTypes[0];
-  const func = () => props.setPortfolioType({type});
-  const mockOnClick = jest.fn(func);
+  const payload = { type: 'online' };
+  const mockOnClick = jest.fn(() => payload);
   const navbutton = shallow(
     <Button
       handleClick={mockOnClick}
-      label={type}
+      label={payload.type}
     />
   );
   test('renders the component', () => {
@@ -33,6 +32,6 @@ describe('Portfolio Nav Button', () => {
   });
   test('onClick returns expected payload', () => {
     navbutton.find('button').simulate('click');
-    expect(mockOnClick.mock.results[0].value).toEqual({type});
+    expect(mockOnClick.mock.results[0].value).toEqual(payload);
   });
 });

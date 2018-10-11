@@ -2,17 +2,16 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import PortfolioItem from '../../src/components/PortfolioItem';
 
-const props = {
-  title: 'title',
-  description: 'description',
-};
-
 describe('Portfolio Item', () => {
   const id = { id: '22'};
-  const func = () => id;
-  const mockOnClick = jest.fn(func);
-  props.handleClick: mockOnClick;
-  const portfolioitem = shallow(<PortfolioItem {...props} />);
+  const mockOnClick = jest.fn(() => id);
+  const portfolioitem = shallow(
+    <PortfolioItem
+      handleClick={mockOnClick}
+      title='title'
+      description='description'
+    />
+  );
   test('renders the component', () => {
     expect(portfolioitem.exists()).toBe(true);
   });
