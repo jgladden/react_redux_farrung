@@ -3,7 +3,7 @@ import { shallow } from 'enzyme';
 import PortfolioItem from '../../src/components/PortfolioItem';
 
 describe('Portfolio Item', () => {
-  const id = { id: '22'};
+  const id = { primary: 'portfolio', secondary: 'online', tertiary: '22'};
   const mockOnClick = jest.fn(() => id);
   const portfolioitem = shallow(
     <PortfolioItem

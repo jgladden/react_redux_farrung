@@ -1,10 +1,17 @@
 import { Router } from 'director';
-import { setPortfolioType, setPortfolioId } from './actions';
 import { store } from './store';
+import { setSection } from './actions';
 
 Router({
-  '/portfolio/:type': type => store.dispatch(setPortfolioType({type})),
-  '/portfolio/:type/:id': (type, id) => store.dispatch(setPortfolioId({id}))
+  '/:primary': primary => store.dispatch(
+    setSection({ primary })
+  ),
+  '/:primary/:secondary': (primary, secondary) => store.dispatch(
+    setSection({ primary, secondary })
+  ),
+  '/:primary/:secondary/:tertiary': (primary, secondary, tertiary) => store.dispatch(
+    setSection({ primary, secondary, tertiary })
+  )
 })
 .configure({
   notfound: () => {}, 
@@ -13,13 +20,15 @@ Router({
 
 const router = () => {
   const {
-    type,
-    id
-  } = store.getState().display_portfolio;
-
-  let path = `/portfolio/${type}`;
-  if(id) path = `${path}/${id}`;
-
+    section: {
+      primary,
+      secondary,
+      tertiary
+    }
+  } = store.getState();
+  let path = `/${primary}/`;
+  if(secondary) path += `${secondary}/`;
+  if(tertiary) path += tertiary;
   if (path !== window.location.pathname) 
     window.history.pushState(null, null, path);
 };

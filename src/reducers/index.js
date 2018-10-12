@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import portfolio from './portfolio';
-import display_portfolio from './display_portfolio';
+import section from './section';
 
 export default combineReducers({
-  portfolio,
-  display_portfolio
+  section,
+  portfolio
 });

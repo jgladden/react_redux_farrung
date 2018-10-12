@@ -34,21 +34,12 @@ describe('event actions', () => {
     store.clearActions();
   });
   
-  test('setportfoliotype dispatches correct action / payload', () => {
-    const payload = { type: 'online' };
+  test('setsection dispatches correct action / payload', () => {
+    const payload = { primary: 'portfolio', secondary: 'online', tertiary: '22' };
     const expectedActions = [
-      { type: types.SET_PORTFOLIO_TYPE, payload }
+      { type: types.SET_SECTION, payload }
     ];
-    store.dispatch(actions.setPortfolioType(payload));
-    expect(store.getActions()).toEqual(expectedActions);
-  });
-
-  test('setportfolioid dispatches correct action / payload', () => {
-    const payload = { id: 22 };
-    const expectedActions = [
-      { type: types.SET_PORTFOLIO_ID, payload }        
-    ];
-    store.dispatch(actions.setPortfolioId(payload));
+    store.dispatch(actions.setSection(payload));
     expect(store.getActions()).toEqual(expectedActions);
   });
 });

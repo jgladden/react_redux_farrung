@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from '../Button';
 import Loading from '../Loading';
 
-const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
+const PortfolioNav = ({portfolioTypes, setSection}) => {
   if(!portfolioTypes.length)
     return (<Loading />);
 
@@ -13,7 +13,7 @@ const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
     {portfolioTypes.map(type => (
       <li key={type}>
         <Button 
-          handleClick={() => setPortfolioType({type})}
+          handleClick={() => setSection({primary: 'portfolio', secondary: type})}
           label={type}
         />
       </li>
@@ -24,7 +24,7 @@ const PortfolioNav = ({portfolioTypes, setPortfolioType}) => {
 
 PortfolioNav.propTypes = {
   portfolioTypes: PropTypes.array.isRequired,
-  setPortfolioType: PropTypes.func.isRequired
+  setSection: PropTypes.func.isRequired
 };
 
 export default PortfolioNav;

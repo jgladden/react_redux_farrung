@@ -6,7 +6,7 @@ const getPortfolioDetails = (items, type, id) => {
 };
 
 const mapStateToProps = state => ({
-  portfolioDetails: getPortfolioDetails(state.portfolio.items, state.display_portfolio.type, state.display_portfolio.id)
+  portfolioDetails: getPortfolioDetails(state.portfolio.items, state.section.secondary, state.section.tertiary)
 });
 
 export default connect(

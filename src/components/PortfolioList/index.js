@@ -12,10 +12,11 @@ class PortfolioList extends Component {
 
   render() {
     const {
+      type,
       items,
       fetching,
       error,
-      setPortfolioId
+      setSection
     } = this.props;
 
     if(fetching) 
@@ -25,22 +26,25 @@ class PortfolioList extends Component {
       return (<Error error={error} />);
     
     return (
-      <ul className="portfolioList">
-        {Object.keys(items).map(id => (
-          <PortfolioItem
-            key={id}
-            {...items[id]}
-            handleClick={() => setPortfolioId(id)}
-          />
-        ))}
-      </ul>
+      <React.Fragment>
+        <p>TYPE: {type}</p>
+        <ul className="portfolioList">
+          {Object.keys(items).map(id => (
+            <PortfolioItem
+              key={id}
+              {...items[id]}
+              handleClick={() => setSection({primary: 'online', secondary: type, tertiary: id})}
+            />
+          ))}
+        </ul>
+      </React.Fragment>
     );
   }
 }
 
 PortfolioList.propTypes = {
   fetchPortfolio: PropTypes.func.isRequired,
-  setPortfolioId: PropTypes.func.isRequired,
+  setSection: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.number

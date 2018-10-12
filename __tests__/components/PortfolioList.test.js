@@ -4,7 +4,7 @@ import PortfolioList from '../../src/components/PortfolioList';
 import PortfolioItem from '../../src/components/PortfolioItem';
 import Loading from '../../src/components/Loading';
 import Error from '../../src/components/Error';
-import { fetchPortfolio, setPortfolioId } from '../../src/actions';
+import { fetchPortfolio, setSection } from '../../src/actions';
 
 const props = {
   items: {
@@ -16,7 +16,7 @@ const props = {
   },
   fetching: null,
   error: null,
-  setPortfolioId,
+  setSection,
   fetchPortfolio
 };
 

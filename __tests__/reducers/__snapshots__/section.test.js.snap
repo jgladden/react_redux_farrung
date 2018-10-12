@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`section reducers initial state is correct 1`] = `
+Object {
+  "primary": "portfolio",
+  "secondary": "online",
+  "tertiary": null,
+}
+`;
+
+exports[`section reducers set section primary returns expected state 1`] = `
+Object {
+  "primary": "portfolio",
+  "secondary": undefined,
+  "tertiary": undefined,
+}
+`;
+
+exports[`section reducers set section secondary returns expected state 1`] = `
+Object {
+  "primary": "portfolio",
+  "secondary": "online",
+  "tertiary": undefined,
+}
+`;
+
+exports[`section reducers set section tertiary returns expected state 1`] = `
+Object {
+  "primary": "portfolio",
+  "secondary": "online",
+  "tertiary": "22",
+}
+`;

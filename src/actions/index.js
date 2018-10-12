@@ -2,6 +2,11 @@ import 'whatwg-fetch';
 import * as types from './types';
 import { api } from '../config';
 
+export const setSection = payload => ({
+  type: types.SET_SECTION,
+  payload
+});
+
 export function fetchPortfolio() {
   return dispatch => {
     dispatch(fetchPortfolioRequest());
@@ -25,17 +30,6 @@ export const fetchPortfolioFailure = payload => ({
   type: types.FETCH_PORTFOLIO_FAILURE,
   payload
 });
-
-export const setPortfolioType = payload => ({
-  type: types.SET_PORTFOLIO_TYPE,
-  payload
-});
-
-export const setPortfolioId = payload => ({
-  type: types.SET_PORTFOLIO_ID,
-  payload
-});
-
 
 export const addPortfolioItem = payload => ({
   type: types.ADD_PORTFOLIO_ITEM,

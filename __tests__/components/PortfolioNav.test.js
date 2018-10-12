@@ -7,7 +7,7 @@ describe('Portfolio Nav', () => {
   const portfolionav = shallow(
     <PortfolioNav
       portfolioTypes={['online', 'print']}
-      setPortfolioType={() => {}}
+      setSection={() => {}}
      />
   );
   test('renders the component', () => {
@@ -19,12 +19,12 @@ describe('Portfolio Nav', () => {
 });
 
 describe('Portfolio Nav Button', () => {
-  const payload = { type: 'online' };
+  const payload = { primary: 'portfolio', secondary: 'online' };
   const mockOnClick = jest.fn(() => payload);
   const navbutton = shallow(
     <Button
       handleClick={mockOnClick}
-      label={payload.type}
+      label={payload.secondary}
     />
   );
   test('renders the component', () => {

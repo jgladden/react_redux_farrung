@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setPortfolioType } from '../actions';
+import { setSection } from '../actions';
 import PortfolioNav from '../components/PortfolioNav/';
 
 const getPortfolioTypes = items => {
@@ -13,6 +13,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    setPortfolioType
+    setSection
   }
 )(PortfolioNav);
