@@ -1,0 +1,10 @@
+.portfolioItem {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 12px;
+
+  &__heading {
+    font-size: 16px;
+  }
+}

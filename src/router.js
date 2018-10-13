@@ -2,7 +2,8 @@ import { Router } from 'director';
 import { store } from './store';
 import { setSection } from './actions';
 
-Router({
+export const router = Router({
+  '': () => store.dispatch(setSection({primary: 'portfolio', secondary: 'online'})),
   '/:primary': primary => store.dispatch(
     setSection({ primary })
   ),
@@ -16,9 +17,9 @@ Router({
 .configure({
   notfound: () => {}, 
   html5history: true
-}).init();
+});
 
-const router = () => {
+export const updateUri = () => {
   const {
     section: {
       primary,
@@ -26,11 +27,10 @@ const router = () => {
       tertiary
     }
   } = store.getState();
-  let path = `/${primary}/`;
-  if(secondary) path += `${secondary}/`;
-  if(tertiary) path += tertiary;
+  let path = `/${primary}`;
+  if(secondary) path += `/${secondary}`;
+  if(tertiary) path += `/${tertiary}`;
   if (path !== window.location.pathname) 
     window.history.pushState(null, null, path);
 };
 
-export default router;

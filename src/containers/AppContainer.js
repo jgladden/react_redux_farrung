@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
-import Website from '../components/Website';
+import App from '../components/App';
 
 const mapStateToProps = state => ({
-  type: state.section.secondary
+  primarySection: state.section.primary
 });
 
 export default connect(
   mapStateToProps,
   {}
-)(Website);
+)(App);

@@ -25,19 +25,25 @@ class PortfolioList extends Component {
     if(error)
       return (<Error error={error} />);
     
+    const itemIds = Object.keys(items);
+
     return (
-      <React.Fragment>
-        <p>TYPE: {type}</p>
-        <ul className="portfolioList">
-          {Object.keys(items).map(id => (
-            <PortfolioItem
-              key={id}
-              {...items[id]}
-              handleClick={() => setSection({primary: 'online', secondary: type, tertiary: id})}
-            />
-          ))}
-        </ul>
-      </React.Fragment>
+      <div id="portfolioList">
+        <h1>Portfolio / {type}</h1>
+        {itemIds.length ? (
+          <ul>
+            {itemIds.map(id => (
+              <PortfolioItem
+                key={id}
+                {...items[id]}
+                handleClick={() => setSection({primary: 'portfolio', secondary: type, tertiary: id})}
+              />
+            ))}
+          </ul>
+        ) : (
+          <p>No items found.</p>
+        )}
+      </div>
     );
   }
 }

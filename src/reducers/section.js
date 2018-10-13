@@ -1,11 +1,6 @@
 import * as types from '../actions/types';
 
-export const initialState = {
-  primary: 'portfolio',
-  secondary: 'online',
-  tertiary: null
-}
-const section = (state = initialState, action) => {
+const section = (state = {}, action) => {
   switch (action.type) {
   case types.SET_SECTION: {
     let {
@@ -13,7 +8,7 @@ const section = (state = initialState, action) => {
       secondary,
       tertiary
     } = action.payload;
-    if(primary === 'online')
+    if(primary === 'portfolio')
       secondary = secondary || 'online';
     if(primary === 'admin')
       secondary = secondary || 'list';
