@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Admin from './Admin';
-import Website from './Website';
-import Loading from './Loading';
-import PageNotFound from './PageNotFound';
+import Admin from '../Admin';
+import Website from '../Website';
+import Loading from '../Loading';
+import PageNotFound from '../PageNotFound';
 
 const App = ({primarySection}) => {
   switch(primarySection) {
