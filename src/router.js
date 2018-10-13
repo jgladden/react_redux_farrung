@@ -3,7 +3,7 @@ import { store } from './store';
 import { setSection } from './actions';
 
 export const router = Router({
-  '': () => store.dispatch(setSection({primary: 'portfolio', secondary: 'online'})),
+  '': () => store.dispatch(setSection({primary: 'portfolio'})),
   '/:primary': primary => store.dispatch(
     setSection({ primary })
   ),
