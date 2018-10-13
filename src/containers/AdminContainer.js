@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import Admin from '../components/Admin';
 
 const mapStateToProps = state => ({
-  primarySection: state.section.primary
+  section: state.section
 });
 
 export default connect(
