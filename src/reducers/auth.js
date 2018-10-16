@@ -8,7 +8,6 @@ const auth = (state = {}, action) => {
     };
   }
   case types.AUTH_SUCCESS: {
-    console.log(action.payload);
     return { 
       isAuthenticated: action.payload.isAuthenticated 
     };
