@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import Admin from '../Admin';
+import AdminContainer from '../../containers/AdminContainer';
 import Website from '../Website';
 import Loading from '../Loading';
 import PageNotFound from '../PageNotFound';
@@ -8,18 +8,14 @@ import PageNotFound from '../PageNotFound';
 const App = ({primarySection}) => {
   switch(primarySection) {
     case 'portfolio': 
-      return(<Website/>)
+      return(<Website />)
     case 'admin':
-      return(<Admin/>);
+      return(<AdminContainer />);
     case undefined:
-      return(<Loading/>);
+      return(<Loading />);
     default:
-      return(<PageNotFound/>);
+      return(<PageNotFound />);
   }
-};
-
-Admin.propTypes = {
-  primarySection: PropTypes.string
 };
 
 export default App;

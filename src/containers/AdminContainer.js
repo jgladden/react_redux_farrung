@@ -1,11 +1,20 @@
 import { connect } from 'react-redux';
-import Admin from '../components/Admin';
+import { submitAuthRequest } from '../actions';
+import Admin from '../components/Admin/';
 
 const mapStateToProps = state => ({
-  section: state.section
+  auth: state.auth
 });
+
+const mapDispatchToProps = dispatch => {
+  return {
+    submitAuthRequest: credentials => {
+      dispatch(submitAuthRequest(credentials))
+    }
+  }
+}
 
 export default connect(
   mapStateToProps,
-  {}
+  mapDispatchToProps
 )(Admin);

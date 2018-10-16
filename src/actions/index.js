@@ -1,6 +1,35 @@
-import 'whatwg-fetch';
+import fetchIt from '../utils/fetchIt';
 import * as types from './types';
-import { api } from '../config';
+import { portfolioRequestUri, authRequestUri } from '../config';
+
+export function submitAuthRequest(credentials) {
+  return dispatch => {
+    dispatch(authRequest());
+    return fetchIt(authRequestUri, {
+      method: 'POST',
+      body: credentials
+    })
+      .then(body => dispatch(authSuccess(body)))
+      .catch(ex => { console.log(ex); return dispatch(authFailure(ex))});
+  };
+}
+
+export const authRequest = () => ({
+  type: types.AUTH_REQUEST
+});
+
+export const authSuccess = payload => ({
+  type: types.AUTH_SUCCESS,
+  payload
+});
+
+export const authFailure = payload => ({
+  type: types.AUTH_FAILURE,
+  payload
+});
+
+
+
 
 export const setSection = payload => ({
   type: types.SET_SECTION,
@@ -10,8 +39,7 @@ export const setSection = payload => ({
 export function fetchPortfolio() {
   return dispatch => {
     dispatch(fetchPortfolioRequest());
-    return fetch(api)
-      .then(res => res.json())
+    return fetchIt(portfolioRequestUri)
       .then(body => dispatch(fetchPortfolioSuccess(body)))
       .catch(ex => dispatch(fetchPortfolioFailure(ex)));
   };

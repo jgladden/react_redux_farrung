@@ -16,7 +16,7 @@ const portfolio = (state = {}, action) => {
   }
   case types.FETCH_PORTFOLIO_FAILURE: {
     return { 
-      error: action.payload.toString()
+      error: action.payload
     };
   }
   case types.ADD_PORTFOLIO_ITEM: {
