@@ -1,4 +1,5 @@
 const domain = 'https://farrung.com';
 const api = `${domain}/api`;
-export const portfolioRequestUri = `${api}/allportfolio/`;
-export const authRequestUri = `${api}/authrequest/`;
+export const getPortfolioUrl = `${api}/allportfolio/`;
+export const postAuthUrl = `${api}/authrequest/`;
+export const postMessageUrl = `${api}/contact/`;

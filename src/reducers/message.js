@@ -1,18 +1,18 @@
 import * as types from '../actions/types';
 
-const auth = (state = {}, action) => {
+const message = (state = {}, action) => {
   switch (action.type) {
-  case types.POST_AUTH: {
+  case types.POST_MESSAGE: {
     return {
       posting: 1
     };
   }
-  case types.POST_AUTH_SUCCESS: {
+  case types.POST_MESSAGE_SUCCESS: {
     return { 
-      isAuthenticated: action.payload.isAuthenticated 
+      success: action.payload.success 
     };
   }
-  case types.POST_AUTH_ERROR: {
+  case types.POST_MESSAGE_ERROR: {
     return { 
       error: action.payload
     };
@@ -22,4 +22,4 @@ const auth = (state = {}, action) => {
   }
 };
 
-export default auth;
+export default message;

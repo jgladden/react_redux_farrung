@@ -1,31 +1,31 @@
 import axios from 'axios';
 import * as types from './types';
-import { authRequestUri } from '../config';
+import { postAuthUrl } from '../config';
 
-export function submitAuthRequest(credentials) {
+export function submitAuth(authObj) {
   return dispatch => {
-    dispatch(authRequest());
-    return axios.post(authRequestUri, credentials)
+    dispatch(postAuth());
+    return axios.post(postAuthUrl, authObj)
       .then(response => dispatch(
-        authSuccess(response.data))
+        postAuthSuccess(response.data))
       )
       .catch(error => dispatch(
-        authFailure(error.toString))
+        postAuthError(error.toString()))
       );
   };
 }
 
-export const authRequest = () => ({
-  type: types.AUTH_REQUEST
+export const postAuth = () => ({
+  type: types.POST_AUTH
 });
 
-export const authSuccess = payload => ({
-  type: types.AUTH_SUCCESS,
+export const postAuthSuccess = payload => ({
+  type: types.POST_AUTH_SUCCESS,
   payload
 });
 
-export const authFailure = payload => ({
-  type: types.AUTH_FAILURE,
+export const postAuthError = payload => ({
+  type: types.POST_AUTH_ERROR,
   payload
 });
 

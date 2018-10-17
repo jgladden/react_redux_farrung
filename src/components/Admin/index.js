@@ -1,27 +1,16 @@
 import React from 'react';
-import Loading from '../Loading/';
-import Error from '../Error/';
+import AuthContainer from '../../containers/AuthContainer';
 
-const Admin = ({auth, submitAuthRequest}) => { 
-  const {
-    fetching,
-    error,
-    isAuthenticated
-  } = auth;
-
-  if(fetching)
-    return (<Loading />);
-
-  if(error) 
-    return(<Error error={error} />);
-
-  return(
-    <React.Fragment>
-      <p onClick={() => submitAuthRequest({username:'james', password:'password'})}>Admin Nav</p>
-      <p>Admin Body</p>
-    </React.Fragment>
-  );
-};
+const Admin = ({isAuthenticated}) => (
+  <React.Fragment>
+  {isAuthenticated ? (
+    <p>Admin</p>
+  ) : (
+    <AuthContainer />
+  )
+  }
+  </React.Fragment>
+);
 
 export default Admin;
 

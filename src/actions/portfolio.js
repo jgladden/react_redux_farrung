@@ -1,11 +1,11 @@
 import axios from 'axios';
 import * as types from './types';
-import { portfolioRequestUri } from '../config';
+import { getPortfolioUrl } from '../config';
 
 export function fetchPortfolio() {
   return dispatch => {
     dispatch(fetchPortfolioRequest());
-    return axios.get(portfolioRequestUri)
+    return axios.get(getPortfolioUrl)
       .then(response => dispatch(
         fetchPortfolioSuccess(response.data))
       )
