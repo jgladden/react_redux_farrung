@@ -2,11 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { submitLogin, submitLogout } from '../actions';
 import Auth from '../components/Auth';
+import formUtil from '../utils/formUtil';
+
+const formFields = {
+  username: {
+    tests: ['(.{5,})']
+  },
+  password: {
+    tests: ['password']
+  }
+};
 
 const initialState = {
-  username: '',
-  password: ''
-}
+  fields: formUtil.getFieldsInitState(formFields)
+};
 
 class AuthContainer extends Component {
     
@@ -15,33 +24,22 @@ class AuthContainer extends Component {
     this.state = initialState;
   }
 
-  handleChange = ({target: { name, value}}) => {
-    this.setState({[name]: value});
-  }
-
-  formIsValid = () => {
-    let isValid = false;
-    const {
-      username,
-      password
-    } = this.state;
-    if (
-      username && 
-      username.length > 3 &&
-      password &&
-      password.length > 5
-    ) isValid = true;
-    return isValid;
+  handleChange = e => {
+    let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
+    this.setState({ fields });
   }
 
   handleSubmit = e => {
     e.preventDefault();
-    if(this.formIsValid()) {
-      this.props.submitLogin({...this.state});
+    let validateForm = formUtil.validateForm(
+      {...this.state.fields}
+    );
+    if(validateForm.isValidForm) {
+      this.props.submitLogin(validateForm.fieldValues);
       this.setState(initialState);
     } else {
-      console.log('not valid input');
-    }
+      this.setState({fields: validateForm.fields});
+    } 
   }
 
   render() {

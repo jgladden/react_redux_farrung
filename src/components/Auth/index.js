@@ -23,7 +23,7 @@ const Auth = ({auth, submitLogin, submitLogout, handleChange}) => {
         label='Log Out'
       />
     );
-  }
+  };
 
   return(
     <React.Fragment>
