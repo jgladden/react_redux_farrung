@@ -9,12 +9,21 @@ const authObj = {
   password:'password'
 };
 
-const Auth = ({auth, submitAuth}) => { 
+const Auth = ({auth, submitLogin, submitLogout, handleChange}) => { 
   const {
     posting,
     error,
     isAuthenticated
   } = auth;
+
+  if(isAuthenticated) {
+    return(
+      <Button
+        handleClick={() => submitLogout()}
+        label='Log Out'
+      />
+    );
+  }
 
   return(
     <React.Fragment>
@@ -24,20 +33,25 @@ const Auth = ({auth, submitAuth}) => {
       {error &&
         <Error error={error} />
       }
-      {isAuthenticated === 'false' &&
-        <p>Invalid login.</p>
+      {isAuthenticated === false &&
+        <p>User not found.</p>
       }
-      <Button 
-        handleClick={() => submitAuth(authObj)} 
-        label='Submit Login' 
-      />
+      <form onSubmit={e => submitLogin(e)}>
+        <input name='username' type='text' onChange={e => handleChange(e)}/>
+        <input name='password' type='password' onChange={e => handleChange(e)}/>
+        <Button 
+          handleClick={e => submitLogin(e)} 
+          label='Submit Login' 
+        />
+      </form>
     </React.Fragment>
   );
 };
 
 Auth.propTypes = {
   auth: PropTypes.object.isRequired,
-  submitAuth: PropTypes.func.isRequired
+  submitLogout: PropTypes.func.isRequired,
+  submitLogin: PropTypes.func.isRequired
 };
 
 export default Auth;

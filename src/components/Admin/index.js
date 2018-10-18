@@ -3,11 +3,9 @@ import AuthContainer from '../../containers/AuthContainer';
 
 const Admin = ({isAuthenticated}) => (
   <React.Fragment>
-  {isAuthenticated ? (
+  <AuthContainer />
+  {isAuthenticated &&
     <p>Admin</p>
-  ) : (
-    <AuthContainer />
-  )
   }
   </React.Fragment>
 );

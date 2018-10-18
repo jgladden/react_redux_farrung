@@ -17,6 +17,9 @@ const auth = (state = {}, action) => {
       error: action.payload
     };
   }
+  case types.AUTH_LOGOUT: {
+    return {};
+  }
   default:
     return state;
   }

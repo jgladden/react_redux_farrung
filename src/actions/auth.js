@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as types from './types';
 import { postAuthUrl } from '../config';
 
-export function submitAuth(authObj) {
+export function submitLogin(authObj) {
   return dispatch => {
     dispatch(postAuth());
     return axios.post(postAuthUrl, authObj)
@@ -28,4 +28,8 @@ export const postAuthError = payload => ({
   type: types.POST_AUTH_ERROR,
   payload
 });
+
+export const submitLogout = () => ({
+  type: types.AUTH_LOGOUT
+})
 
