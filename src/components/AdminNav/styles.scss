@@ -1,0 +1,23 @@
+#adminNav {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 10px;
+
+  li {
+    display: inline-block;
+    color: #444;
+    padding-right: 20px;
+    position: relative;
+    cursor: pointer;
+  }
+
+  li:after {
+    content: '|';
+    position: absolute;
+    right: 9px;
+  }
+
+  li:last-child:after {
+    content: '';
+  }
+}

@@ -1,8 +1,7 @@
 const formUtil = {
 
-  getFieldsInitState: fields => {
-    const fieldInitState = { value: '', errors: [] };
-    let fieldsInitState = {};
+  initFields: fields => {
+    const fieldsInitState = {};
     Object.keys(fields).forEach(key =>
       fieldsInitState[key] = {
         ...fields[key], 

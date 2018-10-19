@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
-import Admin from '../components/Admin';
+import { setSection } from '../actions';
+import AdminNav from '../components/AdminNav';
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
@@ -8,5 +9,7 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps, 
-  {}
-)(Admin);
+  {
+    setSection
+  }
+)(AdminNav);

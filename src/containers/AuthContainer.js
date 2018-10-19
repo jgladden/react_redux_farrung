@@ -4,26 +4,29 @@ import { submitLogin, submitLogout } from '../actions';
 import Auth from '../components/Auth';
 import formUtil from '../utils/formUtil';
 
-const formFields = {
-  username: {
-    tests: ['(.{5,})']
-  },
-  password: {
-    tests: ['password']
-  }
-};
-
-const initialState = {
-  fields: formUtil.getFieldsInitState(formFields)
-};
-
 class AuthContainer extends Component {
     
   constructor(props) {
     super(props);
-    this.state = initialState;
+    this.formFields = {
+      username: {
+        tests: ['(.{5,})'],
+      },
+      password: {
+        tests: ['password'],
+      }
+    }
+    this.state = {
+      fields: formUtil.initFields(this.formFields),
+      displayLogin: false
+    }
   }
 
+  toggleLoginDisplay = () => {
+    let displayLogin = this.state.displayLogin ? false : true;
+    this.setState({displayLogin});
+  }    
+    
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -36,7 +39,10 @@ class AuthContainer extends Component {
     );
     if(validateForm.isValidForm) {
       this.props.submitLogin(validateForm.fieldValues);
-      this.setState(initialState);
+      this.setState({
+        fields: formUtil.initFields(this.formFields),
+        displayLogin: false
+      });
     } else {
       this.setState({fields: validateForm.fields});
     } 
@@ -49,6 +55,9 @@ class AuthContainer extends Component {
     } = this.props;
     return (
       <Auth
+        fields={this.state.fields}
+        displayLogin={this.state.displayLogin}
+        toggleLoginDisplay={this.toggleLoginDisplay}
         handleChange={this.handleChange}
         submitLogin={this.handleSubmit}
         submitLogout={submitLogout}
