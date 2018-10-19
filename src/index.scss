@@ -4,9 +4,12 @@ body {
   font: 14px Arial;
 }
 
+input, textarea {
+  color: #666;
+}
+
 input {
   display: block;
-  color: #666;
   border: 1px solid #ccc;
   padding: 5px 10px;
 }

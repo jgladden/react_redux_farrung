@@ -1,35 +1,74 @@
+import './styles.scss';
 import React from 'react';
-import Loading from '../Loading/';
-import Error from '../Error/';
+import PropTypes from 'prop-types';
 import Button from '../Button/';
 
-const messageObj = {
-  email: 'jamesgladden@gmail.com',
-  subject: 'subject',
-  message: 'message'
-}
-
-const Message = ({message, submitMessage}) => { 
+const Message = props => {
   const {
-    posting,
-    error,
-    success
-  } = message;
+    message: {
+      posting,
+      error,
+      success
+    }, 
+    submitMessage, 
+    handleChange, 
+    fields
+  } = props; 
+
+  const getClass = name => (
+    fields[name].errors && fields[name].errors.length ? 'inValid' : ''
+  );
 
   return(
-    <React.Fragment>
-      {posting &&
-        <p>Sending</p>
-      }
+    <div className='messageForm'>
+      <p className='messageForm__heading'>SEND MESSAGE</p>
       {error &&
-        <Error error={error}/>
+        <p className='messageForm__error'>{error}</p>
       }
-      { success &&
-        <p>Your message was sent.</p>
+      {success === false &&
+        <p className='messageForm__error'>Please try your message later.</p>
       }
-      <Button handleClick={() => submitMessage(messageObj)} label='Submit Message' />
-    </React.Fragment>
+      <form onSubmit={e => submitMessage(e)}>
+        <label>Valid email.</label>
+        <input 
+          value={fields['email'].value}
+          name='email' 
+          type='text' 
+          className={getClass('email')} 
+          onChange={e => handleChange(e)}
+          placeholder='Email'
+        />
+        <label>Minimum 8 characters.</label>
+        <input
+          value={fields['subject'].value}
+          name='subject'
+          type='text'
+          className={getClass('subject')}
+          onChange={e => handleChange(e)}
+          placeholder='Subject'
+        />
+        <label>Please enter your message.</label>
+        <textarea
+          value={fields['message'].value}
+          name='message'
+          className={getClass('message')}
+          onChange={e => handleChange(e)}
+        />
+        <Button 
+          handleClick={e => submitMessage(e)} 
+          label={posting ? 'Sending' : 'Send'}
+          disabled={posting ? true : false} 
+        />
+      </form>
+    </div>
   );
+};
+
+Message.propTypes = {
+  message: PropTypes.object.isRequired,
+  fields: PropTypes.object.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  submitMessage: PropTypes.func.isRequired
 };
 
 export default Message;
