@@ -2,12 +2,12 @@ import React from 'react';
 import AuthContainer from '../../containers/AuthContainer';
 import NotAuthorized from '../NotAuthorized';
 import AdminNav from '../../containers/AdminNavContainer';
-import AdminList from '../AdminList';
+import AdminList from '../../containers/AdminListContainer';
 import AdminAdd from '../AdminAdd';
 import AdminEdit from '../AdminEdit';
 
 const Admin = ({section, isAuthenticated}) => {
-
+isAuthenticated = true;
   let SubPage = '';
   switch(section.secondary) {
   case 'add':
