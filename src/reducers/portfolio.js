@@ -20,11 +20,21 @@ const portfolio = (state = {}, action) => {
     };
   }
   case types.ADD_PORTFOLIO_ITEM: {
+    return {
+      posting: 1
+    };
+  }
+  case types.ADD_PORTFOLIO_ITEM_SUCCESS: {
     let { type, item } = action.payload;
     let portfolio = {...state};
     portfolio.items[type][item.id] = item;
     return {
       ...portfolio
+    };
+  }
+  case types.ADD_PORTFOLIO_ITEM_ERROR: {
+    return {
+      error: action.payload
     };
   }
   case types.REMOVE_PORTFOLIO_ITEM: {

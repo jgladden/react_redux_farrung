@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitMessage } from '../actions';
-import Message from '../components/Message/';
+import MessageForm from '../components/MessageForm/';
 import formUtil from '../utils/formUtil';
 
-class MessageContainer extends Component {
+class MessageFormContainer extends Component {
     
   constructor(props) {
     super(props);
@@ -48,7 +48,7 @@ class MessageContainer extends Component {
 
   render() {
     return (
-      <Message
+      <MessageForm
         fields={this.state.fields}
         handleChange={this.handleChange}
         submitMessage={this.handleSubmit}
@@ -58,7 +58,7 @@ class MessageContainer extends Component {
   }
 }
 
-MessageContainer.propTypes = {
+MessageFormContainer.propTypes = {
   message: PropTypes.object.isRequired,
   submitMessage: PropTypes.func.isRequired
 };
@@ -72,4 +72,4 @@ export default connect(
   {
     submitMessage
   }
-)(MessageContainer);
+)(MessageFormContainer);

@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/';
 
-const Message = props => {
+const MessageForm = props => {
   const {
     message: {
       posting,
@@ -64,14 +64,14 @@ const Message = props => {
   );
 };
 
-Message.propTypes = {
+MessageForm.propTypes = {
   message: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitMessage: PropTypes.func.isRequired
 };
 
-export default Message;
+export default MessageForm;
 
 
 

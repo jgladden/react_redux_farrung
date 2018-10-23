@@ -67,18 +67,16 @@ const formUtil = {
     return fieldValues;
   },
 
-  getDateOptions: (type, size) => {
+  getSelectOptions: (size, defaultOption, isYear) => {
     let rangeArr;
-    if(type !== 'year') {
-      size = size || type === 'month' ? 12 : 31;
-      rangeArr = Array(size).fill()
-        .map((_, i) => i < 9 ? `0${i+1}` : i+1);
-    } else {
+    if(isYear) {
       let currYear = new Date().getFullYear();
       rangeArr = Array(size).fill()
         .map((_, i) => currYear-i);
+    } else {
+      rangeArr = Array(size).fill()
+        .map((_, i) => i < 9 ? `0${i+1}` : i+1);
     }
-    const defaultOption = type === 'year' ? 'yyyy' : type === 'day' ? 'dd' : 'mm';
     rangeArr.unshift(defaultOption);
     return rangeArr.map(num => (
       <option key={num} value={num}>{num}</option>

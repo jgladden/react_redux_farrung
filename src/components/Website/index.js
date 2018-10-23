@@ -2,11 +2,11 @@ import React from 'react';
 import PortfolioNavContainer from '../../containers/PortfolioNavContainer';
 import PortfolioListContainer from '../../containers/PortfolioListContainer';
 import PortfolioDetailContainer from '../../containers/PortfolioDetailContainer';
-import MessageContainer from '../../containers/MessageContainer';
+import MessageFormContainer from '../../containers/MessageFormContainer';
 
 const Website = () => (
   <React.Fragment>
-    <MessageContainer />
+    <MessageFormContainer />
     <PortfolioNavContainer />
     <PortfolioDetailContainer />
     <PortfolioListContainer />

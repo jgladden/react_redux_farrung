@@ -29,14 +29,59 @@ export const fetchPortfolioFailure = payload => ({
   payload
 });
 
+export const submitAddPortfolioItem = () => {
+  return dispatch => {
+    dispatch(addPortfolioItem());
+    return axios.get(getAddPortfolioUrl)
+      .then(response => dispatch(
+        addPortfolioItemSuccess(response.data))
+      )
+      .catch(error => dispatch(
+        addPortfolioItemError(error.toString()))
+      );
+  };
+};
+
 export const addPortfolioItem = payload => ({
-  type: types.ADD_PORTFOLIO_ITEM,
+  type: types.ADD_PORTFOLIO_ITEM
+});
+
+export const addPortfolioItemSuccess = payload => ({
+  type: types.ADD_PORTFOLIO_ITEM_SUCCESS,
   payload
 });
 
-export const removeTodo = payload => ({
-  type: types.REMOVE_PORTFOLIO_ITEM,
+export const addPortfolioItemError = payload => ({
+  type: types.ADD_PORTFOLIO_ITEM_ERROR,
   payload
 });
+
+export const submitEditPortfolioItem = () => {
+  return dispatch => {
+    dispatch(editPortfolioItem());
+    return axios.get(getEditPortfolioUrl)
+      .then(response => dispatch(
+        editPortfolioItemSuccess(response.data))
+      )
+      .catch(error => dispatch(
+        editPortfolioItemError(error.toString()))
+      );
+  };
+};
+
+export const editPortfolioItem = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM
+});
+
+export const editPortfolioItemSuccess = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM_SUCCESS,
+  payload
+});
+
+export const editPortfolioItemError = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM_ERROR,
+  payload
+});
+
 
 
