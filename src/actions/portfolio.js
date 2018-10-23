@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from './types';
-import { getPortfolioUrl } from '../config';
+import { getPortfolioUrl, addPortfolioItemUrl } from '../config';
 
 export function fetchPortfolio() {
   return dispatch => {
@@ -29,10 +29,10 @@ export const fetchPortfolioFailure = payload => ({
   payload
 });
 
-export const submitAddPortfolioItem = () => {
+export const submitAddPortfolioItem = portfolioItemObj => {
   return dispatch => {
     dispatch(addPortfolioItem());
-    return axios.get(getAddPortfolioUrl)
+    return axios.post(addPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
         addPortfolioItemSuccess(response.data))
       )

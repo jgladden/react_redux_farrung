@@ -11,7 +11,7 @@ class AdminPortfolioFormContainer extends Component {
     super(props);
     this.formFields = {
       type: {
-        tests: ['^(online|print)$']
+        tests: ['^(?!\s*$|type).+']
       },
       title: {
         tests: ['(.{5,})']
@@ -22,14 +22,11 @@ class AdminPortfolioFormContainer extends Component {
       description: {
         tests: ['(.{15,})'] 
       },
-      imagename: {
-        tests: ['(.{5,})'] 
-      },
       link: {
-        tests: ['^(\s*|http:)$'] 
+        tests: ['^(\s*|https?:\/\/www\..*)$'] 
       },
       display: {
-        tests: ['^(true|false)$']
+        tests: []
       },
       rating: {
         tests: ['^([0-9]+)$']
@@ -44,7 +41,7 @@ class AdminPortfolioFormContainer extends Component {
         tests: ['^([0-9]+)$']
       },
       image1: {
-        tests: ['(.{3,})'] 
+        tests: ['^(\s*|^[\/:\.a-zA-Z0-9]+(.jpg|.png))$'] 
       }
     };
     this.editMode = props.formInitValues ? true : false;
@@ -60,7 +57,7 @@ class AdminPortfolioFormContainer extends Component {
     const name = `image${imageCount}`;
     let fields = {...this.state.fields};
     let tests = this.state.fields.image1.tests;
-    fields[name] = {tests, error: '', value: ''};
+    fields[name] = {tests, value: '', errors: []};
     this.setState({imageCount, fields});
   }
     
@@ -85,7 +82,8 @@ class AdminPortfolioFormContainer extends Component {
       if(validateForm.isValidForm) {
         this.props.submitAddPortfolioItem(validateForm.fieldValues);
         this.setState({
-          fields: formUtil.initFields(this.formFields)
+          fields: formUtil.initFields(this.formFields),
+          imageCount: 1
         });
       } else {
         this.setState({fields: validateForm.fields});

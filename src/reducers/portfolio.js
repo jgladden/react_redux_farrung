@@ -25,6 +25,8 @@ const portfolio = (state = {}, action) => {
     };
   }
   case types.ADD_PORTFOLIO_ITEM_SUCCESS: {
+    console.log(action.payload);
+    return {};
     let { type, item } = action.payload;
     let portfolio = {...state};
     portfolio.items[type][item.id] = item;

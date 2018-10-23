@@ -19,8 +19,8 @@ input {
   padding: 5px 10px;
 }
 
-input.inValid {
-  border-color: #f00;
+.inValidField {
+  border: 1px solid #f00;
 }
 
 label {

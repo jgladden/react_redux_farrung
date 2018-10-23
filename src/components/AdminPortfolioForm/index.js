@@ -3,12 +3,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/';
 import formUtil from '../../utils/formUtil';
-import {
-  TextField, 
-  SelectField,
-  TextArea,
-  CheckBox
-} from '../FormFields';
+import Input from '../FormFields/Input';
+import Select from '../FormFields/Select'; 
+import TextArea from '../FormFields/TextArea'; 
 
 const AdminPortfolioForm = props => {
   const {
@@ -24,13 +21,7 @@ const AdminPortfolioForm = props => {
     fields
   } = props; 
 
-  const getClass = name => (
-    fields[name].errors && fields[name].errors.length ? 'inValid' : ''
-  );
-
-  const fieldParam = {
-    fields, handleChange, getClass
-  };
+  const fieldParam = { fields, handleChange };
 
   let selectOptions = selectOptions || {
     type: ['type', 'online', 'print'].map(
@@ -44,7 +35,7 @@ const AdminPortfolioForm = props => {
 
   let imageFields = new Array(imageCount)
     .fill().map((_, i) => (
-      <TextField
+      <Input
         key={i}
         id={`image${i+1}`}
         {...fieldParam}
@@ -61,18 +52,18 @@ const AdminPortfolioForm = props => {
       }
       <form onSubmit={e => submitForm(e)}>
         <label>Type:</label>
-        <SelectField 
-          id='type' 
+        <Select 
+          id='type'
           options={selectOptions.type} 
           {...fieldParam}
         />
         <label>Title: <span>5+ characters</span></label>
-        <TextField
+        <Input
           id='title'
           {...fieldParam}
         />
         <label>Client: <span>5+ characters</span></label>
-        <TextField
+        <Input
           id='client'
           {...fieldParam}
         />        
@@ -82,23 +73,23 @@ const AdminPortfolioForm = props => {
           {...fieldParam}
         />
         <label>Link: <span>http://...</span></label>
-        <TextField
+        <Input
           id='link'
           {...fieldParam}
         />      
         <div className='portfolioForm__date'>
           <label>Created on:</label>
-          <SelectField
+          <Select
             id='month'
             options={selectOptions.month}
             {...fieldParam}
           />
-          <SelectField
+          <Select
             id='day'
             options={selectOptions.day}
             {...fieldParam}
           />
-          <SelectField
+          <Select
             id='year'
             options={selectOptions.year}
             {...fieldParam}
@@ -114,14 +105,15 @@ const AdminPortfolioForm = props => {
         </div>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
-          <CheckBox
+          <Input
             id='display'
+            type='checkbox'
             {...fieldParam}
           />
           <span>&nbsp; on</span>
         </div>
         <label>Rating:</label>
-        <SelectField 
+        <Select 
           id='rating'
           options={selectOptions.rating}
           {...fieldParam}

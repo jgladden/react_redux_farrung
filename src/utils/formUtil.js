@@ -2,12 +2,12 @@ import React from 'react';
 
 const formUtil = {
 
-  initFields: fields => {
+  initFields: (fields, values = {}) => {
     const fieldsInitState = {};
     Object.keys(fields).forEach(key =>
       fieldsInitState[key] = {
         ...fields[key], 
-        value: '', 
+        value: values[key] || '', 
         errors: [] 
       }
     );
@@ -36,6 +36,8 @@ const formUtil = {
       test = /^([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})$/i;
     if (test === 'password')
       test = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
+    if(test === 'url')
+      test = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_+.~#?&//=]*)/;
     return value.match(test);
   },
 
@@ -56,6 +58,7 @@ const formUtil = {
       if(field.errors.length)
         returnObj.isValidForm = false;
     }
+console.log(returnObj);
     return returnObj;
   },
 
@@ -66,6 +69,10 @@ const formUtil = {
     }
     return fieldValues;
   },
+
+  fieldErrorClass: (name, fields) => (
+    fields[name].errors && fields[name].errors.length ? 'inValidField' : ''
+  ),
 
   getSelectOptions: (size, defaultOption, isYear) => {
     let rangeArr;

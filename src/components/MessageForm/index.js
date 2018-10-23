@@ -16,7 +16,7 @@ const MessageForm = props => {
   } = props; 
 
   const getClass = name => (
-    fields[name].errors && fields[name].errors.length ? 'inValid' : ''
+    fields[name].errors && fields[name].errors.length ? 'inValidField' : ''
   );
 
   return(
