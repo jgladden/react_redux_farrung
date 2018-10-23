@@ -1,6 +1,11 @@
 import * as types from '../actions/types';
+import cookieUtil from '../utils/cookieUtil';
 
-const auth = (state = {}, action) => {
+let initialState = {};
+if(cookieUtil.getCookie('AUTH') === 'isAuthenticated')
+  initialState = { isAuthenticated: true };
+
+const auth = (state = initialState, action) => {
   switch (action.type) {
   case types.POST_AUTH: {
     return {

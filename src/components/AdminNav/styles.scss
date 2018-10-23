@@ -2,6 +2,7 @@
   border: 1px solid #ccc;
   border-top: none;
   padding: 10px;
+  position: relative;
 
   li {
     display: inline-block;
@@ -19,5 +20,11 @@
 
   li:last-child:after {
     content: '';
+  }
+
+  &__login {
+    position: absolute;
+    right: 10px;
+    top: 10px;
   }
 }

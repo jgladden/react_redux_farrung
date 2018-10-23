@@ -2,9 +2,20 @@
 React Boilerplate configured with babel, webpack, sass, and eslint.
 
 ## Usage
+
 * `npm start` to run eslint on watch mode and dev-server at localhost:8080.
 * `npm run watch` to only watch for/recompile on changes.
 * `npm run build` to generate a minified, production-ready build.
+* 'eslint --fix file.js' to fix eslint errors in file *see environment
+
+
+## Environment
+
+* npm install -g eslint
+* npm install -g eslint-plugin-react  
+* npm install -g babel-eslint   
+* sudo vi /etc/hosts 
+  then add: 127.0.0.1 local.farrung.com
 
 ## Contents
 

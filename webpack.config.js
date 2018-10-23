@@ -20,7 +20,10 @@ module.exports = {
   },
   devtool: 'source-map',
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    host: 'local.farrung.com',
+    port: 8080,
+    https: true
   },  
   module: {
     rules: [

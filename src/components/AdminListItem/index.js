@@ -2,20 +2,19 @@ import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 
-const AdminListItem = ({id, title, description, setSection}) => (
+const AdminListItem = ({id, title, setSection}) => (
   <li 
     id='adminList__item' 
     onClick={() => setSection({primary: 'admin', secondary: 'edit', tertiary: id})}
   >
-    <p>{title}: <span>{description}</span></p>
+    <p>TITLE: {title}</p>
   </li>
 );
 
 AdminListItem.propTypes = {
   id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
   setSection: PropTypes.func.isRequired
-}
+};
 
 export default AdminListItem;

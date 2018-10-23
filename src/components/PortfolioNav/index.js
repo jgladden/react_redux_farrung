@@ -10,14 +10,14 @@ const PortfolioNav = ({portfolioTypes, setSection}) => {
 
   return (
     <ul className="portfolioNav">
-    {portfolioTypes.map(type => (
-      <li key={type}>
-        <Button 
-          handleClick={() => setSection({primary: 'portfolio', secondary: type})}
-          label={type}
-        />
-      </li>
-    ))}
+      {portfolioTypes.map(type => (
+        <li key={type}>
+          <Button 
+            handleClick={() => setSection({primary: 'portfolio', secondary: type})}
+            label={type}
+          />
+        </li>
+      ))}
     </ul>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 
-const AdminEdit = props => (
+const AdminEdit = () => (
   <p>AdminEdit</p>
 );
 

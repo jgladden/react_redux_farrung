@@ -1,3 +1,5 @@
+import React from 'react';
+
 const formUtil = {
 
   initFields: fields => {
@@ -33,7 +35,7 @@ const formUtil = {
     if (test === 'email') 
       test = /^([A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,})$/i;
     if (test === 'password')
-      test = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+      test = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})/;
     return value.match(test);
   },
 
@@ -53,7 +55,7 @@ const formUtil = {
       returnObj.fieldValues[key] = value; 
       if(field.errors.length)
         returnObj.isValidForm = false;
-    };
+    }
     return returnObj;
   },
 
@@ -61,7 +63,7 @@ const formUtil = {
     let fieldValues = {};
     for(let key in fields) {
       fieldValues[key] = fields[key].value;
-    };
+    }
     return fieldValues;
   },
 

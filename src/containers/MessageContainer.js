@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitMessage } from '../actions';
 import Message from '../components/Message/';
@@ -18,10 +19,10 @@ class MessageContainer extends Component {
       message: {
         tests: ['(.{10,})'],
       }
-    }
+    };
     this.state = {
       fields: formUtil.initFields(this.formFields),
-    }
+    };
   }
     
   handleChange = e => {
@@ -46,20 +47,21 @@ class MessageContainer extends Component {
   }
 
   render() {
-    const {
-      submitMessage,
-      message
-    } = this.props;
     return (
       <Message
         fields={this.state.fields}
         handleChange={this.handleChange}
         submitMessage={this.handleSubmit}
-        message={message}
+        message={this.props.message}
       />
     );
   }
 }
+
+MessageContainer.propTypes = {
+  message: PropTypes.object.isRequired,
+  submitMessage: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   message: state.message

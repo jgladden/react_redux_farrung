@@ -3,6 +3,11 @@
     "plugins": [
         "react"
     ],
+    "settings": {
+      "react": {
+        "version": "16.2.0"
+      }
+    },
     "extends": [
         "eslint:recommended", 
         "plugin:react/recommended"

@@ -1,18 +1,16 @@
 .login {
-  border: 1px solid #ccc;
-  padding: 10px;
   position: relative;
-
+  
   &__link {
-    color: #999;
     cursor: pointer;
+    color: #444;
   }
 }
 
-.loginForm {
+.signInModal {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 5px;
+  right: 0;
   padding: 15px;
   width: 230px;
   background-color: #f2f2f2;
@@ -28,7 +26,7 @@
     content: '';
     position: absolute;
     top: -10px;
-    left: 20px;
+    right: 10px;
     width: 0; 
     height: 0; 
     border-left: 10px solid transparent;

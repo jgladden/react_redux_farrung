@@ -14,10 +14,10 @@ export const router = Router({
     setSection({ primary, secondary, tertiary })
   )
 })
-.configure({
-  notfound: () => {}, 
-  html5history: true
-});
+  .configure({
+    notfound: () => {}, 
+    html5history: true
+  });
 
 export const updateUri = () => {
   const {

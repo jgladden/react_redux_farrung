@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitLogin, submitLogout } from '../actions';
-import Auth from '../components/Auth';
+import AuthForm from '../components/AuthForm';
 import formUtil from '../utils/formUtil';
+import cookieUtil from '../utils/cookieUtil';
 
-class AuthContainer extends Component {
+class AuthFormContainer extends Component {
     
   constructor(props) {
     super(props);
@@ -15,18 +17,12 @@ class AuthContainer extends Component {
       password: {
         tests: ['password'],
       }
-    }
+    };
     this.state = {
-      fields: formUtil.initFields(this.formFields),
-      displayLogin: false
-    }
+      fields: formUtil.initFields(this.formFields)
+    };
   }
 
-  toggleLoginDisplay = () => {
-    let displayLogin = this.state.displayLogin ? false : true;
-    this.setState({displayLogin});
-  }    
-    
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -39,33 +35,36 @@ class AuthContainer extends Component {
     );
     if(validateForm.isValidForm) {
       this.props.submitLogin(validateForm.fieldValues);
+      this.setCookie();
       this.setState({
-        fields: formUtil.initFields(this.formFields),
-        displayLogin: false
+        fields: formUtil.initFields(this.formFields)
       });
     } else {
       this.setState({fields: validateForm.fields});
     } 
   }
 
+  setCookie = () => {
+    let exp = new Date(+new Date + 12096e5);
+    cookieUtil.setCookie('AUTH', 'isAuthenticated', exp, '/', '.farrung.com', true);
+  }
+
   render() {
-    const {
-      submitLogout,
-      auth
-    } = this.props;
     return (
-      <Auth
+      <AuthForm
         fields={this.state.fields}
-        displayLogin={this.state.displayLogin}
-        toggleLoginDisplay={this.toggleLoginDisplay}
         handleChange={this.handleChange}
         submitLogin={this.handleSubmit}
-        submitLogout={submitLogout}
-        auth={auth}
+        auth={this.props.auth}
       />
     );
   }
 }
+
+AuthFormContainer.propTypes = {
+  auth: PropTypes.object.isRequired,
+  submitLogin: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
   auth: state.auth
@@ -74,7 +73,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps, 
   {
-    submitLogin,
-    submitLogout
+    submitLogin
   }
-)(AuthContainer);
+)(AuthFormContainer);

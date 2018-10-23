@@ -31,5 +31,5 @@ export const postAuthError = payload => ({
 
 export const submitLogout = () => ({
   type: types.AUTH_LOGOUT
-})
+});
 

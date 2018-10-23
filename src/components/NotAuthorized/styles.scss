@@ -1,0 +1,19 @@
+#notAuthorized {
+  width: 300px;
+  margin: 25px auto;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  padding: 15px;
+
+  &__heading {
+    font-size: 18px;
+    padding-bottom: 15px;
+    color: #888;
+    font-weight: bold;
+  }
+
+  input {
+    margin-bottom: 15px;
+    width: 270px;
+  }
+}

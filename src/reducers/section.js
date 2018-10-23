@@ -12,7 +12,7 @@ const section = (state = {}, action) => {
       secondary = secondary || 'online';
     if(primary === 'admin')
       secondary = secondary || 'list';
-    return {  primary, secondary, tertiary }
+    return {  primary, secondary, tertiary };
   }
   default:
     return state;
