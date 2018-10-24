@@ -106,6 +106,7 @@ class AdminPortfolioFormContainer extends Component {
 }
 
 AdminPortfolioFormContainer.propTypes = {
+  formInitValues: PropTypes.object,
   portfolio: PropTypes.object.isRequired,
   submitAddPortfolioItem: PropTypes.func.isRequired,
   submitEditPortfolioItem: PropTypes.func.isRequired

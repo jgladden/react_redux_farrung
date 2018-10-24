@@ -32,7 +32,7 @@ class SignInContainer extends Component {
        isAuthenticated !== prevProps.isAuthenticated
     ) {
       this.setState({displayLogin: false});
-    };
+    }
   }
 
   render() {

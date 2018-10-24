@@ -34,7 +34,7 @@ export const submitAddPortfolioItem = portfolioItemObj => {
     dispatch(addPortfolioItem());
     return axios.post(addPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
-        addPortfolioItemSuccess(response.data))
+        addPortfolioItemSuccess({...response.data, item: portfolioItemObj}))
       )
       .catch(error => dispatch(
         addPortfolioItemError(error.toString()))
@@ -42,7 +42,7 @@ export const submitAddPortfolioItem = portfolioItemObj => {
   };
 };
 
-export const addPortfolioItem = payload => ({
+export const addPortfolioItem = () => ({
   type: types.ADD_PORTFOLIO_ITEM
 });
 
@@ -69,7 +69,7 @@ export const submitEditPortfolioItem = () => {
   };
 };
 
-export const editPortfolioItem = payload => ({
+export const editPortfolioItem = () => ({
   type: types.EDIT_PORTFOLIO_ITEM
 });
 

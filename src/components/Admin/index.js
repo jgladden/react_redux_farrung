@@ -4,10 +4,8 @@ import NotAuthorized from '../NotAuthorized';
 import AdminNav from '../../containers/AdminNavContainer';
 import AdminList from '../../containers/AdminListContainer';
 import AdminAdd from '../AdminAdd';
-import AdminEdit from '../AdminEdit';
 
 const Admin = ({section, isAuthenticated}) => {
-
   let display = '';
   if(isAuthenticated === true) {
     let SubPage = '';
@@ -26,7 +24,7 @@ const Admin = ({section, isAuthenticated}) => {
     );
   } else {
     display = <NotAuthorized />;
-  }; 
+  } 
 
   return(display);
 };

@@ -12,6 +12,8 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
     items
   } = portfolio;
 
+console.log(type);
+
   let portfolioLoaded = items && type ? true : false;
   let itemsByType = portfolioLoaded ? items[type] : [];
 
@@ -27,22 +29,22 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
       {portfolioLoaded &&
         <React.Fragment>
           <ul id='adminList__typenav'>
-         {Object.keys(items).map(ptype => (
-            <li 
-              key={ptype}
-              className={ptype === type ? 'selected' : ''}
-              onClick={() => setType(ptype)}
-            >{ptype}</li>
-          ))}
+            {Object.keys(items).map(ptype => (
+              <li 
+                key={ptype}
+                className={ptype === type ? 'selected' : ''}
+                onClick={() => setType(ptype)}
+              >{ptype}</li>
+            ))}
           </ul>
           <ul id='adminList__items'>
-          {Object.keys(itemsByType).map(id => (
-            <AdminListItem
-              key={id}
-              setSection={setSection}
-              {...itemsByType[id]}
-            />
-          ))}
+            {Object.keys(itemsByType).map(id => (
+              <AdminListItem
+                key={id}
+                setSection={setSection}
+                {...itemsByType[id]}
+              />
+            ))}
           </ul>
         </React.Fragment>
       }

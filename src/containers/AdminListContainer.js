@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setSection, fetchPortfolio } from '../actions';
+import { setSection } from '../actions';
 import AdminList from '../components/AdminList/';
 
 class AdminListContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {};
-  }
-
-  componentDidMount() {
-    this.props.fetchPortfolio();
+    const items = props.portfolio.items;
+    const type = items ? Object.keys(items)[0] : null; 
+    this.state = {type};
   }
 
   componentDidUpdate(prevProps) {
@@ -45,7 +43,6 @@ class AdminListContainer extends Component {
 }
 
 AdminListContainer.propTypes = {
-  fetchPortfolio: PropTypes.func.isRequired,
   setSection: PropTypes.func.isRequired,
   portfolio: PropTypes.object.isRequired
 };  
@@ -57,7 +54,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    setSection,
-    fetchPortfolio
+    setSection
   }
 )(AdminListContainer);
