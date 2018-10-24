@@ -1,20 +1,19 @@
 import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
+import AdminPortfolioFormContainer from '../../containers/AdminPortfolioFormContainer';
 
-const AdminListItem = ({id, title, setSection}) => (
-  <li 
-    id='adminList__item' 
-    onClick={() => setSection({primary: 'admin', secondary: 'edit', tertiary: id})}
-  >
-    <p>TITLE: {title}</p>
+const AdminListItem = props => (
+  <li id='adminList__item'>
+    <p>TITLE: {props.title}</p>
+    <AdminPortfolioFormContainer
+      formInitValues={{...props}}
+    />
   </li>
 );
 
 AdminListItem.propTypes = {
-  id: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired,
-  setSection: PropTypes.func.isRequired
+  title: PropTypes.string.isRequired
 };
 
 export default AdminListItem;

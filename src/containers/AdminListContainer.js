@@ -7,19 +7,7 @@ import AdminList from '../components/AdminList/';
 class AdminListContainer extends Component {
   constructor(props) {
     super(props);
-    const items = props.portfolio.items;
-    const type = items ? Object.keys(items)[0] : null; 
-    this.state = {type};
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      items
-    } = this.props.portfolio;
-    if(items && !prevProps.portfolio.items) {
-      let type = Object.keys(items)[0]; 
-      this.setState({type});
-    }
+    this.state = {type: 'online'};
   }
 
   setType = type => {

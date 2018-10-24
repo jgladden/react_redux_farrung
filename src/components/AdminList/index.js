@@ -12,8 +12,6 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
     items
   } = portfolio;
 
-console.log(type);
-
   let portfolioLoaded = items && type ? true : false;
   let itemsByType = portfolioLoaded ? items[type] : [];
 
@@ -41,7 +39,6 @@ console.log(type);
             {Object.keys(itemsByType).map(id => (
               <AdminListItem
                 key={id}
-                setSection={setSection}
                 {...itemsByType[id]}
               />
             ))}
@@ -57,7 +54,7 @@ AdminList.propTypes = {
   setType: PropTypes.func.isRequired,
   type: PropTypes.string,
   portfolio: PropTypes.shape({
-    fetch: PropTypes.string,
+    fetching: PropTypes.number,
     error: PropTypes.string,
     items: PropTypes.object
   })

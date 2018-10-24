@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { fetchPortfolio, setSection } from '../actions';
+import { setSection } from '../actions';
 import PortfolioList from '../components/PortfolioList/';
 
 const getVisiblePortfolio = (items, type) => {
@@ -16,7 +16,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    setSection,
-    fetchPortfolio
+    setSection
   }
 )(PortfolioList);

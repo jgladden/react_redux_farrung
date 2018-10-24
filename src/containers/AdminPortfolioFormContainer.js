@@ -4,12 +4,16 @@ import { connect } from 'react-redux';
 import { submitAddPortfolioItem, submitEditPortfolioItem } from '../actions';
 import AdminPortfolioForm from '../components/AdminPortfolioForm/';
 import formUtil from '../utils/formUtil';
+import { uniqueId } from '../utils';
 
 class AdminPortfolioFormContainer extends Component {
     
   constructor(props) {
     super(props);
     this.formFields = {
+      id: {
+        tests: []
+      },
       type: {
         tests: ['^(?!\s*$|type).+']
       },
@@ -80,6 +84,7 @@ class AdminPortfolioFormContainer extends Component {
 
     if(!this.editMode) {
       if(validateForm.isValidForm) {
+        validateForm.fieldValues.id = uniqueId;
         this.props.submitAddPortfolioItem(validateForm.fieldValues);
         this.setState({
           fields: formUtil.initFields(this.formFields),

@@ -1,41 +1,49 @@
 import axios from 'axios';
 import * as types from './types';
-import { getPortfolioUrl, addPortfolioItemUrl } from '../config';
+import { 
+  getPortfolioUrl, 
+  addPortfolioItemUrl, 
+  editPortfolioItemUrl,
+  removePortfolioItemUrl 
+} from '../config';
 
-export function fetchPortfolio() {
+export function fetchPortfolioItems() {
   return dispatch => {
-    dispatch(fetchPortfolioRequest());
+    dispatch(getPortfolioItems());
     return axios.get(getPortfolioUrl)
       .then(response => dispatch(
-        fetchPortfolioSuccess(response.data))
+        getPortfolioItemsSuccess(response.data))
       )
       .catch(error => dispatch(
-        fetchPortfolioFailure(error.toString()))
+        getPortfolioItemsError(error.toString()))
       );
   };
 }
 
-export const fetchPortfolioRequest = () => ({
-  type: types.FETCH_PORTFOLIO_REQUEST
+export const getPortfolioItems = () => ({
+  type: types.GET_PORTFOLIO_ITEMS
 });
 
-export const fetchPortfolioSuccess = payload => ({
-  type: types.FETCH_PORTFOLIO_SUCCESS,
+export const getPortfolioItemsSuccess = payload => ({
+  type: types.GET_PORTFOLIO_ITEMS_SUCCESS,
   payload
 });
 
-export const fetchPortfolioFailure = payload => ({
-  type: types.FETCH_PORTFOLIO_FAILURE,
+export const getPortfolioItemsError = payload => ({
+  type: types.GET_PORTFOLIO_ITEMS_ERROR,
   payload
 });
+
 
 export const submitAddPortfolioItem = portfolioItemObj => {
   return dispatch => {
     dispatch(addPortfolioItem());
     return axios.post(addPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
-        addPortfolioItemSuccess({...response.data, item: portfolioItemObj}))
-      )
+        addPortfolioItemSuccess({
+          item: {...portfolioItemObj}
+        })
+      ))
       .catch(error => dispatch(
         addPortfolioItemError(error.toString()))
       );
@@ -56,13 +64,16 @@ export const addPortfolioItemError = payload => ({
   payload
 });
 
-export const submitEditPortfolioItem = () => {
+
+export const submitEditPortfolioItem = portfolioItemObj => {
   return dispatch => {
     dispatch(editPortfolioItem());
-    return axios.get(getEditPortfolioUrl)
+    return axios.post(editPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
-        editPortfolioItemSuccess(response.data))
-      )
+        editPortfolioItemSuccess({
+          item: {...portfolioItemObj}
+        }) 
+      ))
       .catch(error => dispatch(
         editPortfolioItemError(error.toString()))
       );
@@ -84,4 +95,30 @@ export const editPortfolioItemError = payload => ({
 });
 
 
+export const submitRemovePortfolioItem = (id, type) => {
+  return dispatch => {
+    dispatch(removePortfolioItem());
+    return axios.post(removePortfolioItemUrl, id)
+      .then(response => dispatch(
+        removePortfolioItemSuccess({ id, type })
+      ))
+      .catch(error => dispatch(
+        removePortfolioItemError(error.toString()))
+      );
+  };
+};
+
+export const removePortfolioItem = () => ({
+  type: types.REMOVE_PORTFOLIO_ITEM
+});
+
+export const removePortfolioItemSuccess = payload => ({
+  type: types.REMOVE_PORTFOLIO_ITEM_SUCCESS,
+  payload
+});
+
+export const removePortfolioItemError = payload => ({
+  type: types.REMOVE_PORTFOLIO_ITEM_ERROR,
+  payload
+});
 

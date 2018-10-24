@@ -58,7 +58,6 @@ const formUtil = {
       if(field.errors.length)
         returnObj.isValidForm = false;
     }
-console.log(returnObj);
     return returnObj;
   },
 
