@@ -2,6 +2,7 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/';
+import Text from '../FormFields/Text';
 
 const AuthForm = props => {
   const {
@@ -15,9 +16,7 @@ const AuthForm = props => {
     fields
   } = props; 
 
-  const getClass = name => (
-    fields[name].errors && fields[name].errors.length ? 'inValid' : ''
-  );
+  const fieldParam = { fields, handleChange };
 
   return(
     <div className='loginForm'>
@@ -29,22 +28,17 @@ const AuthForm = props => {
       }
       <form onSubmit={e => submitLogin(e)}>
         <label>Atleast 8 characters.</label>
-        <input 
-          value={fields['username'].value}
-          name='username' 
-          type='text' 
-          className={getClass('username')} 
-          onChange={e => handleChange(e)}
+        <Text
+          name='username'
           placeholder='Username'
+          {...fieldParam}
         />
         <label>Atleast 8 characters w/ number, upper & lowercase letter and special character.</label>
-        <input
-          value={fields['password'].value} 
-          name='password' 
-          type='password' 
-          className={getClass('password')} 
-          onChange={e => handleChange(e)}
+        <Text
+          name='password'
+          type='password'
           placeholder='Password'
+          {...fieldParam}
         />
         <Button 
           handleClick={e => submitLogin(e)} 

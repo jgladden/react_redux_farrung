@@ -2,17 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formUtil from '../../utils/formUtil';
 
-const TextArea = ({id, fields, handleChange}) => (
+const TextArea = ({name, fields, handleChange}) => (
   <textarea
-    value={fields[id].value}
-    name={id}
-    className={formUtil.fieldErrorClass(id,fields)}
+    value={fields[name].value}
+    name={name}
+    className={formUtil.fieldErrorClass(name, fields)}
     onChange={e => handleChange(e)}
   />
 );
 
 TextArea.propTypes = {
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired
 };

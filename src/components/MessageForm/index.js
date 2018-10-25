@@ -2,6 +2,8 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/';
+import Text from '../FormFields/Text';
+import TextArea from '../FormFields/TextArea';
 
 const MessageForm = props => {
   const {
@@ -13,11 +15,9 @@ const MessageForm = props => {
     submitMessage, 
     handleChange, 
     fields
-  } = props; 
+  } = props;
 
-  const getClass = name => (
-    fields[name].errors && fields[name].errors.length ? 'inValidField' : ''
-  );
+  const fieldParam = { fields, handleChange }; 
 
   return(
     <div className='messageForm'>
@@ -30,29 +30,21 @@ const MessageForm = props => {
       }
       <form onSubmit={e => submitMessage(e)}>
         <label>Valid email.</label>
-        <input 
-          value={fields['email'].value}
-          name='email' 
-          type='text' 
-          className={getClass('email')} 
-          onChange={e => handleChange(e)}
+        <Text
+          name='email'
           placeholder='Email'
+          {...fieldParam}
         />
         <label>Minimum 8 characters.</label>
-        <input
-          value={fields['subject'].value}
+        <Text
           name='subject'
-          type='text'
-          className={getClass('subject')}
-          onChange={e => handleChange(e)}
           placeholder='Subject'
+          {...fieldParam}
         />
         <label>Please enter your message.</label>
-        <textarea
-          value={fields['message'].value}
+        <TextArea
           name='message'
-          className={getClass('message')}
-          onChange={e => handleChange(e)}
+          {...fieldParam}
         />
         <Button 
           handleClick={e => submitMessage(e)} 

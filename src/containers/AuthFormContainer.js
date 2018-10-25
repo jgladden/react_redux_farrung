@@ -45,7 +45,7 @@ class AuthFormContainer extends Component {
   }
 
   setCookie = () => {
-    let exp = new Date(+new Date + 12096e5);
+    let exp = new Date(+new Date + 1.44e+7);
     cookieUtil.setCookie('AUTH', 'isAuthenticated', exp, '/', '.farrung.com', true);
   }
 

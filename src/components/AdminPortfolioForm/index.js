@@ -44,69 +44,69 @@ const AdminPortfolioForm = props => {
       <form onSubmit={e => submitForm(e)}>
         <label>Type:</label>
         <Select 
-          id='type'
+          name='type'
           options={selectOptions.type} 
           {...fieldParam}
         />
         <label>Title: <span>5+ characters</span></label>
         <Text
-          id='title'
+          name='title'
           {...fieldParam}
         />
         <label>Client: <span>5+ characters</span></label>
         <Text
-          id='client'
+          name='client'
           {...fieldParam}
         />        
         <label>Description: <span>15+ characters</span></label>
         <TextArea
-          id='description'
+          name='description'
           {...fieldParam}
         />
         <label>Link: <span>http://...</span></label>
         <Text
-          id='link'
+          name='link'
           {...fieldParam}
         />      
         <div className='portfolioForm__date'>
           <label>Created on:</label>
           <Select
-            id='month'
+            name='month'
             options={selectOptions.month}
             {...fieldParam}
           />
           <Select
-            id='day'
+            name='day'
             options={selectOptions.day}
             {...fieldParam}
           />
           <Select
-            id='year'
+            name='year'
             options={selectOptions.year}
             {...fieldParam}
           />
         </div>
         <label>Image name: <span>5+ characters</span></label>
         <Text
-          id='imagename'
+          name='imagename'
           {...fieldParam}
         />
         <label>Number of images:</label>
         <Select
-          id='slidenum'
+          name='slidenum'
           options={selectOptions.slidenum}
           {...fieldParam}
         />
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
-            id='display'
+            name='display'
             {...fieldParam}
           />
         </div>
         <label>Rating:</label>
         <Select 
-          id='rating'
+          name='rating'
           options={selectOptions.rating}
           {...fieldParam}
         />

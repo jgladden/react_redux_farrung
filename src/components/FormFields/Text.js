@@ -2,20 +2,23 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formUtil from '../../utils/formUtil';
 
-const Text = ({id, fields, handleChange}) => (
+const Text = ({type, name, fields, handleChange, placeholder}) => (
   <input
-    type='text'
-    value={fields[id].value}
-    name={id}
-    className={formUtil.fieldErrorClass(id,fields)}
+    type={type ? type : 'text'}
+    value={fields[name].value}
+    name={name}
+    placeholder={placeholder ? placeholder : ''}
+    className={formUtil.fieldErrorClass(name, fields)}
     onChange={e => handleChange(e)}
   />
 );
 
 Text.propTypes = {
-  id: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  name: PropTypes.string.isRequired,
   fields: PropTypes.object.isRequired,
-  handleChange: PropTypes.func.isRequired
+  handleChange: PropTypes.func.isRequired,
+  placeHolder: PropTypes.string
 };
 
 export default Text;
