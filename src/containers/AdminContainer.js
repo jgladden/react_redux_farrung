@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { fetchPortfolio } from '../actions';
 import Admin from '../components/Admin';
 
 const mapStateToProps = state => ({

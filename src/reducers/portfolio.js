@@ -54,9 +54,9 @@ const portfolio = (state = {}, action) => {
     };
   }
   case types.EDIT_PORTFOLIO_ITEM_SUCCESS: {
-    let { id, type } = action.payload.item;
+    let { item } = action.payload;
     let portfolio = {...state};
-    portfolio.items[type][id] = item;
+    portfolio.items[item.type][item.id] = item;
     return {
       items: {
         ...portfolio.items

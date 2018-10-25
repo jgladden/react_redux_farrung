@@ -41,6 +41,7 @@ export const submitAddPortfolioItem = portfolioItemObj => {
     return axios.post(addPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
         addPortfolioItemSuccess({
+          response,
           item: {...portfolioItemObj}
         })
       ))
@@ -71,6 +72,7 @@ export const submitEditPortfolioItem = portfolioItemObj => {
     return axios.post(editPortfolioItemUrl, portfolioItemObj)
       .then(response => dispatch(
         editPortfolioItemSuccess({
+          response,
           item: {...portfolioItemObj}
         }) 
       ))
@@ -100,7 +102,7 @@ export const submitRemovePortfolioItem = (id, type) => {
     dispatch(removePortfolioItem());
     return axios.post(removePortfolioItemUrl, id)
       .then(response => dispatch(
-        removePortfolioItemSuccess({ id, type })
+        removePortfolioItemSuccess({ response, id, type })
       ))
       .catch(error => dispatch(
         removePortfolioItemError(error.toString()))

@@ -3,7 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from '../Button/';
 import formUtil from '../../utils/formUtil';
-import Input from '../FormFields/Input';
+import Text from '../FormFields/Text';
+import CheckBox from '../FormFields/CheckBox';
 import Select from '../FormFields/Select'; 
 import TextArea from '../FormFields/TextArea'; 
 
@@ -16,8 +17,6 @@ const AdminPortfolioForm = props => {
     }, 
     submitForm, 
     handleChange,
-    addImage,
-    imageCount, 
     fields
   } = props; 
 
@@ -27,20 +26,12 @@ const AdminPortfolioForm = props => {
     type: ['type', 'online', 'print'].map(
       type => <option key={type} value={type}>{type}</option>
     ),
+    slidenum: formUtil.getSelectOptions(10, '#'),
     rating: formUtil.getSelectOptions(10, 'rating'),
-    year: formUtil.getSelectOptions(30, 'yyyy', true),
-    day: formUtil.getSelectOptions(31, 'dd'),
-    month: formUtil.getSelectOptions(12, 'mm'),  
+    year: formUtil.getSelectOptions(30, 'yyyy', 'year'),
+    day: formUtil.getSelectOptions(31, 'dd', 'pre0'),
+    month: formUtil.getSelectOptions(12, 'mm', 'pre0'),  
   };
-
-  let imageFields = new Array(imageCount)
-    .fill().map((_, i) => (
-      <Input
-        key={i}
-        id={`image${i+1}`}
-        {...fieldParam}
-      />
-    ));
 
   return(
     <div className='portfolioForm'>
@@ -58,12 +49,12 @@ const AdminPortfolioForm = props => {
           {...fieldParam}
         />
         <label>Title: <span>5+ characters</span></label>
-        <Input
+        <Text
           id='title'
           {...fieldParam}
         />
         <label>Client: <span>5+ characters</span></label>
-        <Input
+        <Text
           id='client'
           {...fieldParam}
         />        
@@ -73,7 +64,7 @@ const AdminPortfolioForm = props => {
           {...fieldParam}
         />
         <label>Link: <span>http://...</span></label>
-        <Input
+        <Text
           id='link'
           {...fieldParam}
         />      
@@ -95,22 +86,23 @@ const AdminPortfolioForm = props => {
             {...fieldParam}
           />
         </div>
-        <div className='portfolioForm__addImage'>
-          <label>Images</label>
-          {imageFields}
-          <Button 
-            handleClick={e => addImage(e)}
-            label='Add Image'
-          />
-        </div>
+        <label>Image name: <span>5+ characters</span></label>
+        <Text
+          id='imagename'
+          {...fieldParam}
+        />
+        <label>Number of images:</label>
+        <Select
+          id='slidenum'
+          options={selectOptions.slidenum}
+          {...fieldParam}
+        />
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
-          <Input
+          <CheckBox
             id='display'
-            type='checkbox'
             {...fieldParam}
           />
-          <span>&nbsp; on</span>
         </div>
         <label>Rating:</label>
         <Select 
@@ -131,10 +123,8 @@ const AdminPortfolioForm = props => {
 AdminPortfolioForm.propTypes = {
   portfolio: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
-  imageCount: PropTypes.number.isRequired,
   handleChange: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired,
-  addImage: PropTypes.func.isRequired
+  submitForm: PropTypes.func.isRequired
 };
 
 export default AdminPortfolioForm;

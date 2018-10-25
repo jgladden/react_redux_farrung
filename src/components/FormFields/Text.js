@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formUtil from '../../utils/formUtil';
 
-const Input = ({type, id, fields, handleChange}) => (
+const Text = ({id, fields, handleChange}) => (
   <input
-    type={type || 'text'}
+    type='text'
     value={fields[id].value}
     name={id}
     className={formUtil.fieldErrorClass(id,fields)}
@@ -12,11 +12,10 @@ const Input = ({type, id, fields, handleChange}) => (
   />
 );
 
-Input.propTypes = {
-  type: PropTypes.string,
+Text.propTypes = {
   id: PropTypes.string.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired
 };
 
-export default Input;
+export default Text;

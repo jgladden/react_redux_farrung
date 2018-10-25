@@ -18,16 +18,16 @@ class AdminPortfolioFormContainer extends Component {
         tests: ['^(?!\s*$|type).+']
       },
       title: {
-        tests: ['(.{5,})']
+        tests: ['(.{3,})']
       },
       client: {
-        tests: ['(.{5,})']
+        tests: ['^(\s*|(.{3,}))']
       },
       description: {
         tests: ['(.{15,})'] 
       },
       link: {
-        tests: ['^(\s*|https?:\/\/www\..*)$'] 
+        tests: ['^(\s*|https?:.*)$'] 
       },
       display: {
         tests: []
@@ -44,27 +44,22 @@ class AdminPortfolioFormContainer extends Component {
       year: {
         tests: ['^([0-9]+)$']
       },
-      image1: {
-        tests: ['^(\s*|^[\/:\.a-zA-Z0-9]+(.jpg|.png))$'] 
+      imagename: {
+        tests: ['(.{2,})']
+      },
+      slidenum: {
+        tests: ['^([0-9]+)$']
+      },
+      date: {
+        test: []
       }
     };
     this.editMode = props.formInitValues ? true : false;
     this.state = {
-      fields: formUtil.initFields(this.formFields, props.formInitValues),
-      imageCount: 1
+      fields: formUtil.initFields(this.formFields, props.formInitValues)
     };
   }
 
-  addImage = e => {
-    if(e) e.preventDefault();
-    const imageCount = this.state.imageCount + 1;
-    const name = `image${imageCount}`;
-    let fields = {...this.state.fields};
-    let tests = this.state.fields.image1.tests;
-    fields[name] = {tests, value: '', errors: []};
-    this.setState({imageCount, fields});
-  }
-    
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -84,11 +79,10 @@ class AdminPortfolioFormContainer extends Component {
 
     if(!this.editMode) {
       if(validateForm.isValidForm) {
-        validateForm.fieldValues.id = uniqueId;
+        validateForm.fieldValues.id = uniqueId();
         this.props.submitAddPortfolioItem(validateForm.fieldValues);
         this.setState({
-          fields: formUtil.initFields(this.formFields),
-          imageCount: 1
+          fields: formUtil.initFields(this.formFields)
         });
       } else {
         this.setState({fields: validateForm.fields});
@@ -102,8 +96,6 @@ class AdminPortfolioFormContainer extends Component {
         fields={this.state.fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
-        addImage={this.addImage}
-        imageCount={this.state.imageCount}
         portfolio={this.props.portfolio}
       />
     );

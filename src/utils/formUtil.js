@@ -73,15 +73,22 @@ const formUtil = {
     fields[name].errors && fields[name].errors.length ? 'inValidField' : ''
   ),
 
-  getSelectOptions: (size, defaultOption, isYear) => {
+  getSelectOptions: (size, defaultOption, type) => {
     let rangeArr;
-    if(isYear) {
-      let currYear = new Date().getFullYear();
+    switch(type) {
+    case 'year': { 
+      const currYear = new Date().getFullYear();
       rangeArr = Array(size).fill()
         .map((_, i) => currYear-i);
-    } else {
+      break;
+    }
+    case 'pre0':
       rangeArr = Array(size).fill()
         .map((_, i) => i < 9 ? `0${i+1}` : i+1);
+      break;
+    default:
+      rangeArr = Array(size).fill()
+        .map((_, i) => i+1);
     }
     rangeArr.unshift(defaultOption);
     return rangeArr.map(num => (

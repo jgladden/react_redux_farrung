@@ -40,9 +40,10 @@ const PortfolioList = props => {
       )}
     </div>
   );
-}
+};
 
 PortfolioList.propTypes = {
+  type: PropTypes.string.isRequired,
   setSection: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired,
   error: PropTypes.string,
