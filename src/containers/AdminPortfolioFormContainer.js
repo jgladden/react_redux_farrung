@@ -60,6 +60,21 @@ class AdminPortfolioFormContainer extends Component {
     };
   }
 
+  /*
+  getderivedstatefromprops not working in react-redux
+  this waits until server passes back success
+  not needed for edit mode as we do not want to clear 
+  field values in that case
+  */
+  componentWillReceiveProps(nextProps) {
+    if(!this.editMode && 
+       nextProps.portfolio.item_added && 
+       !this.props.portfolio.item_added
+    ) this.setState({ 
+      fields: formUtil.initFields(this.formFields) 
+    });
+  }
+
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -70,22 +85,13 @@ class AdminPortfolioFormContainer extends Component {
     let validateForm = formUtil.validateForm(
       {...this.state.fields}
     );
-
-    if(this.editMode) {
-      if(validateForm.isValidForm)
-        this.props.submitEditPortfolioItem(validateForm.fieldValues);
-      this.setState({fields: validateForm.fields});
-    }
-
-    if(!this.editMode) {
-      if(validateForm.isValidForm) {
+    this.setState({fields: validateForm.fields});
+    if(validateForm.isValidForm) {
+      if(!this.editMode) {
         validateForm.fieldValues.id = uniqueId();
         this.props.submitAddPortfolioItem(validateForm.fieldValues);
-        this.setState({
-          fields: formUtil.initFields(this.formFields)
-        });
       } else {
-        this.setState({fields: validateForm.fields});
+        this.props.submitEditPortfolioItem(validateForm.fieldValues);
       }
     }
   }

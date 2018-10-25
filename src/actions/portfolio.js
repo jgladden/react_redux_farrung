@@ -39,12 +39,20 @@ export const submitAddPortfolioItem = portfolioItemObj => {
   return dispatch => {
     dispatch(addPortfolioItem());
     return axios.post(addPortfolioItemUrl, portfolioItemObj)
-      .then(response => dispatch(
-        addPortfolioItemSuccess({
-          response,
-          item: {...portfolioItemObj}
-        })
-      ))
+      .then(response => {
+        let error = response.data.error;
+        if(!error) {
+          dispatch(
+            addPortfolioItemSuccess({
+              item: {...portfolioItemObj}
+            })
+          );
+        } else {
+          dispatch(
+            addPortfolioItemError(error)
+          );
+        }
+      })
       .catch(error => dispatch(
         addPortfolioItemError(error.toString()))
       );

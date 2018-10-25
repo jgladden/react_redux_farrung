@@ -9,6 +9,7 @@ const portfolio = (state = {}, action) => {
   }
   case types.GET_PORTFOLIO_ITEMS_SUCCESS: {
     return {
+      items_loaded: 1,
       items: {
         ...action.payload 
       }
@@ -32,6 +33,7 @@ const portfolio = (state = {}, action) => {
     let portfolio = {...state};
     portfolio.items[item.type][item.id] = item;
     return {
+      item_added: 1,
       items: {
         ...portfolio.items
       }
@@ -58,6 +60,7 @@ const portfolio = (state = {}, action) => {
     let portfolio = {...state};
     portfolio.items[item.type][item.id] = item;
     return {
+      item_edited: 1,
       items: {
         ...portfolio.items
       }
@@ -84,6 +87,7 @@ const portfolio = (state = {}, action) => {
     let portfolio = {...state};
     delete portfolio.items[type][id];
     return {
+      item_removed: 1,
       items: {
         ...portfolio.items
       }
