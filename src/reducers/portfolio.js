@@ -20,89 +20,23 @@ const portfolio = (state = {}, action) => {
       error: action.payload
     };
   }
-  case types.ADD_PORTFOLIO_ITEM: {
-    return {
-      posting: 1,
-      items: {
-        ...state.items
-      }
-    };
-  }
-  case types.ADD_PORTFOLIO_ITEM_SUCCESS: {
+  case types.MERGE_PORTFOLIO_ITEM: {
     let { item } = action.payload;
     let portfolio = {...state};
     portfolio.items[item.type][item.id] = item;
     return {
-      item_added: 1,
       items: {
         ...portfolio.items
-      }
-    };
-  }
-  case types.ADD_PORTFOLIO_ITEM_ERROR: {
-    return {
-      error: action.payload,
-      items: {
-        ...state.items
-      }
-    };
-  }
-  case types.EDIT_PORTFOLIO_ITEM: {
-    return {
-      id: action.payload.id,
-      posting: 1,
-      items: {
-        ...state.items
-      }
-    };
-  }
-  case types.EDIT_PORTFOLIO_ITEM_SUCCESS: {
-    let { item } = action.payload;
-    let { id, type } = item;
-    let portfolio = {...state};
-    portfolio.items[type][id] = item;
-    return {
-      id,
-      item_edited: 1,
-      items: {
-        ...portfolio.items
-      }
-    };
-  }
-  case types.EDIT_PORTFOLIO_ITEM_ERROR: {
-    let { id, error } = action.payload;
-    return {
-      id,
-      error,
-      items: {
-        ...state.items
       }
     };
   }
   case types.REMOVE_PORTFOLIO_ITEM: {
-    return {
-      posting: 1,
-      items: {
-        ...state.items
-      }
-    };
-  }
-  case types.REMOVE_PORTFOLIO_ITEM_SUCCESS: {
     let { id, type } = action.payload.item;
     let portfolio = {...state};
     delete portfolio.items[type][id];
     return {
-      item_removed: 1,
       items: {
         ...portfolio.items
-      }
-    };
-  }
-  case types.REMOVE_PORTFOLIO_ITEM_ERROR: {
-    return {
-      error: action.payload,
-      items: {
-        ...state.items
       }
     };
   }

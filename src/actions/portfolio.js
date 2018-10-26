@@ -35,116 +35,13 @@ export const getPortfolioItemsError = payload => ({
 });
 
 
-export const submitAddPortfolioItem = portfolioItemObj => {
-  return dispatch => {
-    dispatch(addPortfolioItem());
-    return axios.post(addPortfolioItemUrl, portfolioItemObj)
-      .then(response => {
-        let error = response.data.error;
-        if(!error) {
-          dispatch(
-            addPortfolioItemSuccess({
-              item: {...portfolioItemObj}
-            })
-          );
-        } else {
-          dispatch(
-            addPortfolioItemError(error)
-          );
-        }
-      })
-      .catch(error => dispatch(
-        addPortfolioItemError(error.toString()))
-      );
-  };
-};
-
-export const addPortfolioItem = () => ({
-  type: types.ADD_PORTFOLIO_ITEM
-});
-
-export const addPortfolioItemSuccess = payload => ({
-  type: types.ADD_PORTFOLIO_ITEM_SUCCESS,
+export const mergePortfolioItem = payload => ({
+  type: types.MERGE_PORTFOLIO_ITEM,
   payload
 });
 
-export const addPortfolioItemError = payload => ({
-  type: types.ADD_PORTFOLIO_ITEM_ERROR,
-  payload
-});
-
-
-export const submitEditPortfolioItem = portfolioItemObj => {
-  const id = portfolioItemObj.id;
-  return dispatch => {
-    dispatch(editPortfolioItem({id}));
-    return axios.post(editPortfolioItemUrl, portfolioItemObj)
-      .then(response => {
-        let error = response.data.error;
-        if(!error) {
-          dispatch(
-            editPortfolioItemSuccess({
-              item: {...portfolioItemObj}
-            })
-          );
-        } else {
-          dispatch(
-            editPortfolioItemError({
-              id,
-              error
-            })
-          );
-        }
-      })
-      .catch(error => dispatch(
-        editPortfolioItemError({
-          id,
-          error: error.toString()
-        })
-      ));
-  };
-};
-
-export const editPortfolioItem = payload => ({
-  type: types.EDIT_PORTFOLIO_ITEM,
-  payload
-});
-
-export const editPortfolioItemSuccess = payload => ({
-  type: types.EDIT_PORTFOLIO_ITEM_SUCCESS,
-  payload
-});
-
-export const editPortfolioItemError = payload => ({
-  type: types.EDIT_PORTFOLIO_ITEM_ERROR,
-  payload
-});
-
-
-export const submitRemovePortfolioItem = (id, type) => {
-  return dispatch => {
-    dispatch(removePortfolioItem());
-    return axios.post(removePortfolioItemUrl, id)
-      .then(response => dispatch(
-        removePortfolioItemSuccess({ response, id, type })
-      ))
-      .catch(error => dispatch(
-        removePortfolioItemError(error.toString()))
-      );
-  };
-};
-
-export const removePortfolioItem = () => ({
-  type: types.REMOVE_PORTFOLIO_ITEM
-});
-
-export const removePortfolioItemSuccess = payload => ({
-  type: types.REMOVE_PORTFOLIO_ITEM_SUCCESS,
-  payload
-});
-
-export const removePortfolioItemError = payload => ({
-  type: types.REMOVE_PORTFOLIO_ITEM_ERROR,
+export const removePortfolioItem = payload => ({
+  type: types.REMOVE_PORTFOLIO_ITEM,
   payload
 });
 

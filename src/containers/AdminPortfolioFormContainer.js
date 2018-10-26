@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { submitAddPortfolioItem, submitEditPortfolioItem } from '../actions';
+import { mergePortfolioItem } from '../actions';
 import AdminPortfolioForm from '../components/AdminPortfolioForm/';
 import formUtil from '../utils/formUtil';
 import { uniqueId } from '../utils';
+import {} from '../config';
+
 
 class AdminPortfolioFormContainer extends Component {
     
@@ -56,6 +59,7 @@ class AdminPortfolioFormContainer extends Component {
     };
     this.editMode = props.formInitValues ? true : false;
     this.state = {
+      status: {},
       fields: formUtil.initFields(this.formFields, props.formInitValues)
     };
   }
@@ -81,36 +85,69 @@ class AdminPortfolioFormContainer extends Component {
   }
 
   handleSubmit = e => {
+    const {
+      mergePortfolioItem
+    } = this.props;
     e.preventDefault();
     let validateForm = formUtil.validateForm(
       {...this.state.fields}
     );
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
+      this.setState({ 
+        status: { 
+          posting: 1 
+        }
+      });
+      let url = editPortfolioItemUrl;
+      let item = validateForm.fieldValues;
       if(!this.editMode) {
-        validateForm.fieldValues.id = uniqueId();
-        this.props.submitAddPortfolioItem(validateForm.fieldValues);
-      } else {
-        this.props.submitEditPortfolioItem(validateForm.fieldValues);
+        item.id = uniqueId();
+        url = addPortfolioItemUrl;
       }
+      axios.post(url, item)
+        .then(response => {
+          let error = response.data.error;
+          if(!error) {
+            mergePortfolioItem(item);
+            let fields = {...state.fields};
+            if(!this.editMode)
+              fields = formUtil.initFields(this.formFields);
+            this.setState({
+              fields,
+              status: {
+                success: 1
+              }
+            });
+          } else {
+            this.setState({ 
+              status: { 
+                error 
+              }
+            });
+          }
+        })
+        .catch(error => {
+          this.setState({ 
+            status: { 
+              error: error.toString() 
+            }
+          });
+        })
     }
   }
 
   render() {
-    let { portfolio } = this.props;
-    let { fields } = this.state;
-    //portfolio is global
-    //if multiple portfolio forms on same page display
-    //display portfolio status for active form only
-    if(portfolio.id && 
-       portfolio.id !== fields.id.value
-    ) portfolio = {};
+    const {
+      fields,
+      status
+    } = this.state;
     return (
       <AdminPortfolioForm
         fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
-        portfolio={portfolio}
+        status={status}
       />
     );
   }
@@ -118,19 +155,15 @@ class AdminPortfolioFormContainer extends Component {
 
 AdminPortfolioFormContainer.propTypes = {
   formInitValues: PropTypes.object,
-  portfolio: PropTypes.object.isRequired,
-  submitAddPortfolioItem: PropTypes.func.isRequired,
-  submitEditPortfolioItem: PropTypes.func.isRequired
+  mergePortfolioItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  portfolio: state.portfolio
 });
 
 export default connect(
   mapStateToProps, 
   {
-    submitAddPortfolioItem,
-    submitEditPortfolioItem
+    mergePortfolioItem
   }
 )(AdminPortfolioFormContainer);

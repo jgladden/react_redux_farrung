@@ -10,8 +10,7 @@ import TextArea from '../FormFields/TextArea';
 
 const AdminPortfolioForm = props => {
   const {
-    portfolio: {
-      id,
+    status: {
       posting,
       error,
       success
@@ -122,7 +121,7 @@ const AdminPortfolioForm = props => {
 };
 
 AdminPortfolioForm.propTypes = {
-  portfolio: PropTypes.object.isRequired,
+  status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired
