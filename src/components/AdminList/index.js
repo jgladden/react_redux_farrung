@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from '../Loading';
 import Error from '../Error';
-import AdminListItem from '../AdminListItem';
+import AdminListItemContainer from '../../containers/AdminListItemContainer';
 
 const AdminList = ({setSection, setType, type, portfolio}) => {
   const {
@@ -37,7 +37,7 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
           </ul>
           <ul id='adminList__items'>
             {Object.keys(itemsByType).map(id => (
-              <AdminListItem
+              <AdminListItemContainer
                 key={id}
                 {...itemsByType[id]}
               />

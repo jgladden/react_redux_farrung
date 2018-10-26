@@ -10,4 +10,12 @@
   &__item:first-child {
     border-top: 1px solid #ccc;
   }
+
+  &__editForm {
+    display: none;
+  }
+  
+  &__editForm.display {
+    display: block;
+  }
 }
