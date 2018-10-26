@@ -97,12 +97,20 @@ class AdminPortfolioFormContainer extends Component {
   }
 
   render() {
+    let { portfolio } = this.props;
+    let { fields } = this.state;
+    //portfolio is global
+    //if multiple portfolio forms on same page display
+    //display portfolio status for active form only
+    if(portfolio.id && 
+       portfolio.id !== fields.id.value
+    ) portfolio = {};
     return (
       <AdminPortfolioForm
-        fields={this.state.fields}
+        fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
-        portfolio={this.props.portfolio}
+        portfolio={portfolio}
       />
     );
   }

@@ -49,6 +49,7 @@ const portfolio = (state = {}, action) => {
   }
   case types.EDIT_PORTFOLIO_ITEM: {
     return {
+      id: action.payload.id,
       posting: 1,
       items: {
         ...state.items
@@ -57,9 +58,11 @@ const portfolio = (state = {}, action) => {
   }
   case types.EDIT_PORTFOLIO_ITEM_SUCCESS: {
     let { item } = action.payload;
+    let { id, type } = item;
     let portfolio = {...state};
-    portfolio.items[item.type][item.id] = item;
+    portfolio.items[type][id] = item;
     return {
+      id,
       item_edited: 1,
       items: {
         ...portfolio.items
@@ -67,8 +70,10 @@ const portfolio = (state = {}, action) => {
     };
   }
   case types.EDIT_PORTFOLIO_ITEM_ERROR: {
+    let { id, error } = action.payload;
     return {
-      error: action.payload,
+      id,
+      error,
       items: {
         ...state.items
       }

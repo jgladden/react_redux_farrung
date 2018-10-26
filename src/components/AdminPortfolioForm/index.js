@@ -11,14 +11,15 @@ import TextArea from '../FormFields/TextArea';
 const AdminPortfolioForm = props => {
   const {
     portfolio: {
+      id,
       posting,
       error,
       success
-    }, 
+    },
     submitForm, 
     handleChange,
     fields
-  } = props; 
+  } = props;
 
   const fieldParam = { fields, handleChange };
 

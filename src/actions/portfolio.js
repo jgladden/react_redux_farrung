@@ -75,23 +75,39 @@ export const addPortfolioItemError = payload => ({
 
 
 export const submitEditPortfolioItem = portfolioItemObj => {
+  const id = portfolioItemObj.id;
   return dispatch => {
-    dispatch(editPortfolioItem());
+    dispatch(editPortfolioItem({id}));
     return axios.post(editPortfolioItemUrl, portfolioItemObj)
-      .then(response => dispatch(
-        editPortfolioItemSuccess({
-          response,
-          item: {...portfolioItemObj}
-        }) 
-      ))
+      .then(response => {
+        let error = response.data.error;
+        if(!error) {
+          dispatch(
+            editPortfolioItemSuccess({
+              item: {...portfolioItemObj}
+            })
+          );
+        } else {
+          dispatch(
+            editPortfolioItemError({
+              id,
+              error
+            })
+          );
+        }
+      })
       .catch(error => dispatch(
-        editPortfolioItemError(error.toString()))
-      );
+        editPortfolioItemError({
+          id,
+          error: error.toString()
+        })
+      ));
   };
 };
 
-export const editPortfolioItem = () => ({
-  type: types.EDIT_PORTFOLIO_ITEM
+export const editPortfolioItem = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM,
+  payload
 });
 
 export const editPortfolioItemSuccess = payload => ({
