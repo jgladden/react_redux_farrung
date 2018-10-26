@@ -7,11 +7,11 @@ import TextArea from '../FormFields/TextArea';
 
 const MessageForm = props => {
   const {
-    message: {
-      posting,
+    status: {
       error,
+      posting,
       success
-    }, 
+    },
     submitMessage, 
     handleChange, 
     fields
@@ -24,9 +24,6 @@ const MessageForm = props => {
       <p className='messageForm__heading'>SEND MESSAGE</p>
       {error &&
         <p className='messageForm__error'>{error}</p>
-      }
-      {success === false &&
-        <p className='messageForm__error'>Please try your message later.</p>
       }
       <form onSubmit={e => submitMessage(e)}>
         <label>Valid email.</label>
@@ -57,7 +54,7 @@ const MessageForm = props => {
 };
 
 MessageForm.propTypes = {
-  message: PropTypes.object.isRequired,
+  status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitMessage: PropTypes.func.isRequired

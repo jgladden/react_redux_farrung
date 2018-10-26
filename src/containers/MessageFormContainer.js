@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { submitMessage } from '../actions';
+import axios from 'axios';
+import { postMessageUrl } from '../config';
 import MessageForm from '../components/MessageForm/';
 import formUtil from '../utils/formUtil';
 
@@ -21,6 +21,7 @@ class MessageFormContainer extends Component {
       }
     };
     this.state = {
+      status: {},
       fields: formUtil.initFields(this.formFields),
     };
   }
@@ -36,40 +37,53 @@ class MessageFormContainer extends Component {
       {...this.state.fields}
     );
     if(validateForm.isValidForm) {
-      this.props.submitMessage(validateForm.fieldValues);
-      this.setState({
-        fields: formUtil.initFields(this.formFields),
-        displayLogin: false
-      });
+      this.postForm(validateForm.fieldValues);
     } else {
       this.setState({fields: validateForm.fields});
-    } 
+    }
+  }
+
+  postForm = fields => {
+    this.setState({status: { posting: 1 }});
+    axios.post(postMessageUrl, fields)
+      .then(response => {
+        console.log(response);
+        let success = response.data.success;
+        if(success) {
+          this.setState({
+            status: { success: 1 },
+            fields: formUtil.initFields(this.formFields)
+          });
+        } else {
+          this.setState({      
+            status: {
+              error: 'Message could not be sent.'
+            } 
+          });
+        }
+      })
+      .catch(error => this.setState({
+        status: {       
+          error: error.toString()
+        }
+      }));
+
   }
 
   render() {
+    const {
+      fields,
+      status
+    } = this.state;
     return (
       <MessageForm
-        fields={this.state.fields}
+        fields={fields}
         handleChange={this.handleChange}
         submitMessage={this.handleSubmit}
-        message={this.props.message}
+        status={status}
       />
     );
   }
 }
 
-MessageFormContainer.propTypes = {
-  message: PropTypes.object.isRequired,
-  submitMessage: PropTypes.func.isRequired
-};
-
-const mapStateToProps = state => ({
-  message: state.message
-});
-
-export default connect(
-  mapStateToProps, 
-  {
-    submitMessage
-  }
-)(MessageFormContainer);
+export default MessageFormContainer;
