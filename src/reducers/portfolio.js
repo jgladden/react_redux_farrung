@@ -25,10 +25,11 @@ const portfolio = (state = {}, action) => {
     let portfolio = {...state};
     portfolio.items[item.type][item.id] = item;
     return {
+      item_merged: item.id,
       items: {
         ...portfolio.items
       }
-    };
+    }
   }
   case types.REMOVE_PORTFOLIO_ITEM: {
     let { id, type } = action.payload.item;

@@ -6,7 +6,7 @@ import { mergePortfolioItem } from '../actions';
 import AdminPortfolioForm from '../components/AdminPortfolioForm/';
 import formUtil from '../utils/formUtil';
 import { uniqueId } from '../utils';
-import {} from '../config';
+import { editPortfolioItemUrl, addPortfolioItemUrl } from '../config';
 
 
 class AdminPortfolioFormContainer extends Component {
@@ -52,9 +52,6 @@ class AdminPortfolioFormContainer extends Component {
       },
       slidenum: {
         tests: ['^([0-9]+)$']
-      },
-      date: {
-        test: []
       }
     };
     this.editMode = props.formInitValues ? true : false;
@@ -109,8 +106,8 @@ class AdminPortfolioFormContainer extends Component {
         .then(response => {
           let error = response.data.error;
           if(!error) {
-            mergePortfolioItem(item);
-            let fields = {...state.fields};
+            mergePortfolioItem({item});
+            let fields = {...this.state.fields};
             if(!this.editMode)
               fields = formUtil.initFields(this.formFields);
             this.setState({

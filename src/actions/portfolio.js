@@ -1,10 +1,7 @@
 import axios from 'axios';
 import * as types from './types';
 import { 
-  getPortfolioUrl, 
-  addPortfolioItemUrl, 
-  editPortfolioItemUrl,
-  removePortfolioItemUrl 
+  getPortfolioUrl 
 } from '../config';
 
 export function fetchPortfolioItems() {
