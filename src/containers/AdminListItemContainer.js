@@ -8,19 +8,21 @@ class AdminListItemContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      displayEdit: false
+      displayEdit: false,
+      id: props.id
     };
   }
 
-  componentWillReceiveProps(nextProps) {
+  static getDerivedStateFromProps(nextProps, state) {
     const {
-      id
-    } = this.props;
-    if(nextProps.portfolio.item_merged === id &&
-       this.state.displayEdit === true
-    ) {
-      this.setState({displayEdit: false});
+      item_merged
+    } = nextProps.portfolio;
+    if(item_merged === state.id &&
+       state.displayEdit === true
+    )  {
+      return { displayEdit: false};
     };
+    return null;
   }
 
   toggleEditDisplay = () => {

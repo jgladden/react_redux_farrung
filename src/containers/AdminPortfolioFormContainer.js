@@ -54,26 +54,11 @@ class AdminPortfolioFormContainer extends Component {
         tests: ['^([0-9]+)$']
       }
     };
-    this.editMode = props.formInitValues ? true : false;
+    this.editMode: props.formInitValues ? true : false;
     this.state = {
       status: {},
       fields: formUtil.initFields(this.formFields, props.formInitValues)
     };
-  }
-
-  /*
-  getderivedstatefromprops not working in react-redux
-  this waits until server passes back success
-  not needed for edit mode as we do not want to clear 
-  field values in that case
-  */
-  componentWillReceiveProps(nextProps) {
-    if(!this.editMode && 
-       nextProps.portfolio.item_added && 
-       !this.props.portfolio.item_added
-    ) this.setState({ 
-      fields: formUtil.initFields(this.formFields) 
-    });
   }
 
   handleChange = e => {
