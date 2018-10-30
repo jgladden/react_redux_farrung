@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import { setSection } from '../actions';
-import PortfolioList from '../components/PortfolioList/';
+import { setSection } from 'actions';
+import PortfolioList from 'components/Website/PortfolioList/';
 
 const getVisiblePortfolio = (items, type) => {
   return typeof items !== 'undefined' && items[type] ? items[type] : {};

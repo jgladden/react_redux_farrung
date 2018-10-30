@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import NotAuthorized from '../NotAuthorized';
-import AdminNav from '../../containers/AdminNavContainer';
-import AdminList from '../../containers/AdminListContainer';
-import AdminAdd from '../AdminAdd';
+import NotAuthorized from 'components/NotAuthorized';
+import NavContainer from 'containers/Admin/NavContainer';
+import ListContainer from 'containers/Admin/ListContainer';
+import Add from 'components/Admin/Add';
 
 const Admin = ({section, isAuthenticated}) => {
   let display = '';
@@ -11,14 +11,14 @@ const Admin = ({section, isAuthenticated}) => {
     let SubPage = '';
     switch (section.secondary) {
     case 'add':
-      SubPage = AdminAdd;
+      SubPage = Add;
       break;
     default: 
-      SubPage = AdminList;
+      SubPage = ListContainer;
     }
     display = (
       <React.Fragment>
-        <AdminNav />
+        <NavContainer />
         <SubPage />
       </React.Fragment>
     );

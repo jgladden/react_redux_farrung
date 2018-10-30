@@ -20,6 +20,37 @@ const portfolio = (state = {}, action) => {
       error: action.payload
     };
   }
+  case types.EDIT_PORTFOLIO_ITEM: {
+    return {
+      ...state,
+      edit: {
+        id: action.payload.id,
+        status: 'posting'
+      } 
+    }
+  }
+  case types.EDIT_PORTFOLIO_ITEM_SUCCESS: {
+    let { item } = action.payload;
+    let portfolio = {...state};
+    portfolio.items[item.type][item.id] = item;
+    return {
+      ...state,
+      edit: {
+        id: item.id,
+        status: 'success'
+      }, 
+      items: {
+        ...portfolio.items
+      }
+    }
+  }
+  case types.EDIT_PORTFOLIO_ITEM_ERROR: {
+    let { id, error } = action.payload;
+    return {
+      ...state,
+      edit: { id, error }
+    }
+  }
   case types.MERGE_PORTFOLIO_ITEM: {
     let { item } = action.payload;
     let portfolio = {...state};

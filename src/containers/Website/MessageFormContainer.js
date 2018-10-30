@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import { postMessageUrl } from '../config';
-import MessageForm from '../components/MessageForm/';
-import formUtil from '../utils/formUtil';
+import { postMessageUrl } from 'config';
+import formUtil from 'utils/formUtil';
+import MessageForm from 'components/Website/MessageForm';
 
 class MessageFormContainer extends Component {
     

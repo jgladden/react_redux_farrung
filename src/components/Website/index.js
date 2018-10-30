@@ -1,8 +1,8 @@
 import React from 'react';
-import PortfolioNavContainer from '../../containers/PortfolioNavContainer';
-import PortfolioListContainer from '../../containers/PortfolioListContainer';
-import PortfolioDetailContainer from '../../containers/PortfolioDetailContainer';
-import MessageFormContainer from '../../containers/MessageFormContainer';
+import PortfolioNavContainer from 'containers/Website/PortfolioNavContainer';
+import PortfolioListContainer from 'containers/Website/PortfolioListContainer';
+import PortfolioDetailContainer from 'containers/Website/PortfolioDetailContainer';
+import MessageFormContainer from 'containers/Website/MessageFormContainer';
 
 const Website = () => (
   <React.Fragment>

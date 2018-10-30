@@ -1,9 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/';
-import Text from '../FormFields/Text';
-import TextArea from '../FormFields/TextArea';
+import Button from 'components/Button/';
+import Text from 'components/FormFields/Text';
+import TextArea from 'components/FormFields/TextArea';
 
 const MessageForm = props => {
   const {

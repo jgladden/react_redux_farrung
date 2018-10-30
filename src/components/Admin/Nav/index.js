@@ -1,9 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import SignInContainer from '../../containers/SignInContainer';
+import SignInContainer from 'containers/SignInContainer';
 
-const AdminNav = ({setSection, section}) => {
+const Nav = ({setSection, section}) => {
   return (
     <div id='adminNav'>
       <ul id='adminNav__primary'>
@@ -27,7 +27,7 @@ const AdminNav = ({setSection, section}) => {
   );
 };
 
-AdminNav.propTypes = {
+Nav.propTypes = {
   setSection: PropTypes.func.isRequired,
   section: PropTypes.shape({
     primary: PropTypes.string.isRequired,
@@ -36,5 +36,5 @@ AdminNav.propTypes = {
   }).isRequired
 };
 
-export default AdminNav;
+export default Nav;
 

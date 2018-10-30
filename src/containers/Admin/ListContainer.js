@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setSection } from '../actions';
-import AdminList from '../components/AdminList/';
+import { setSection } from 'actions';
+import List from 'components/Admin/List';
 
-class AdminListContainer extends Component {
+class ListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {type: 'online'};
@@ -20,7 +20,7 @@ class AdminListContainer extends Component {
       setSection
     } = this.props;
     return (
-      <AdminList
+      <List
         type={this.state.type}
         setType={this.setType}
         portfolio={portfolio}
@@ -30,7 +30,7 @@ class AdminListContainer extends Component {
   }
 }
 
-AdminListContainer.propTypes = {
+ListContainer.propTypes = {
   setSection: PropTypes.func.isRequired,
   portfolio: PropTypes.object.isRequired
 };  
@@ -44,4 +44,4 @@ export default connect(
   {
     setSection
   }
-)(AdminListContainer);
+)(ListContainer);

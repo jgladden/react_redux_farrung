@@ -1,9 +1,9 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import PortfolioItem from '../PortfolioItem';
-import Loading from '../Loading';
-import Error from '../Error';
+import PortfolioItem from 'components/Website/PortfolioItem';
+import Loading from 'components/Loading';
+import Error from 'components/Error';
 
 const PortfolioList = props => { 
   const {

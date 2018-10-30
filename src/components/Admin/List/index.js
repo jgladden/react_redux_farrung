@@ -1,11 +1,11 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loading from '../Loading';
-import Error from '../Error';
-import AdminListItemContainer from '../../containers/AdminListItemContainer';
+import Loading from 'components/Loading';
+import Error from 'components/Error';
+import ListItemContainer from 'containers/Admin/ListItemContainer';
 
-const AdminList = ({setSection, setType, type, portfolio}) => {
+const List = ({setSection, setType, type, portfolio}) => {
   const {
     fetching,
     error,
@@ -37,7 +37,7 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
           </ul>
           <ul id='adminList__items'>
             {Object.keys(itemsByType).map(id => (
-              <AdminListItemContainer
+              <ListItemContainer
                 key={id}
                 {...itemsByType[id]}
               />
@@ -49,7 +49,7 @@ const AdminList = ({setSection, setType, type, portfolio}) => {
   );
 };
 
-AdminList.propTypes = {
+List.propTypes = {
   setSection: PropTypes.func.isRequired,
   setType: PropTypes.func.isRequired,
   type: PropTypes.string,
@@ -60,4 +60,4 @@ AdminList.propTypes = {
   })
 };
 
-export default AdminList; 
+export default List; 

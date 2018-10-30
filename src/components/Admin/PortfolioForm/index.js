@@ -1,19 +1,19 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/';
-import formUtil from '../../utils/formUtil';
-import Text from '../FormFields/Text';
-import CheckBox from '../FormFields/CheckBox';
-import Select from '../FormFields/Select'; 
-import TextArea from '../FormFields/TextArea'; 
+import formUtil from 'utils/formUtil';
+import Button from 'components/Button/';
+import Text from 'components/FormFields/Text';
+import CheckBox from 'components/FormFields/CheckBox';
+import Select from 'components/FormFields/Select'; 
+import TextArea from 'components/FormFields/TextArea'; 
 
-const AdminPortfolioForm = props => {
+const PortfolioForm = props => {
   const {
-    status: {
-      posting,
-      error,
-      success
+    formStatus: {
+      id,
+      status,
+      error
     },
     submitForm, 
     handleChange,
@@ -37,9 +37,6 @@ const AdminPortfolioForm = props => {
     <div className='portfolioForm'>
       {error &&
         <p className='portfolioForm__error'>{error}</p>
-      }
-      {success === false &&
-        <p className='portfolioForm__error'>Please try your message later.</p>
       }
       <form onSubmit={e => submitForm(e)}>
         <label>Type:</label>
@@ -112,22 +109,22 @@ const AdminPortfolioForm = props => {
         />
         <Button 
           handleClick={e => submitForm(e)} 
-          label={posting ? 'Sending' : 'Send'}
-          disabled={posting ? true : false} 
+          label={status === 'posting' ? 'Sending' : 'Send'}
+          disabled={status === 'posting' ? true : false} 
         />
       </form>
     </div>
   );
 };
 
-AdminPortfolioForm.propTypes = {
-  status: PropTypes.object.isRequired,
+PortfolioForm.propTypes = {
+  formStatus: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired
 };
 
-export default AdminPortfolioForm;
+export default PortfolioForm;
 
 
 

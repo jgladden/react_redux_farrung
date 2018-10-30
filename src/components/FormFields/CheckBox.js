@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formUtil from '../../utils/formUtil';
+import formUtil from 'utils/formUtil';
 
 const CheckBox = ({name, fields, handleChange}) => (
   <input

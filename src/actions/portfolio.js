@@ -1,7 +1,9 @@
 import axios from 'axios';
 import * as types from './types';
 import { 
-  getPortfolioUrl 
+  getPortfolioUrl,
+  editPortfolioItemUrl,
+  addPortfolioItemUrl 
 } from '../config';
 
 export function fetchPortfolioItems() {
@@ -31,14 +33,37 @@ export const getPortfolioItemsError = payload => ({
   payload
 });
 
+export function editPortfolioItem(item) {
+  let id = item.id;
+  return dispatch => {
+    dispatch(editPortfolioItemInit({id}));
+    return axios.post(editPortfolioItemUrl, item)
+      .then(response => {
+        let error = response.data.error;
+        if(!error) {
+          dispatch(editPortfolioItemSuccess({item}))
+        } else {
+          dispatch(editPortfolioItemError({id,error}))
+        }
+      })
+      .catch(error => dispatch(
+        editPortfolioItemError({id, error: error.toString()})
+      ));
+  };
+};
 
-export const mergePortfolioItem = payload => ({
-  type: types.MERGE_PORTFOLIO_ITEM,
+export const editPortfolioItemInit = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM,
   payload
 });
 
-export const removePortfolioItem = payload => ({
-  type: types.REMOVE_PORTFOLIO_ITEM,
+export const editPortfolioItemSuccess = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM_SUCCESS,
+  payload
+});
+
+export const editPortfolioItemError = payload => ({
+  type: types.EDIT_PORTFOLIO_ITEM_ERROR,
   payload
 });
 

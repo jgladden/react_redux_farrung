@@ -1,8 +1,8 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from '../Button/';
-import Text from '../FormFields/Text';
+import Button from 'components/Button/';
+import Text from 'components/FormFields/Text';
 
 const AuthForm = props => {
   const {

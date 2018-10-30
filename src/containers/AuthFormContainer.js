@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { submitLogin } from '../actions';
-import AuthForm from '../components/AuthForm';
-import formUtil from '../utils/formUtil';
-import cookieUtil from '../utils/cookieUtil';
+import { submitLogin } from 'actions';
+import AuthForm from 'components/AuthForm';
+import formUtil from 'utils/formUtil';
+import cookieUtil from 'utils/cookieUtil';
 
 class AuthFormContainer extends Component {
     

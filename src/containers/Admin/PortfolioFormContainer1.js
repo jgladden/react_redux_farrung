@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { mergePortfolioItem } from '../actions';
-import AdminPortfolioForm from '../components/AdminPortfolioForm/';
-import formUtil from '../utils/formUtil';
-import { uniqueId } from '../utils';
-import { editPortfolioItemUrl, addPortfolioItemUrl } from '../config';
+import { mergePortfolioItem } from 'actions';
+import formUtil from 'utils/formUtil';
+import { uniqueId } from 'utils';
+import { editPortfolioItemUrl, addPortfolioItemUrl } from 'config';
+import PortfolioForm from 'components/Admin/PortfolioForm';
 
-
-class AdminPortfolioFormContainer extends Component {
+class PortfolioFormContainer extends Component {
     
   constructor(props) {
     super(props);
@@ -54,7 +53,7 @@ class AdminPortfolioFormContainer extends Component {
         tests: ['^([0-9]+)$']
       }
     };
-    this.editMode: props.formInitValues ? true : false;
+    this.editMode = props.formInitValues ? true : false;
     this.state = {
       status: {},
       fields: formUtil.initFields(this.formFields, props.formInitValues)
@@ -125,7 +124,7 @@ class AdminPortfolioFormContainer extends Component {
       status
     } = this.state;
     return (
-      <AdminPortfolioForm
+      <PortfolioForm
         fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
@@ -135,7 +134,7 @@ class AdminPortfolioFormContainer extends Component {
   }
 }
 
-AdminPortfolioFormContainer.propTypes = {
+PortfolioFormContainer.propTypes = {
   formInitValues: PropTypes.object,
   mergePortfolioItem: PropTypes.func.isRequired
 };
@@ -148,4 +147,4 @@ export default connect(
   {
     mergePortfolioItem
   }
-)(AdminPortfolioFormContainer);
+)(PortfolioFormContainer);

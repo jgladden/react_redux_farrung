@@ -15,6 +15,12 @@ module.exports = {
   },
   resolve: {
     alias: {
+      components: __dirname + '/src/components',
+      containers: __dirname + '/src/containers',
+      actions: __dirname + '/src/actions',
+      reducers: __dirname + '/src/reducers',
+      utils: __dirname + '/src/utils',
+      config: __dirname + '/src/config',
       director: __dirname + '/node_modules/director/build/director'
     }
   },

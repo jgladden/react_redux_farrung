@@ -1,10 +1,10 @@
 import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import AdminPortfolioFormContainer from '../../containers/AdminPortfolioFormContainer';
-import Button from '../Button';
+import PortfolioFormContainer from 'containers/Admin/PortfolioFormContainer';
+import Button from 'components/Button';
 
-const AdminListItem = props => {
+const ListItem = props => {
   const {
     toggleEditDisplay,
     displayEdit,
@@ -22,7 +22,7 @@ const AdminListItem = props => {
         id='adminList__editForm'
         className={displayEdit ? 'display' : ''}
         >
-        <AdminPortfolioFormContainer
+        <PortfolioFormContainer
           formInitValues={{...props}}
         />
       </div>
@@ -30,10 +30,10 @@ const AdminListItem = props => {
   );
 }
 
-AdminListItem.propTypes = {
+ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   toggleEditDisplay: PropTypes.func.isRequired,
   displayEdit: PropTypes.bool.isRequired
 };
 
-export default AdminListItem;
+export default ListItem;

@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { submitLogout } from '../actions';
-import SignIn from '../components/SignIn';
-import cookieUtil from '../utils/cookieUtil';
+import { submitLogout } from 'actions';
+import SignIn from 'components/SignIn';
+import cookieUtil from 'utils/cookieUtil';
 
 class SignInContainer extends Component {
     
