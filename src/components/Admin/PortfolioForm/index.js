@@ -10,9 +10,9 @@ import TextArea from 'components/FormFields/TextArea';
 
 const PortfolioForm = props => {
   const {
-    formStatus: {
-      id,
-      status,
+    status: {
+      posting,
+      success,
       error
     },
     submitForm, 
@@ -109,8 +109,8 @@ const PortfolioForm = props => {
         />
         <Button 
           handleClick={e => submitForm(e)} 
-          label={status === 'posting' ? 'Sending' : 'Send'}
-          disabled={status === 'posting' ? true : false} 
+          label={posting ? 'Sending' : 'Send'}
+          disabled={posting ? true : false} 
         />
       </form>
     </div>
@@ -118,7 +118,7 @@ const PortfolioForm = props => {
 };
 
 PortfolioForm.propTypes = {
-  formStatus: PropTypes.object.isRequired,
+  status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired

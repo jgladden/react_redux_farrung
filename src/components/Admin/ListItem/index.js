@@ -6,6 +6,7 @@ import Button from 'components/Button';
 
 const ListItem = props => {
   const {
+    deleteItem,
     toggleEditDisplay,
     displayEdit,
     title
@@ -13,6 +14,11 @@ const ListItem = props => {
   return (
     <li id='adminList__item'>
       <p>TITLE: {title}</p>
+      <Button
+        className='adminList__removeBtn'
+        handleClick={() => deleteItem()}
+        label='Delete'
+      />
       <Button
         className='adminList__editBtn'
         handleClick={() => toggleEditDisplay()}
@@ -24,6 +30,7 @@ const ListItem = props => {
         >
         <PortfolioFormContainer
           formInitValues={{...props}}
+          toggleEditDisplay={toggleEditDisplay}
         />
       </div>
     </li>
@@ -33,7 +40,8 @@ const ListItem = props => {
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
   toggleEditDisplay: PropTypes.func.isRequired,
-  displayEdit: PropTypes.bool.isRequired
+  displayEdit: PropTypes.bool.isRequired,
+  deleteItem: PropTypes.func.isRequired
 };
 
 export default ListItem;

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { connect } from 'react-redux';
-import { editPortfolioItem, addPortfolioItem } from 'actions';
+import { mergePortfolioItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { uniqueId } from 'utils';
+import { editPortfolioItemUrl, addPortfolioItemUrl } from 'config';
 import PortfolioForm from 'components/Admin/PortfolioForm';
 
 class PortfolioFormContainer extends Component {
@@ -53,6 +55,7 @@ class PortfolioFormContainer extends Component {
     };
     this.editMode = props.formInitValues ? true : false;
     this.state = {
+      status: {},
       fields: formUtil.initFields(this.formFields, props.formInitValues)
     };
   }
@@ -69,31 +72,77 @@ class PortfolioFormContainer extends Component {
     );
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
-      this.props.editPortfolioItem(validateForm.fieldValues);
-    };      
+      let values = validateForm.fieldValues;
+      if(this.editMode) {
+        this.postEdit(values);
+      } else {
+        this.postAdd(values);
+      }
+      this.setState({ 
+        status: { 
+          posting: 1 
+        }
+      });
+    }
   }
 
-  getFormStatus = () => {
-    const { 
-      value: id 
-    } = this.state.fields.id;
-    const {
-      edit,
-      add
-    } = this.props.portfolio;
-    let fs = this.editMode ? edit : add;
-    if(!fs || id !== fs.id)  
-      fs = {};
-    return fs;
+  postEdit = values => {
+    axios.post(editPortfolioItemUrl, values)
+      .then(response => {
+        let error = response.data.error;
+        if(!error) {
+          this.props.mergePortfolioItem({values});
+          this.props.toggleEditDisplay();
+          const fields = {...this.state.fields};
+          const status = { success : 1 };
+          this.setState({fields,status});
+        } else {
+          this.setState({status: { error }});
+        }
+      })
+      .catch(error => {
+        this.setState({
+          status: { 
+            error: error.toString() 
+          }
+        });        
+      });
+  }
+
+  postAdd = values => {
+    values.id = uniqueId();
+    axios.post(addPortfolioItemUrl, values)
+      .then(response => {
+        let error = response.data.error;
+        if(!error) {
+          this.props.mergePortfolioItem({values});
+          const fields = formUtil.initFields(this.formFields);
+          const status = { success : 1 };
+          this.setState({fields,status});
+        } else {
+          this.setState({status: { error }});
+        }
+      })
+      .catch(error => {
+        this.setState({
+          status: { 
+            error: error.toString() 
+          }
+        });
+      });
   }
 
   render() {
+    const {
+      fields,
+      status
+    } = this.state;
     return (
       <PortfolioForm
-        fields={this.state.fields}
+        fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
-        formStatus={this.getFormStatus()}
+        status={status}
       />
     );
   }
@@ -101,18 +150,13 @@ class PortfolioFormContainer extends Component {
 
 PortfolioFormContainer.propTypes = {
   formInitValues: PropTypes.object,
-  editPortfolioItem: PropTypes.func.isRequired,
-  addPortfolioItem: PropTypes.func
+  mergePortfolioItem: PropTypes.func.isRequired,
+  toggleEditDisplay: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  portfolio: state.portfolio
-});
-
 export default connect(
-  mapStateToProps, 
+  null, 
   {
-    editPortfolioItem,
-    addPortfolioItem
+    mergePortfolioItem
   }
 )(PortfolioFormContainer);

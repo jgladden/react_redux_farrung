@@ -3,7 +3,15 @@ import { setSection } from 'actions';
 import PortfolioList from 'components/Website/PortfolioList/';
 
 const getVisiblePortfolio = (items, type) => {
-  return typeof items !== 'undefined' && items[type] ? items[type] : {};
+  const itemsByType = typeof items !== 'undefined' && items[type] ? items[type] : {};
+  return Object.keys(itemsByType)
+    .filter(key => {
+      return itemsByType[key].display === '1';
+    })
+    .reduce((obj, key) => {
+      obj[key] = itemsByType[key];
+      return obj;
+    }, {});
 };
 
 const mapStateToProps = state => ({

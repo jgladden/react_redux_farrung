@@ -20,52 +20,23 @@ const portfolio = (state = {}, action) => {
       error: action.payload
     };
   }
-  case types.EDIT_PORTFOLIO_ITEM: {
-    return {
-      ...state,
-      edit: {
-        id: action.payload.id,
-        status: 'posting'
-      } 
-    }
-  }
-  case types.EDIT_PORTFOLIO_ITEM_SUCCESS: {
-    let { item } = action.payload;
-    let portfolio = {...state};
-    portfolio.items[item.type][item.id] = item;
-    return {
-      ...state,
-      edit: {
-        id: item.id,
-        status: 'success'
-      }, 
-      items: {
-        ...portfolio.items
-      }
-    }
-  }
-  case types.EDIT_PORTFOLIO_ITEM_ERROR: {
-    let { id, error } = action.payload;
-    return {
-      ...state,
-      edit: { id, error }
-    }
-  }
   case types.MERGE_PORTFOLIO_ITEM: {
-    let { item } = action.payload;
+    let { values } = action.payload;
+    let { id, type } = values;
     let portfolio = {...state};
-    portfolio.items[item.type][item.id] = item;
+    portfolio.items[type][id] = values;
     return {
-      item_merged: item.id,
       items: {
         ...portfolio.items
       }
     }
   }
   case types.REMOVE_PORTFOLIO_ITEM: {
-    let { id, type } = action.payload.item;
+    let { id, type } = action.payload;
     let portfolio = {...state};
+    console.log(type, id);
     delete portfolio.items[type][id];
+    console.log(portfolio.items);
     return {
       items: {
         ...portfolio.items
