@@ -2,33 +2,6 @@
   padding: 15px 10px;
   position: relative;
 
-  &__typenav {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-
-    li {
-      position: relative;
-      display: inline-block;
-      padding-left: 20px;
-      cursor: pointer;
-    }
-
-    li.selected {
-      color: #ccc;
-    }
-
-    li:after {
-      content: '|';
-      position: absolute;
-      left: 10px;
-    }
-
-    li:first-child:after {
-      content: '';
-    }
-  }
-
   &__heading {
     font-size: 18px;
     padding-bottom: 15px;

@@ -34,7 +34,6 @@ const portfolio = (state = {}, action) => {
   case types.REMOVE_PORTFOLIO_ITEM: {
     let { id, type } = action.payload;
     let portfolio = {...state};
-    console.log(type, id);
     delete portfolio.items[type][id];
     console.log(portfolio.items);
     return {

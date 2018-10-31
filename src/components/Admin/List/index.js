@@ -4,16 +4,22 @@ import PropTypes from 'prop-types';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
 import ListItemContainer from 'containers/Admin/ListItemContainer';
+import ListNav from 'components/Admin/ListNav';
 
-const List = ({setSection, setType, type, portfolio}) => {
+const List = props => {
   const {
-    fetching,
-    error,
-    items
-  } = portfolio;
-
-  let portfolioLoaded = items && type ? true : false;
-  let itemsByType = portfolioLoaded ? items[type] : [];
+    setSection,
+    setCurrentType,
+    setDisplayArchiveItems,
+    currentType,
+    displayArchiveItems,
+    filteredItems,
+    portfolio: {
+      fetching,
+      error,
+      items: allItems
+    }
+  } = props;
 
   return (
     <div id='adminList'>
@@ -24,22 +30,20 @@ const List = ({setSection, setType, type, portfolio}) => {
       {error &&
         <Error error={error} />
       }
-      {portfolioLoaded &&
+      {allItems &&
         <React.Fragment>
-          <ul id='adminList__typenav'>
-            {Object.keys(items).map(ptype => (
-              <li 
-                key={ptype}
-                className={ptype === type ? 'selected' : ''}
-                onClick={() => setType(ptype)}
-              >{ptype}</li>
-            ))}
-          </ul>
+          <ListNav
+            allItems={allItems}
+            setCurrentType={setCurrentType}
+            currentType={currentType}
+            setDisplayArchiveItems={setDisplayArchiveItems}
+            displayArchiveItems={displayArchiveItems}
+          />
           <ul id='adminList__items'>
-            {Object.keys(itemsByType).map(id => (
+            {Object.keys(filteredItems).map(id => (
               <ListItemContainer
                 key={id}
-                {...itemsByType[id]}
+                {...filteredItems[id]}
               />
             ))}
           </ul>
@@ -51,8 +55,11 @@ const List = ({setSection, setType, type, portfolio}) => {
 
 List.propTypes = {
   setSection: PropTypes.func.isRequired,
-  setType: PropTypes.func.isRequired,
-  type: PropTypes.string,
+  setCurrentType: PropTypes.func.isRequired,
+  currentType: PropTypes.string.isRequired,
+  setDisplayArchiveItems: PropTypes.func.isRequired,
+  displayArchiveItems: PropTypes.bool.isRequired,
+  filteredItems: PropTypes.object.isRequired,
   portfolio: PropTypes.shape({
     fetching: PropTypes.number,
     error: PropTypes.string,
