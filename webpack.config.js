@@ -21,6 +21,7 @@ module.exports = {
       reducers: __dirname + '/src/reducers',
       utils: __dirname + '/src/utils',
       config: __dirname + '/src/config',
+      img: __dirname + '/src/assets/img',
       director: __dirname + '/node_modules/director/build/director'
     }
   },
@@ -79,7 +80,7 @@ module.exports = {
       disable: process.env.NODE_ENV !== 'production'
     }),
     new HtmlWebpackPlugin({
-      title: 'My App',
+      title: 'f a r r u n g . d e s i g n . s t u d i o',
       filename: 'index.html',
       hash: true,
       template: __dirname + '/src/index.html'

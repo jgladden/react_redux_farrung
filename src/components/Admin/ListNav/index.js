@@ -1,7 +1,6 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import CheckBox from 'components/FormFields/CheckBox';
 
 const ListNav = ({
   allItems, 
@@ -14,16 +13,13 @@ const ListNav = ({
     <div id='adminList__typenav'>
       <span>Select Type:</span>
       <ul>
-      { Object.keys(allItems)
-        .map(type => (
+        {Object.keys(allItems).map(type => (
           <li
             key={type}
             className={currentType === type ? 'selected' : ''}
             onClick={() => setCurrentType(type)}
-          >
-          {type}
-          </li>
-      ))}
+          >{type}</li>
+        ))}
       </ul>
     </div>
     <div id='adminList__archiveNav'>
