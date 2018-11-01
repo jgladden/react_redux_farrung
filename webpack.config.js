@@ -12,7 +12,7 @@ const alias = {
   config: __dirname + '/src/config',
   img: __dirname + '/src/assets/img',
   director: __dirname + '/node_modules/director/build/director'
-}
+};
 
 module.exports = { 
   entry: [

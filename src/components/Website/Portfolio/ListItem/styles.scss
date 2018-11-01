@@ -1,10 +1,44 @@
 .portfolioItem {
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin-bottom: 10px;
-  font-size: 12px;
+  float: left;
+  width: 20%;
+  padding: 7.5px;
 
-  &__heading {
-    font-size: 16px;
+  div {
+    padding: 15px 15px 5px;
+    border: 1px solid #cccccc;
+    overflow: hidden;
+  }
+
+  img {
+    width: 100%;
+  }
+  
+  p {
+    font-size: 10px;
+    padding-top: 5px;
+  }
+}
+
+@media (max-width:1200px) {
+  .portfolioItem {
+    width: 25%;
+  }
+}
+
+@media (max-width:900px) {
+  .portfolioItem {
+    width: 33.3%;
+  }
+}
+
+@media (max-width:480px) {
+  .portfolioItem {
+    width: 50%;
+  }
+}
+
+@media (max-width:320px) {
+  .portfolioItem {
+    width: 100%;
   }
 }
