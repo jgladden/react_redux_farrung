@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { postMessageUrl } from 'config';
 import formUtil from 'utils/formUtil';
-import MessageForm from 'components/Website/MessageForm';
+import Form from 'components/Website/Contact/Form';
 
-class MessageFormContainer extends Component {
+class FormContainer extends Component {
     
   constructor(props) {
     super(props);
@@ -76,7 +76,7 @@ class MessageFormContainer extends Component {
       status
     } = this.state;
     return (
-      <MessageForm
+      <Form
         fields={fields}
         handleChange={this.handleChange}
         submitMessage={this.handleSubmit}
@@ -86,4 +86,4 @@ class MessageFormContainer extends Component {
   }
 }
 
-export default MessageFormContainer;
+export default FormContainer;

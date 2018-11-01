@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import PortfolioItem from 'components/Website/PortfolioItem';
+import ListItem from 'components/Website/Portfolio/ListItem';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
 
@@ -28,7 +28,7 @@ const PortfolioList = props => {
       {itemIds.length ? (
         <ul>
           {itemIds.map(id => (
-            <PortfolioItem
+            <ListItem
               key={id}
               {...items[id]}
               handleClick={() => setSection({primary: 'portfolio', secondary: type, tertiary: id})}

@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import PortfolioDetail from 'components/Website/PortfolioDetail/';
+import Detail from 'components/Website/Portfolio/Detail/';
 
 const getPortfolioDetails = (items, type, id) => {
   return items && items[type] && items[type][id] ? items[type][id] : {};
@@ -12,4 +12,4 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {}
-)(PortfolioDetail);
+)(Detail);

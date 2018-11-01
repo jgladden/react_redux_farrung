@@ -5,7 +5,7 @@ import Button from 'components/Button/';
 import Text from 'components/FormFields/Text';
 import TextArea from 'components/FormFields/TextArea';
 
-const MessageForm = props => {
+const Form = props => {
   const {
     status: {
       error,
@@ -20,47 +20,46 @@ const MessageForm = props => {
   const fieldParam = { fields, handleChange }; 
 
   return(
-    <div className='messageForm'>
-      <p className='messageForm__heading'>SEND MESSAGE</p>
+    <React.Fragment>
       {error &&
-        <p className='messageForm__error'>{error}</p>
+        <p className='connectWrapper__error'>{error}</p>
       }
-      <form onSubmit={e => submitMessage(e)}>
-        <label>Valid email.</label>
+      <form 
+        onSubmit={e => submitMessage(e)}
+      >
         <Text
           name='email'
-          placeholder='Email'
+          placeholder='EMAIL'
           {...fieldParam}
         />
-        <label>Minimum 8 characters.</label>
         <Text
           name='subject'
-          placeholder='Subject'
+          placeholder='SUBJECT'
           {...fieldParam}
         />
-        <label>Please enter your message.</label>
         <TextArea
           name='message'
+          placeholder='MESSAGE'
           {...fieldParam}
         />
         <Button 
           handleClick={e => submitMessage(e)} 
-          label={posting ? 'Sending' : 'Send'}
+          label={posting ? 'SENDING' : 'SUBMIT'}
           disabled={posting ? true : false} 
         />
       </form>
-    </div>
+    </React.Fragment>
   );
 };
 
-MessageForm.propTypes = {
+Form.propTypes = {
   status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitMessage: PropTypes.func.isRequired
 };
 
-export default MessageForm;
+export default Form;
 
 
 

@@ -1,3 +1,4 @@
+import './styles.scss';
 import React from 'react';
 import imgLogo from 'img/site/logo.gif';
 

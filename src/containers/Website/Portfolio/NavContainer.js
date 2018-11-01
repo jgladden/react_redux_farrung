@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
-import PortfolioNav from 'components/Website/PortfolioNav/';
+import Nav from 'components/Website/Portfolio/Nav';
 
 const getPortfolioTypes = items => {
   return items ? Object.keys(items) : [];
@@ -15,4 +15,4 @@ export default connect(
   {
     setSection
   }
-)(PortfolioNav);
+)(Nav);

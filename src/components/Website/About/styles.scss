@@ -1,0 +1,53 @@
+#aboutDetail {
+  overflow: auto;
+  width: auto;
+}
+
+#aboutDetail h5 {
+  padding-top1: 10px;
+  font-size: 20px;
+}
+
+#aboutDetail p {
+  color: #666666;
+  padding-top: 5px;
+}
+
+#aboutDetail div {
+  float: left;
+}
+
+#aboutDetailTxt {
+  width: 30%;
+  max-width: 390px;
+}
+
+#aboutDetailImg {
+  float: left;
+  width: 70%;
+  max-width: 668px;
+}
+
+#aboutDetailImg img {
+  width: 100%;
+}
+
+@media only screen and (max-width: 900px) {
+  #aboutDetail div {
+    float: none;
+    width: 100%;
+  }
+
+  #aboutDetailTxt {
+    max-width: 100%;
+  }
+
+  #aboutDetailImg {
+    padding-top: 10px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  #aboutDetailImg {
+    display: none;
+  }
+}

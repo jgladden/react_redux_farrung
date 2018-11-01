@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
-import PortfolioList from 'components/Website/PortfolioList/';
+import List from 'components/Website/Portfolio/List/';
 
 const getVisiblePortfolio = (items, type) => {
   const itemsByType = typeof items !== 'undefined' && items[type] ? items[type] : {};
@@ -26,4 +26,4 @@ export default connect(
   {
     setSection
   }
-)(PortfolioList);
+)(List);

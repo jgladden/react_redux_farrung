@@ -2,10 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import formUtil from 'utils/formUtil';
 
-const TextArea = ({name, fields, handleChange}) => (
+const TextArea = ({name, fields, handleChange, placeholder}) => (
   <textarea
     value={fields[name].value}
     name={name}
+    placeholder={placeholder}
     className={formUtil.fieldErrorClass(name, fields)}
     onChange={e => handleChange(e)}
   />

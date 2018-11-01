@@ -1,19 +1,29 @@
+import './styles.scss';
 import React from 'react';
 import Header from 'components/Website/Header';
 import About from 'components/Website/About';
-import PortfolioNavContainer from 'containers/Website/PortfolioNavContainer';
-import PortfolioListContainer from 'containers/Website/PortfolioListContainer';
-import PortfolioDetailContainer from 'containers/Website/PortfolioDetailContainer';
-import MessageFormContainer from 'containers/Website/MessageFormContainer';
+import Portfolio from 'components/Website/Portfolio';
+//import PortfolioDetail from 'components/Website/Portfolio/Detail';
+import Contact from 'components/Website/Contact';
+import Footer from 'components/Website/Footer';
+import SliderNav from 'components/Website/SliderNav';
+
+/*
+    <Header />
+    <About />
+    <Portfolio />
+    <Contact />
+    <Footer />
+*/
 
 const Website = () => (
   <section id='contentWrapper'>    
     <Header />
     <About />
-    <PortfolioNavContainer />
-    <PortfolioDetailContainer />
-    <PortfolioListContainer />
-    <MessageFormContainer />
+    <Portfolio />
+    <Contact />
+    <Footer />
+    <SliderNav />
   </section>
 );
 

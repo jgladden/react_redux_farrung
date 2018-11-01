@@ -1,0 +1,36 @@
+#sliderNav {
+  background-color: #000;
+  position: fixed;
+  top: 90px;
+  left: 0;
+}
+
+#sliderNav a {
+  display: block;
+  width: 30px;
+}
+
+#sliderNav a:hover {
+  display: block;
+  background-color: #ff6f6f;
+}
+
+#lastSection {
+  height: 25px;
+  background: url('/src/assets/img/site/arrow_up.gif') center center no-repeat;
+}
+
+#topSection {
+  font-family: "Times New Roman", Times, serif;
+  font-size: 10px;
+  text-align: center;
+  padding: 5px 0;
+  color: #fff;
+  border-top: 1px solid #666666;
+  border-bottom: 1px solid #666666;
+}
+
+#nextSection {
+  height: 25px;
+  background: url('/src/assets/img/site/arrow_down.gif') center center no-repeat;
+}

@@ -3,6 +3,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const assetcontext = 'src/assets';
 
+const alias = {
+  components: __dirname + '/src/components',
+  containers: __dirname + '/src/containers',
+  actions: __dirname + '/src/actions',
+  reducers: __dirname + '/src/reducers',
+  utils: __dirname + '/src/utils',
+  config: __dirname + '/src/config',
+  img: __dirname + '/src/assets/img',
+  director: __dirname + '/node_modules/director/build/director'
+}
+
 module.exports = { 
   entry: [
     'babel-polyfill', 
@@ -14,22 +25,13 @@ module.exports = {
     filename: 'js/bundle.js'
   },
   resolve: {
-    alias: {
-      components: __dirname + '/src/components',
-      containers: __dirname + '/src/containers',
-      actions: __dirname + '/src/actions',
-      reducers: __dirname + '/src/reducers',
-      utils: __dirname + '/src/utils',
-      config: __dirname + '/src/config',
-      img: __dirname + '/src/assets/img',
-      director: __dirname + '/node_modules/director/build/director'
-    }
+    alias
   },
   devtool: 'source-map',
   devServer: {
     historyApiFallback: true,
     host: 'local.farrung.com',
-    port: 8080,
+    port: 8080, 
     https: true
   },  
   module: {
@@ -64,7 +66,7 @@ module.exports = {
           loader: 'file-loader',
           options: {
             name: '[path][name].[hash].[ext]',
-            context: assetcontext          
+            context: assetcontext
           }
         }]
       }

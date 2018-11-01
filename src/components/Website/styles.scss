@@ -1,0 +1,10 @@
+#contentWrapper {
+  padding: 0 15px;
+  position: relative;
+}
+
+#contentWrapper > article {
+  background-color: #fff;
+  padding: 30px 20px;
+  border-bottom: 5px solid black;
+}
