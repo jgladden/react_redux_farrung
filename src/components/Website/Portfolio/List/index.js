@@ -19,15 +19,15 @@ const PortfolioList = props => {
 
   if(error)
     return (<Error error={error} />);
-  
-  const itemIds = Object.keys(items);
 
-  if(!itemIds.length)
+  const ids = Object.keys(items);
+
+  if(!ids.length)
     return(<p>No items found.</p>);
 
   return (
     <ul id='portfolioThumbnail'>
-      {itemIds.map(id => (
+      {ids.map((id, index) => (
         <ListItem
           key={id}
           {...items[id]}
