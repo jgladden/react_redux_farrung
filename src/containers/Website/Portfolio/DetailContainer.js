@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { setSection } from 'actions';
 import Detail from 'components/Website/Portfolio/Detail/';
 
 const getProps = (items, type, id) => {
@@ -23,5 +24,7 @@ const mapStateToProps = state => (
 
 export default connect(
   mapStateToProps,
-  {}
+  {
+    setSection
+  }
 )(Detail);
