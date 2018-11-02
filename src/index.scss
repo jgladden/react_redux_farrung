@@ -1,5 +1,11 @@
 @import 'sass/normalize';
 
+#react-application {
+  overflow: hidden;
+}
+
+
+
 @font-face {
   font-family: DinAlternateLight;
   src: url("./assets/font/din_alternate_light-webfont.eot");

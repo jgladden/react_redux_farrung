@@ -5,7 +5,7 @@ import Detail from 'components/Website/Portfolio/Detail/';
 const getProps = (items, type, id) => {
   const allItems = items && items[type] ? items[type] : null;
   if(!allItems || !id)
-    return {item: {}, prevId: -1, nextId: -1};
+    return {item: {}, prevId: '', nextId: ''};
   const arr = Object.keys(allItems);
   const len = arr.length;
   const pos = arr.indexOf(id);

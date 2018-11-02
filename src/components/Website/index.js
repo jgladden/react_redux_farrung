@@ -6,16 +6,20 @@ import Portfolio from 'components/Website/Portfolio';
 import Contact from 'components/Website/Contact';
 import Footer from 'components/Website/Footer';
 import SliderNav from 'components/Website/SliderNav';
+import DetailContainer from 'containers/Website/Portfolio/DetailContainer';
 
 const Website = () => (
-  <section id='contentWrapper'>    
-    <Header />
-    <About />
-    <Portfolio />
-    <Contact />
-    <Footer />
+  <React.Fragment>
+    <section id='contentWrapper'>    
+      <Header />
+      <About />
+      <Portfolio />
+      <Contact />
+      <Footer />
+    </section>
     <SliderNav />
-  </section>
+    <DetailContainer />
+  </React.Fragment>
 );
 
 export default Website;

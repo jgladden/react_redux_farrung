@@ -28,52 +28,79 @@ const Detail = props => {
     setSection({primary: 'portfolio', secondary: type, tertiary: id});
   }
 
-return (
-<section id='portfolioDetail'>
-  <div id='portfolioDetailContent'>
-    <div id='portfolioItemDetails'>
-      <div id='detailNav'>
-        <a id='closePortfolioDetail' href='#'></a>
-        <p id='detailType'>{type.toUpperCase()}</p>
-        <ul id='detailNavLastNext'>
-          <li id='detailLast' onClick={() => showDetail(prevId)}></li>
-          <li id='detailNext' onClick={() => showDetail(nextId)}></li>
-        </ul>
+  return (
+    <section id="portfolioDetail">
+      <div id='portfolioDetailContent'>
+        <div id='portfolioItemDetails'>
+          <div id='detailNav'>
+            <p 
+              id='detailNav__closeBtn'
+              onClick={() => showDetail(null) }
+            >
+            </p>
+            <p 
+              id='detailNav__type'
+            >
+            {type.toUpperCase()}
+            </p>
+            <ul>
+              <li 
+                id='detailNav__prevBtn'
+                onClick={() => showDetail(prevId)}
+              ></li>
+              <li 
+                id='detailNav__nextBtn'
+                onClick={() => showDetail(nextId)}
+              ></li>
+            </ul>
+          </div>
+          <h5 id='detailTitle'>
+          {title}
+          </h5>
+          <div 
+            id='detailDescription'
+            dangerouslySetInnerHTML={ {__html: description} } 
+          />
+          {link !== '' &&
+          <a 
+            id='detailLinkBtn' 
+            target='new' 
+            href={link}
+          >
+          visit website
+          </a>
+          }
+        </div>
+        <div id='portfolioDetailImageWrapper'>
+          <ul className={`slideNum${slidenum}`}>
+            {range(slidenum).map(num => {
+             let displaynum = slidenum === '1' ? '' : num + 1;
+             return (
+               <li key={num}>
+                 <img src={`${imgPath}${imagename}${displaynum}.jpg`} />
+               </li>
+             );
+           }) }
+          </ul>
+        </div>
       </div>
-      <div id='detailDescription'>
-        <h5>{title}</h5>
-        <div dangerouslySetInnerHTML={ {__html: description} } />
-        <p id='viewsTitle'>slide views</p>
-        <ul id='showPortfolioImage'>
-          {range(slidenum).map(num  =>
-            <li key={num+1} className='imageSlider'>{num+1}</li>
-          )}
-          <li><a id='visitWebsite' target='new' href={link}>visit website</a></li>
-        </ul>
-      </div>
-    </div>
-    <div id='portfolioDetailImageWrapper'>
-      <ul id='portfolioDetailImages'>
-        {range(slidenum).map(num => {
-         let displaynum = slidenum === '1' ? '' : num + 1;
-         return (
-          <li key={num} className='portfolioDetailImage'>
-            <img src={`${imgPath}${imagename}${displaynum}.jpg`} />
-           </li>
-         );
-       }) }
-      </ul>
-    </div>
-  </div>
-</section>
+    </section>
   );
 };
 
 Detail.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string,
-    title: PropTypes.string
-  }).isRequired
+    title: PropTypes.string,
+    type: PropTypes.string,
+    slidenum: PropTypes.string,
+    imagename: PropTypes.string,
+    link: PropTypes.string,
+    description: PropTypes.string
+  }).isRequired,
+    nextId: PropTypes.string,
+    prevId: PropTypes.string,
+    setSection: PropTypes.func.isRequired
 };
 
 export default Detail;
