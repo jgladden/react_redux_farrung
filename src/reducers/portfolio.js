@@ -20,28 +20,6 @@ const portfolio = (state = {}, action) => {
       error: action.payload
     };
   }
-  case types.MERGE_PORTFOLIO_ITEM: {
-    let { values } = action.payload;
-    let { id, type } = values;
-    let portfolio = {...state};
-    portfolio.items[type][id] = values;
-    return {
-      items: {
-        ...portfolio.items
-      }
-    }
-  }
-  case types.REMOVE_PORTFOLIO_ITEM: {
-    let { id, type } = action.payload;
-    let portfolio = {...state};
-    delete portfolio.items[type][id];
-    console.log(portfolio.items);
-    return {
-      items: {
-        ...portfolio.items
-      }
-    };
-  }
   default:
     return state;
   }

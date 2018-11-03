@@ -33,7 +33,7 @@ const Website = ({primary, secondary, tertiary}) => {
 };
 
 Website.propTypes = {
-  primary: PropTypes.string.isRequired,
+  primary: PropTypes.string,
   secondary: PropTypes.string,
   tertiary: PropTypes.string
 };

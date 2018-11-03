@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { mergePortfolioItem } from 'actions';
+import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { uniqueId } from 'utils';
-import { editPortfolioItemUrl, addPortfolioItemUrl } from 'config';
+import { editAdminItemUrl, addAdminItemUrl } from 'config';
 import PortfolioForm from 'components/Admin/PortfolioForm';
 
 class PortfolioFormContainer extends Component {
@@ -87,11 +87,11 @@ class PortfolioFormContainer extends Component {
   }
 
   postEdit = values => {
-    axios.post(editPortfolioItemUrl, values)
+    axios.post(editAdminItemUrl, values)
       .then(response => {
         let error = response.data.error;
         if(!error) {
-          this.props.mergePortfolioItem({values});
+          this.props.mergeAdminItem({values});
           this.props.toggleEditDisplay();
           const fields = {...this.state.fields};
           const status = { success : 1 };
@@ -111,11 +111,11 @@ class PortfolioFormContainer extends Component {
 
   postAdd = values => {
     values.id = uniqueId();
-    axios.post(addPortfolioItemUrl, values)
+    axios.post(addAdminItemUrl, values)
       .then(response => {
         let error = response.data.error;
         if(!error) {
-          this.props.mergePortfolioItem({values});
+          this.props.mergeAdminItem({values});
           const fields = formUtil.initFields(this.formFields);
           const status = { success : 1 };
           this.setState({fields,status});
@@ -150,13 +150,13 @@ class PortfolioFormContainer extends Component {
 
 PortfolioFormContainer.propTypes = {
   formInitValues: PropTypes.object,
-  mergePortfolioItem: PropTypes.func.isRequired,
+  mergeAdminItem: PropTypes.func.isRequired,
   toggleEditDisplay: PropTypes.func
 };
 
 export default connect(
   null, 
   {
-    mergePortfolioItem
+    mergeAdminItem
   }
 )(PortfolioFormContainer);

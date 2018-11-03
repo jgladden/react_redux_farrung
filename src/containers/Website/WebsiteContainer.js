@@ -1,11 +1,35 @@
+import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import Website from '../components/Website';
+import { fetchPortfolio } from 'actions';
+import Website from 'components/Website';
+
+class WebsiteContainer extends Component {
+  componentDidMount() {
+    this.props.fetchPortfolio();
+  }
+
+  render() {
+    return (
+      <Website
+        {...this.props.section}
+      />
+    );
+  }
+}
+
+WebsiteContainer.propTypes = {
+  section: PropTypes.object.isRequired,
+  fetchPortfolio: PropTypes.func.isRequired
+};
 
 const mapStateToProps = state => ({
-  type: state.section.secondary
+  section: state.section
 });
 
 export default connect(
   mapStateToProps,
-  {}
-)(Website);
+  {
+    fetchPortfolio
+  }
+)(WebsiteContainer);

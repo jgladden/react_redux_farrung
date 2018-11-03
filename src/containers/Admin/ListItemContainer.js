@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
-import { removePortfolioItemUrl } from 'config';
-import { removePortfolioItem } from 'actions';
+import { removeAdminItemUrl } from 'config';
+import { removeAdminItem } from 'actions';
 import ListItem from 'components/Admin/ListItem';
 
 class ListItemContainer extends Component {
@@ -21,11 +21,11 @@ class ListItemContainer extends Component {
       id,
       removePortfolioItem
     } = this.props;
-    axios.post(removePortfolioItemUrl, {id})
+    axios.post(removeAdminItemUrl, {id})
       .then(response => {
         let error = response.data.error;
         if(!error) {
-          removePortfolioItem({type, id});
+          removeAdminItem({type, id});
         }
       });
   } 
@@ -54,7 +54,7 @@ class ListItemContainer extends Component {
 
 ListItemContainer.propTypes = {
   portfolio: PropTypes.object.isRequired,
-  removePortfolioItem: PropTypes.func.isRequired
+  removeAdminItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
@@ -64,6 +64,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    removePortfolioItem
+    removeAdminItem
   }
 )(ListItemContainer);

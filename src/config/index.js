@@ -1,9 +1,10 @@
 const domain = 'https://farrung.com';
 const api = `${domain}/api/`;
-export const getPortfolioUrl = `${api}allportfolio/`;
+export const getPortfolioUrl = `${api}getPortfolio/`;
+export const getAdminUrl = `${api}getAdmin/`;
 export const postAuthUrl = `${api}authrequest/`;
 export const postMessageUrl = `${api}contact/`;
-export const addPortfolioItemUrl = `${api}addPortfolioItem/`;
-export const editPortfolioItemUrl = `${api}editPortfolioItem/`;
-export const removePortfolioItemUrl = `${api}removePortfolioItem/`;
+export const addAdminItemUrl = `${api}addPortfolioItem/`;
+export const editAdminItemUrl = `${api}editPortfolioItem/`;
+export const removeAdminItemUrl = `${api}removePortfolioItem/`;
 export const imgPath = `${domain}/images/`;

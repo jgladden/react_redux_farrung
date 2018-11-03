@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import AdminContainer from 'containers/Admin/AdminContainer';
-import Website from 'components/Website';
+import WebsiteContainer from 'containers/Website/WebsiteContainer';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
 
@@ -9,7 +9,7 @@ const App = ({section}) => {
   switch(section.primary) {
   case 'portfolio': 
     return(
-      <Website 
+      <WebsiteContainer 
         {...section}
       />
     );
