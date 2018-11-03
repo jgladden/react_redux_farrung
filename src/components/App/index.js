@@ -5,10 +5,14 @@ import Website from 'components/Website';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
 
-const App = ({primarySection}) => {
-  switch(primarySection) {
+const App = ({section}) => {
+  switch(section.primary) {
   case 'portfolio': 
-    return(<Website />);
+    return(
+      <Website 
+        {...section}
+      />
+    );
   case 'admin':
     return(<AdminContainer />);
   case undefined:
@@ -19,7 +23,11 @@ const App = ({primarySection}) => {
 };
 
 App.propTypes = {
-  primarySection: PropTypes.string.isRequired
+  section: PropTypes.shape({
+    primary: PropTypes.string,
+    secondary: PropTypes.string,
+    tertiary: PropTypes.string
+  }).isRequired
 };
 
 export default App;

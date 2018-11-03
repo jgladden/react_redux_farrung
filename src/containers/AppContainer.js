@@ -12,7 +12,7 @@ class AppContainer extends Component {
   render() {
     return (
       <App 
-        primarySection={this.props.primarySection}
+        section={this.props.section}
       />
     );
   }
@@ -20,11 +20,11 @@ class AppContainer extends Component {
 
 AppContainer.propTypes = {
   fetchPortfolioItems: PropTypes.func.isRequired,
-  primarySection: PropTypes.string.isRequired
+  section: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  primarySection: state.section.primary
+  section: state.section
 });
 
 export default connect(

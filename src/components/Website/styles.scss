@@ -1,6 +1,12 @@
 #contentWrapper {
   padding: 0 15px;
   position: relative;
+  left: 0;
+  transition:left .5s ease-out;
+}
+
+#contentWrapper.detailView {
+  left: -100%;
 }
 
 #contentWrapper > article {

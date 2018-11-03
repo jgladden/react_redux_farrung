@@ -3,9 +3,13 @@
   height: 100%;
   overflow: hidden;
   position: fixed;
+  top: -100%;
+  left: 0;
+  transition:top 1s ease-in; 
+}
+
+#portfolioDetail.detailView {
   top: 0;
-  left1: 100%;
-background: #000;
 }
 
 #portfolioDetailContent {
@@ -152,51 +156,33 @@ background: #000;
   }    
 
   ul.slideNum2 li {
-    -webkit-animation: imageAnimation 12s linear infinite 0s;
     animation: imageAnimation2 12s linear infinite 0s;
   }
 
   ul.slideNum3 li {
-    -webkit-animation: imageAnimation 18s linear infinite 0s;
     animation: imageAnimation3 18s linear infinite 0s;
   }
 
   ul.slideNum4 li {
-    -webkit-animation: imageAnimation 24s linear infinite 0s;
     animation: imageAnimation4 24s linear infinite 0s;
   }
 
   ul.slideNum5 li {
-    -webkit-animation: imageAnimation 30s linear infinite 0s;
     animation: imageAnimation5 30s linear infinite 0s;
   }
   
   li:nth-child(2)  { 
-    -webkit-animation-delay: 6s !important;
     animation-delay: 6s !important; 
   }
   li:nth-child(3) { 
-    -webkit-animation-delay: 12s !important;
     animation-delay: 12s !important; 
   }
   li:nth-child(4) { 
-    -webkit-animation-delay: 18s !important;
     animation-delay: 18s !important; 
   }
   li:nth-child(5) { 
-    -webkit-animation-delay: 24s !important;
     animation-delay: 24s !important; 
   }
-}
-
-@-webkit-keyframes imageAnimation2 {
-  0% { opacity: 0;
-  animation-timing-function: ease-in; }
-  20% { opacity: 1;
-       animation-timing-function: ease-out; }
-  45% { opacity: 1 }
-  65% { opacity: 0 }
-  100% { opacity: 0 }
 }
 
 @keyframes imageAnimation2 {
@@ -206,16 +192,6 @@ background: #000;
        animation-timing-function: ease-out; }
   45% { opacity: 1 }
   65% { opacity: 0 }
-  100% { opacity: 0 }
-}
-
-@-webkit-keyframes imageAnimation3 {
-  0% { opacity: 0;
-  animation-timing-function: ease-in; }
-  13% { opacity: 1;
-       animation-timing-function: ease-out; }
-  30% { opacity: 1 }
-  43% { opacity: 0 }
   100% { opacity: 0 }
 }
 
@@ -229,16 +205,6 @@ background: #000;
     100% { opacity: 0 }
 }
 
-@-webkit-keyframes imageAnimation4 { 
-  0% { opacity: 0;
-  animation-timing-function: ease-in; }
-  10% { opacity: 1;
-       animation-timing-function: ease-out; }
-  20% { opacity: 1 }
-  30% { opacity: 0 }
-  100% { opacity: 0 }
-}
-
 @keyframes imageAnimation4 {
   0% { opacity: 0;
   animation-timing-function: ease-in; }
@@ -246,16 +212,6 @@ background: #000;
        animation-timing-function: ease-out; }
   20% { opacity: 1 }
   30% { opacity: 0 }
-  100% { opacity: 0 }
-}
-
-@-webkit-keyframes imageAnimation5 {
-  0% { opacity: 0;
-  animation-timing-function: ease-in; }
-  8% { opacity: 1;
-       animation-timing-function: ease-out; }
-  17% { opacity: 1 }
-  25% { opacity: 0 }
   100% { opacity: 0 }
 }
 

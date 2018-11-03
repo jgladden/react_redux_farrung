@@ -20,16 +20,16 @@ const Detail = props => {
     setSection
   } = props;
 
-  console.log(props);
-
-  if(!id) return null;
-
   const showDetail = id => {
     setSection({primary: 'portfolio', secondary: type, tertiary: id});
   }
 
   return (
-    <section id="portfolioDetail">
+    <section 
+      id="portfolioDetail"
+      className={id ? 'detailView' : ''}
+    >
+      {id &&
       <div id='portfolioDetailContent'>
         <div id='portfolioItemDetails'>
           <div id='detailNav'>
@@ -84,6 +84,7 @@ const Detail = props => {
           </ul>
         </div>
       </div>
+    }
     </section>
   );
 };
