@@ -1,36 +1,51 @@
 #sliderNav {
   background-color: #000;
   position: fixed;
-  top: 90px;
-  left: 0;
-}
-
-#sliderNav a {
-  display: block;
-  width: 30px;
-}
-
-#sliderNav a:hover {
-  display: block;
-  background-color: #ff6f6f;
-}
-
-#lastSection {
-  height: 25px;
-  background: url('../../../assets/img/site/arrow_up.gif') center center no-repeat;
-}
-
-#topSection {
-  font-family: "Times New Roman", Times, serif;
-  font-size: 10px;
-  text-align: center;
+  top: 130px;
+  left: -80px;
   padding: 5px 0;
-  color: #fff;
-  border-top: 1px solid #666666;
-  border-bottom: 1px solid #666666;
+
+  a {
+    display: block;
+    p {
+      display: inline-block;
+      font-size: 11px;
+      padding-left: 7px;
+      width: 80px;
+      color: #fff;
+    }
+    p:last-child {
+      width: 40px;
+      padding: 5px 0;
+      text-align: center;
+      border-left1: 1px solid #333;
+    }
+  }
+
+  a:hover {
+    background-color: #ff6f6f;
+  }
+  
+  a.center {
+    border-top: 1px solid #333;
+    border-bottom: 1px solid #333;
+  }
 }
 
-#nextSection {
-  height: 25px;
-  background: url('../../../assets/img/site/arrow_down.gif') center center no-repeat;
+
+@media (hover: hover) {
+  #sliderNav:hover {
+    left: 0px;
+    a:hover {
+      background-color: #ff6f6f;
+    }
+  }
+}
+
+@media (hover: none) {
+  #sliderNav {
+    a:active {
+      background-color: #ff6f6f;
+    }
+  }
 }

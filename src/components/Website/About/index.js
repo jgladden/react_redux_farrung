@@ -4,6 +4,7 @@ import imgProcess from 'img/site/process.jpg';
 
 const About = () => (
   <article id='aboutWrapper'>
+    <a name="about"></a>
     <h1>ABOUT</h1>
     <h2>a winning message requires you speak the language</h2>
     <h3>we can translate</h3> 

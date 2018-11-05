@@ -1,3 +1,96 @@
+@font-face {
+  font-family: DinAlternateLight;
+  src: url("../../assets/font/din_alternate_light-webfont.eot");
+  src: url("../../assets/font/din_alternate_light-webfont.eot?#iefix") format("embedded-opentype"), 
+       url("../../assets/font/din_alternate_light-webfont.woff") format("woff"), 
+       url("../../assets/font/din_alternate_light-webfont.ttf") format("truetype"), 
+       url("../../assets/font/din_alternate_light-webfont.svg#DinAlternateLight") format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body, html {
+  height: 100%;
+}
+
+body {
+  background: white url('../../assets/img/site/bg45.jpg');
+  font-size: 10px;
+}
+
+body, p, span, a, textarea {
+  font-family: Tahoma, Geneva, sans-serif;
+  color: #333333;
+  font-size: 14px;
+  letter-spacing: 1px;
+  line-height: 20px;
+}
+
+ul {
+  overflow: auto;
+  width: auto;
+}
+
+/* TYPE */
+h1, h2, h3, h4, h5, h6 {
+  font-family: DinAlternateLight;
+  color: #333333;
+  font-weight: normal;
+  line-height: 1.2em;
+}
+
+h1 {
+  font-size: 11.8em;
+  letter-spacing: -.05em;
+}
+
+h2 {
+  font-size: 10em;
+  letter-spacing: -.05em;
+  color: #b6b6b6;
+}
+
+h3 {
+  font-size: 5em;
+  color: #b6b6b6;
+}
+
+h4 {
+  font-size: 3.6em;
+}
+
+h5 {
+  font-size: 2.6em;
+}
+
+article h3 {
+  margin: 5px 0;
+}
+
+@media (max-width: 1075px) {
+  body { font-size: 11px; }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 9px; }
+}
+
+@media (max-width: 568px) {
+  body { font-size: 6px; }
+}
+
+@media (max-width: 480px) {
+  body { font-size: 5px; }
+}
+
+@media (max-width: 375px) {
+  body { font-size: 4px; }
+}
+
+@media (max-width: 320px) {
+  body { font-size: 3px; }
+}
+
 #contentWrapper {
   padding: 0 15px;
   position: relative;
@@ -14,3 +107,4 @@
   padding: 30px 20px;
   border-bottom: 5px solid black;
 }
+

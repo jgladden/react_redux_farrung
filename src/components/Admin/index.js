@@ -17,10 +17,10 @@ const Admin = ({section, isAuthenticated}) => {
       SubPage = ListContainer;
     }
     display = (
-      <React.Fragment>
+      <article id='admin'>
         <NavContainer />
         <SubPage />
-      </React.Fragment>
+      </article>
     );
   } else {
     display = <NotAuthorized />;
