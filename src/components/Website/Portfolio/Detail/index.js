@@ -22,7 +22,7 @@ const Detail = props => {
 
   const showDetail = id => {
     setSection({primary: 'portfolio', secondary: type, tertiary: id});
-  }
+  };
 
   return (
     <section 
@@ -41,7 +41,7 @@ const Detail = props => {
             <p 
               id='detailNav__type'
             >
-            {type.toUpperCase()}
+              {type.toUpperCase()}
             </p>
             <ul>
               <li 
@@ -55,7 +55,7 @@ const Detail = props => {
             </ul>
           </div>
           <h5 id='detailTitle'>
-          {title}
+            {title}
           </h5>
           <div 
             id='detailDescription'
@@ -74,17 +74,17 @@ const Detail = props => {
         <div id='portfolioDetailImageWrapper'>
           <ul className={`slideNum${slidenum}`}>
             {range(slidenum).map(num => {
-             let displaynum = slidenum === '1' ? '' : num + 1;
-             return (
-               <li key={num}>
-                 <img src={`${imgPath}${imagename}${displaynum}.jpg`} />
-               </li>
-             );
-           }) }
+              let displaynum = slidenum === '1' ? '' : num + 1;
+              return (
+                <li key={num}>
+                  <img src={`${imgPath}${imagename}${displaynum}.jpg`} />
+                </li>
+              );
+            }) }
           </ul>
         </div>
       </div>
-    }
+      }
     </section>
   );
 };
@@ -99,9 +99,9 @@ Detail.propTypes = {
     link: PropTypes.string,
     description: PropTypes.string
   }).isRequired,
-    nextId: PropTypes.string,
-    prevId: PropTypes.string,
-    setSection: PropTypes.func.isRequired
+  nextId: PropTypes.string,
+  prevId: PropTypes.string,
+  setSection: PropTypes.func.isRequired
 };
 
 export default Detail;

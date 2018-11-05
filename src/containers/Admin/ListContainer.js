@@ -28,13 +28,13 @@ class ListContainer extends Component {
     let itemsFilteredByType = items[currentType];
     if(displayArchiveItems) return itemsFilteredByType;
     return Object.keys(itemsFilteredByType)
-    .filter(key =>
-      itemsFilteredByType[key].display === '1'
-    )
-    .reduce((obj, key) => {
-      obj[key] = itemsFilteredByType[key];
-      return obj;
-    }, {});
+      .filter(key =>
+        itemsFilteredByType[key].display === '1'
+      )
+      .reduce((obj, key) => {
+        obj[key] = itemsFilteredByType[key];
+        return obj;
+      }, {});
   }
 
   setCurrentType = type => {

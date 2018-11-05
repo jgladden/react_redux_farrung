@@ -1,7 +1,8 @@
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const assetcontext = 'src/assets';
+const devMode = process.env.NODE_ENV !== 'production';
 
 const alias = {
   components: __dirname + '/src/components',
@@ -44,10 +45,11 @@ module.exports = {
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          fallback: 'style-loader',
-          use: ['css-loader','sass-loader']
-        })
+        use: [
+          devMode ? 'style-loader' : MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
       },
       {
         test: /\.(jpe?g|png|gif)$/,
@@ -74,12 +76,9 @@ module.exports = {
   },
   plugins: [
     new webpack.optimize.ModuleConcatenationPlugin(),
-    new webpack.ProvidePlugin({
-      $: 'jquery'
-    }),
-    new ExtractTextPlugin({
-      filename: 'css/[name].css',
-      disable: process.env.NODE_ENV !== 'production'
+    new webpack.ProvidePlugin({}),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].css'
     }),
     new HtmlWebpackPlugin({
       title: 'f a r r u n g . d e s i g n . s t u d i o',
