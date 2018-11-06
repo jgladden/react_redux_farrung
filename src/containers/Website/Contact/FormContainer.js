@@ -47,7 +47,6 @@ class FormContainer extends Component {
     this.setState({status: { posting: 1 }});
     axios.post(postMessageUrl, fields)
       .then(response => {
-        console.log(response);
         let success = response.data.success;
         if(success) {
           this.setState({
