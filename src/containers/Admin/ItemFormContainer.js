@@ -6,9 +6,9 @@ import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { uniqueId } from 'utils';
 import { editAdminItemUrl, addAdminItemUrl } from 'config';
-import PortfolioForm from 'components/Admin/PortfolioForm';
+import ItemForm from 'components/Admin/ItemForm';
 
-class PortfolioFormContainer extends Component {
+class ItemFormContainer extends Component {
     
   constructor(props) {
     super(props);
@@ -138,7 +138,7 @@ class PortfolioFormContainer extends Component {
       status
     } = this.state;
     return (
-      <PortfolioForm
+      <ItemForm
         fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
@@ -148,7 +148,7 @@ class PortfolioFormContainer extends Component {
   }
 }
 
-PortfolioFormContainer.propTypes = {
+ItemFormContainer.propTypes = {
   formInitValues: PropTypes.object,
   mergeAdminItem: PropTypes.func.isRequired,
   toggleEditDisplay: PropTypes.func
@@ -159,4 +159,4 @@ export default connect(
   {
     mergeAdminItem
   }
-)(PortfolioFormContainer);
+)(ItemFormContainer);

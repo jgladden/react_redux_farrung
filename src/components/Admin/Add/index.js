@@ -1,10 +1,15 @@
+import './styles.scss';
 import React from 'react';
-import PortfolioFormContainer from 'containers/Admin/PortfolioFormContainer';
+import ItemFormContainer from 'containers/Admin/ItemFormContainer';
 
 const Add = () => (
   <div id='adminAdd'>
-    <p>Add Portfolio Item</p>
-    <PortfolioFormContainer/>
+    <p id='adminAdd__heading'>
+    Add Portfolio Item
+    </p>
+    <div id='adminAdd__form'>
+      <ItemFormContainer/>
+    </div>
   </div>
 );
 

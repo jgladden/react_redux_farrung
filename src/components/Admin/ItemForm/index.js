@@ -8,7 +8,7 @@ import CheckBox from 'components/FormFields/CheckBox';
 import Select from 'components/FormFields/Select'; 
 import TextArea from 'components/FormFields/TextArea'; 
 
-const PortfolioForm = props => {
+const ItemForm = props => {
   const {
     status: {
       posting,
@@ -83,7 +83,7 @@ const PortfolioForm = props => {
             {...fieldParam}
           />
         </div>
-        <label>Image name: <span>5+ characters</span></label>
+        <label>Image name: <span>5+ characters / 513x352</span></label>
         <Text
           name='imagename'
           {...fieldParam}
@@ -117,14 +117,14 @@ const PortfolioForm = props => {
   );
 };
 
-PortfolioForm.propTypes = {
+ItemForm.propTypes = {
   status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired
 };
 
-export default PortfolioForm;
+export default ItemForm;
 
 
 

@@ -1,7 +1,7 @@
 import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import PortfolioFormContainer from 'containers/Admin/PortfolioFormContainer';
+import ItemFormContainer from 'containers/Admin/ItemFormContainer';
 import Button from 'components/Button';
 
 const ListItem = props => {
@@ -13,22 +13,25 @@ const ListItem = props => {
   } = props;
   return (
     <li id='adminList__item'>
-      <p>TITLE: {title}</p>
       <Button
-        className='adminList__removeBtn'
-        handleClick={() => deleteItem()}
-        label='Delete'
-      />
-      <Button
-        className='adminList__editBtn'
+        id='adminList__editBtn'
         handleClick={() => toggleEditDisplay()}
         label={displayEdit ? 'Close' : 'Edit'}
       />
+      <p id='adminList__title'>
+      TITLE: {title}
+      </p>
+      <div
+        id='adminList__removeBtn'
+        onClick={() => deleteItem()}
+      >
+      DELETE ITEM
+      </div>
       <div 
         id='adminList__editForm'
         className={displayEdit ? 'display' : ''}
         >
-        <PortfolioFormContainer
+        <ItemFormContainer
           formInitValues={{...props}}
           toggleEditDisplay={toggleEditDisplay}
         />

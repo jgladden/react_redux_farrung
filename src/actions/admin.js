@@ -29,6 +29,16 @@ export const getAdminItemsError = payload => ({
   payload
 });
 
+export const setDisplayType = payload => ({
+  type: types.SET_DISPLAY_TYPE,
+  payload
+});
+
+export const setDisplayArchived = payload => ({
+  type: types.SET_DISPLAY_ARCHIVED,
+  payload
+});
+
 export const mergeAdminItem = payload => ({
   type: types.MERGE_ADMIN_ITEM,
   payload

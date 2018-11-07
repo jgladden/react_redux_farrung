@@ -3,44 +3,34 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
-import ListItemContainer from 'containers/Admin/ListItemContainer';
-import ListNav from 'components/Admin/ListNav';
+import ItemContainer from 'containers/Admin/List/ItemContainer';
+import FilterContainer from 'containers/Admin/List/FilterContainer';
 
 const List = props => {
   const {
-    setCurrentType,
-    setDisplayArchiveItems,
-    currentType,
-    displayArchiveItems,
     filteredItems,
     admin: {
       fetching,
       error,
-      items: allItems
+      success
     }
   } = props;
 
   return (
     <div id='adminList'>
       <p id='adminList__heading'>Admin Portfolio List</p>
-      {fetching === 1 &&
+      {fetching &&
         <Loading />
       }
       {error &&
         <Error error={error} />
       }
-      {allItems &&
+      {success &&
         <React.Fragment>
-          <ListNav
-            allItems={allItems}
-            setCurrentType={setCurrentType}
-            currentType={currentType}
-            setDisplayArchiveItems={setDisplayArchiveItems}
-            displayArchiveItems={displayArchiveItems}
-          />
+          <FilterContainer />
           <ul id='adminList__items'>
             {Object.keys(filteredItems).map(id => (
-              <ListItemContainer
+              <ItemContainer
                 key={id}
                 {...filteredItems[id]}
               />
@@ -53,16 +43,12 @@ const List = props => {
 };
 
 List.propTypes = {
-  setCurrentType: PropTypes.func.isRequired,
-  currentType: PropTypes.string.isRequired,
-  setDisplayArchiveItems: PropTypes.func.isRequired,
-  displayArchiveItems: PropTypes.bool.isRequired,
   filteredItems: PropTypes.object.isRequired,
   admin: PropTypes.shape({
-    fetching: PropTypes.number,
-    error: PropTypes.string,
-    items: PropTypes.object
-  })
+    fetching: PropTypes.bool,
+    error: PropTypes.bool,
+    success: PropTypes.bool
+  }).isRequired
 };
 
 export default List; 

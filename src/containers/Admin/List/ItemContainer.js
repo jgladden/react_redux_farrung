@@ -4,7 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { removeAdminItemUrl } from 'config';
 import { removeAdminItem } from 'actions';
-import ListItem from 'components/Admin/ListItem';
+import Item from 'components/Admin/List/Item';
 
 class ListItemContainer extends Component {
 
@@ -41,7 +41,7 @@ class ListItemContainer extends Component {
 
   render() {
     return (
-      <ListItem
+      <Item
         displayEdit={this.state.displayEdit}
         toggleEditDisplay={this.toggleEditDisplay}
         deleteItem={this.deleteItem}
