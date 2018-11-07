@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
 import Nav from 'components/Website/Portfolio/Nav';
-import { getPortfolioTypes } from 'reducers/portfolio';
+import { getPortfolioTypes } from 'reducers';
 
 const mapStateToProps = state => ({
   portfolioTypes: getPortfolioTypes(state)

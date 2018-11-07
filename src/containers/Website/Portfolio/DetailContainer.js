@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
 import Detail from 'components/Website/Portfolio/Detail/';
-import { getDetailProps } from 'reducers/portfolio';
+import { getDetailProps } from 'reducers';
 
 const mapStateToProps = state => (
   getDetailProps(state)

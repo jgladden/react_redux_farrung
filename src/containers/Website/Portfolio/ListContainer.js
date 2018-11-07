@@ -1,7 +1,7 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
 import List from 'components/Website/Portfolio/List/';
-import { getItemsByType } from 'reducers/portfolio';
+import { getItemsByType } from 'reducers';
 
 const mapStateToProps = state => ({
   type: state.section.secondary,
