@@ -19,19 +19,19 @@ class WebsiteContainer extends Component {
     return (
       <Website
         DetailContainer={this.state.DetailContainer}
-        {...this.props.section}
+        {...this.props.route}
       />
     );
   }
 }
 
 WebsiteContainer.propTypes = {
-  section: PropTypes.object.isRequired,
+  route: PropTypes.object.isRequired,
   fetchPortfolio: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  section: state.section
+  route: state.route
 });
 
 export default connect(

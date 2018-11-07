@@ -19,7 +19,7 @@ class ListItemContainer extends Component {
     const {
       type,
       id,
-      removePortfolioItem
+      removeAdminItem
     } = this.props;
     axios.post(removeAdminItemUrl, {id})
       .then(response => {
@@ -45,7 +45,7 @@ class ListItemContainer extends Component {
         displayEdit={this.state.displayEdit}
         toggleEditDisplay={this.toggleEditDisplay}
         deleteItem={this.deleteItem}
-        portfolio={this.props.portfolio}
+        admin={this.props.admin}
         {...this.props}
       />
     );
@@ -53,12 +53,12 @@ class ListItemContainer extends Component {
 }
 
 ListItemContainer.propTypes = {
-  portfolio: PropTypes.object.isRequired,
+  admin: PropTypes.object.isRequired,
   removeAdminItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  portfolio: state.portfolio
+  admin: state.admin
 });
 
 export default connect(

@@ -11,7 +11,7 @@ const PortfolioList = props => {
     items,
     fetching,
     error,
-    setSection
+    setRoute
   } = props;
 
   if(fetching) 
@@ -31,7 +31,7 @@ const PortfolioList = props => {
         <ListItem
           key={id}
           {...items[id]}
-          handleClick={() => setSection({primary: 'portfolio', secondary: type, tertiary: id})}
+          handleClick={() => setRoute(`/portfolio/${type}/${id}`)}
         />
       ))}
     </ul>
@@ -40,7 +40,7 @@ const PortfolioList = props => {
 
 PortfolioList.propTypes = {
   type: PropTypes.string.isRequired,
-  setSection: PropTypes.func.isRequired,
+  setRoute: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.number

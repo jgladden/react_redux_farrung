@@ -8,13 +8,12 @@ import ListNav from 'components/Admin/ListNav';
 
 const List = props => {
   const {
-    setSection,
     setCurrentType,
     setDisplayArchiveItems,
     currentType,
     displayArchiveItems,
     filteredItems,
-    portfolio: {
+    admin: {
       fetching,
       error,
       items: allItems
@@ -54,13 +53,12 @@ const List = props => {
 };
 
 List.propTypes = {
-  setSection: PropTypes.func.isRequired,
   setCurrentType: PropTypes.func.isRequired,
   currentType: PropTypes.string.isRequired,
   setDisplayArchiveItems: PropTypes.func.isRequired,
   displayArchiveItems: PropTypes.bool.isRequired,
   filteredItems: PropTypes.object.isRequired,
-  portfolio: PropTypes.shape({
+  admin: PropTypes.shape({
     fetching: PropTypes.number,
     error: PropTypes.string,
     items: PropTypes.object

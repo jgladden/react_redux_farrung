@@ -8,15 +8,15 @@ import Add from 'components/Admin/Add';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
 
-const Admin = ({section, isAuthenticated}) => {
+const Admin = ({urlParts, isAuthenticated}) => {
 
-  if(section.primary === 'undefined')
+  if(urlParts.length === 0)
     return(<Loading />);
 
   let display = '';
   if(isAuthenticated === true) {
     let SubPage = '';
-    switch (section.secondary) {
+    switch (urlParts[1]) {
     case 'add':
       SubPage = Add;
       break;
@@ -37,7 +37,7 @@ const Admin = ({section, isAuthenticated}) => {
 };
 
 Admin.propTypes = {
-  section: PropTypes.object.isRequired,
+  urlParts: PropTypes.array.isRequired,
   isAuthenticated: PropTypes.bool
 };
 

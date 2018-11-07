@@ -3,19 +3,19 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import SignInContainer from 'containers/SignInContainer';
 
-const Nav = ({setSection, section}) => {
+const Nav = ({setRoute, urlParts}) => {
   return (
     <div id='adminNav'>
       <ul id='adminNav__primary'>
         <li
-          onClick={() => setSection({primary: 'admin', secondary: 'list'})}
-          className={'list' === section.secondary ? 'isSelected' : ''}
+          onClick={() => setRoute('/admin/list')}
+          className={'list' === urlParts[1] ? 'isSelected' : ''}
         >
         List Portfolio Items
         </li>
         <li
-          onClick={() => setSection({primary: 'admin', secondary: 'add'})}
-          className={'add' === section.secondary ? 'isSelected' : ''}
+          onClick={() => setRoute('/admin/add')}
+          className={'add' === urlParts[1] ? 'isSelected' : ''}
         >
         Add Portfolio Item 
         </li>
@@ -28,12 +28,8 @@ const Nav = ({setSection, section}) => {
 };
 
 Nav.propTypes = {
-  setSection: PropTypes.func.isRequired,
-  section: PropTypes.shape({
-    primary: PropTypes.string.isRequired,
-    secondary: PropTypes.string,
-    tertiary: PropTypes.string
-  }).isRequired
+  setRoute: PropTypes.func.isRequired,
+  urlParts: PropTypes.array.isRequired
 };
 
 export default Nav;

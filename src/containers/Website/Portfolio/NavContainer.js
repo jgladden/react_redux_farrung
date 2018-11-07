@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import { setSection } from 'actions';
+import { setRoute } from 'actions';
 import Nav from 'components/Website/Portfolio/Nav';
 import { getPortfolioTypes } from 'reducers';
 
@@ -10,6 +10,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    setSection
+    setRoute
   }
 )(Nav);

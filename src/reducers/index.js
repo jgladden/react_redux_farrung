@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 import auth from './auth';
-import section from './section';
+import route from './route';
 import portfolio, * as fromPortfolio from './portfolio';
 import admin from './admin';
 
@@ -15,7 +15,7 @@ export const getDetailProps = state =>
 
 export default combineReducers({
   auth,
-  section,
+  route,
   portfolio,
   admin
 });

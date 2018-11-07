@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import Button from 'components/Button';
 import Loading from 'components/Loading';
 
-const Nav = ({portfolioTypes, setSection}) => {
+const Nav = ({portfolioTypes, setRoute}) => {
   if(!portfolioTypes.length)
     return (<Loading />);
 
@@ -13,7 +13,7 @@ const Nav = ({portfolioTypes, setSection}) => {
       {portfolioTypes.map(type => (
         <li 
           key={type}
-          onClick={() => setSection({primary: 'portfolio', secondary: type})}
+          onClick={() => setRoute(`/portfolio/${type}`)}
         >
         {type.toUpperCase()}
         </li>
@@ -24,7 +24,7 @@ const Nav = ({portfolioTypes, setSection}) => {
 
 Nav.propTypes = {
   portfolioTypes: PropTypes.array.isRequired,
-  setSection: PropTypes.func.isRequired
+  setRoute: PropTypes.func.isRequired
 };
 
 export default Nav;

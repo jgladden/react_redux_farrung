@@ -10,18 +10,18 @@ import SliderNav from 'components/Website/SliderNav';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
 
-const Website = ({primary, secondary, tertiary, DetailContainer}) => {
+const Website = ({urlParts, DetailContainer}) => {
 
-  if(primary === 'undefined')
+  if(urlParts.length === 0)
     return(<Loading />);
 
-  if(primary !== 'portfolio')
+  if(urlParts[0] !== 'portfolio')
     return(<PageNotFound />);
 
   let detailView = '';
   
-  if(primary === 'portfolio' &&
-     tertiary
+  if(urlParts[0] === 'portfolio' &&
+     urlParts[2]
   ) detailView = 'detailView';
 
   return (
@@ -37,15 +37,14 @@ const Website = ({primary, secondary, tertiary, DetailContainer}) => {
         <Footer />
       </section>
       <SliderNav />
-      {DetailContainer ? <DetailContainer /> : <p>loading</p>}
+      {DetailContainer ? <DetailContainer /> : <Loading />}
     </React.Fragment>
   );
 };
 
 Website.propTypes = {
-  primary: PropTypes.string,
-  secondary: PropTypes.string,
-  tertiary: PropTypes.string
+  urlParts: PropTypes.array,
+  DetailContainer: PropTypes.object
 };
 
 export default Website;

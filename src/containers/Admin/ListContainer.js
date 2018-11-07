@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { setSection } from 'actions';
 import List from 'components/Admin/List';
 
 class ListContainer extends Component {
@@ -16,7 +15,7 @@ class ListContainer extends Component {
 
   filterItems = () => {
     const {
-      portfolio: {
+      admin: {
         items
       }
     } = this.props;
@@ -56,8 +55,8 @@ class ListContainer extends Component {
 
   render() {
     const {
-      portfolio,
-      setSection
+      admin,
+      setRoute
     } = this.props;
     const {
       currentType,
@@ -69,8 +68,7 @@ class ListContainer extends Component {
         setCurrentType={this.setCurrentType}
         displayArchiveItems={displayArchiveItems}
         setDisplayArchiveItems={this.setDisplayArchiveItems}
-        portfolio={portfolio}
-        setSection={setSection}
+        admin={admin}
         filteredItems={this.filterItems()}
       />
     );
@@ -78,17 +76,14 @@ class ListContainer extends Component {
 }
 
 ListContainer.propTypes = {
-  setSection: PropTypes.func.isRequired,
-  portfolio: PropTypes.object.isRequired
+  admin: PropTypes.object.isRequired
 };  
 
 const mapStateToProps = state => ({
-  portfolio: state.portfolio
+  admin: state.admin
 });
 
 export default connect(
   mapStateToProps,
-  {
-    setSection
-  }
+  {}
 )(ListContainer);

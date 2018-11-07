@@ -1,38 +1,38 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchPortfolio } from 'actions'
+import { fetchAdmin } from 'actions'
 import { connect } from 'react-redux';
 import Admin from 'components/Admin';
 
 class AdminContainer extends Component {
   componentDidMount() {
-    this.props.fetchPortfolio();
+    this.props.fetchAdmin();
   }
 
   render() {
     return (
       <Admin
         isAuthenticated={this.props.isAuthenticated}
-        section={this.props.section}
+        urlParts={this.props.urlParts}
       />
     );
   }
 };
 
 AdminContainer.propTypes = {
-  isAuthenticated: PropTypes.bool.isRequired,
-  section: PropTypes.object,
-  fetchPortfolio: PropTypes.func.isRequired
+  isAuthenticated: PropTypes.bool,
+  urlParts: PropTypes.array.isRequired,
+  fetchAdmin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
   isAuthenticated: state.auth.isAuthenticated,
-  section: state.section
+  urlParts: state.route.urlParts
 });
 
 export default connect(
   mapStateToProps, 
   {
-    fetchPortfolio
+    fetchAdmin
   }
 )(AdminContainer);

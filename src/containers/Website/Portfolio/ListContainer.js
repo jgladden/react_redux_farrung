@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
-import { setSection } from 'actions';
+import { setRoute } from 'actions';
 import List from 'components/Website/Portfolio/List/';
 import { getItemsByType } from 'reducers';
 
 const mapStateToProps = state => ({
-  type: state.section.secondary,
+  type: state.route.urlParts[1],
   items: getItemsByType(state),
   fetching: state.portfolio.fetching,
   error: state.portfolio.error
@@ -13,6 +13,6 @@ const mapStateToProps = state => ({
 export default connect(
   mapStateToProps,
   {
-    setSection
+    setRoute
   }
 )(List);

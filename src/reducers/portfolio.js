@@ -7,14 +7,14 @@ export const getPortfolioTypes = state => {
 
 export const getItemsByType = state => {
   const items = state.portfolio.items;
-  const type = state.section.secondary;
+  const type = state.route.urlParts[1];
   return typeof items !== 'undefined' && items[type] ? items[type] : {};
 };
 
 export const getDetailProps = state => {
   const items = state.portfolio.items;
-  const type = state.section.secondary;
-  const id = state.section.tertiary;
+  const type = state.route.urlParts[1];
+  const id = state.route.urlParts[2];
   const allItems = items && items[type] ? items[type] : null;
   if(!allItems || !id)
     return {item: {}, prevId: '', nextId: ''};

@@ -1,7 +1,7 @@
 import * as types from '../actions/types';
 import cookieUtil from '../utils/cookieUtil';
 
-let initialState = {};
+let initialState = { };
 if(cookieUtil.getCookie('AUTH') === 'isAuthenticated')
   initialState = { isAuthenticated: true };
 

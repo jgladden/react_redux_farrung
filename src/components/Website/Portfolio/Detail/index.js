@@ -17,11 +17,11 @@ const Detail = props => {
     },
     nextId,
     prevId,
-    setSection
+    setRoute
   } = props;
 
   const showDetail = id => {
-    setSection({primary: 'portfolio', secondary: type, tertiary: id});
+    setRoute(`/portfolio/${type}/${id}`);
   };
 
   return (
@@ -35,7 +35,7 @@ const Detail = props => {
           <div id='detailNav'>
             <p 
               id='detailNav__closeBtn'
-              onClick={() => showDetail(null) }
+              onClick={() => showDetail('') }
             >
             </p>
             <p 
@@ -101,7 +101,7 @@ Detail.propTypes = {
   }).isRequired,
   nextId: PropTypes.string,
   prevId: PropTypes.string,
-  setSection: PropTypes.func.isRequired
+  setRoute: PropTypes.func.isRequired
 };
 
 export default Detail;
