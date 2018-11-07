@@ -30,7 +30,7 @@ const ListItem = props => {
       <div 
         id='adminList__editForm'
         className={displayEdit ? 'display' : ''}
-        >
+      >
         <ItemFormContainer
           formInitValues={{...props}}
           toggleEditDisplay={toggleEditDisplay}
@@ -38,7 +38,7 @@ const ListItem = props => {
       </div>
     </li>
   );
-}
+};
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,

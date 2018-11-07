@@ -44,7 +44,7 @@ const Website = ({urlParts, DetailContainer}) => {
 
 Website.propTypes = {
   urlParts: PropTypes.array,
-  DetailContainer: PropTypes.object
+  DetailContainer: PropTypes.func
 };
 
 export default Website;

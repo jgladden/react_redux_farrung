@@ -12,7 +12,6 @@ const ItemForm = props => {
   const {
     status: {
       posting,
-      success,
       error
     },
     submitForm, 

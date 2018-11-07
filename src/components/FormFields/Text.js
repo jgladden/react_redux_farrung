@@ -18,7 +18,7 @@ Text.propTypes = {
   name: PropTypes.string.isRequired,
   fields: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  placeHolder: PropTypes.string
+  placeholder: PropTypes.string
 };
 
 export default Text;

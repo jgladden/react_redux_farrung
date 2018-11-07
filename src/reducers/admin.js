@@ -16,12 +16,12 @@ export const getFilteredAdminItems = state => {
       obj[key] = filteredItems[key];
       return obj;
     }, {});
-}
+};
 
 const initialState = {
-    displayType: 'online',
-    displayArchived: false
-}
+  displayType: 'online',
+  displayArchived: false
+};
 const admin = (state = initialState, action) => {
   switch (action.type) {
   case types.GET_ADMIN_ITEMS: {
@@ -70,7 +70,7 @@ const admin = (state = initialState, action) => {
       items: {
         ...portfolio.items
       }
-    }
+    };
   }
   case types.REMOVE_ADMIN_ITEM: {
     let { id, type } = action.payload;

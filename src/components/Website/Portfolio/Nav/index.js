@@ -1,7 +1,6 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'components/Button';
 import Loading from 'components/Loading';
 
 const Nav = ({portfolioTypes, setRoute}) => {
@@ -15,7 +14,7 @@ const Nav = ({portfolioTypes, setRoute}) => {
           key={type}
           onClick={() => setRoute(`/portfolio/${type}`)}
         >
-        {type.toUpperCase()}
+          {type.toUpperCase()}
         </li>
       ))}
     </ul>

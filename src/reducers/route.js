@@ -3,7 +3,7 @@ import * as types from '../actions/types';
 const initialState = {
   urlParts: [],
   url: ''
-}
+};
 
 const route = (state = initialState, action) => {
   switch (action.type) {
@@ -16,7 +16,7 @@ const route = (state = initialState, action) => {
         urlParts[1] = 'online';
       if(urlParts[0] === 'admin')
         urlParts[1] = 'list';
-    };
+    }
     url = `/${urlParts.join('/')}`;
     return {  url, urlParts };
   }

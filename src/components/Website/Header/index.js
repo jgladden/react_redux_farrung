@@ -16,7 +16,7 @@ const Header = () => (
         <li><a href='#connect'>connect</a></li>
       </ul>
       <p id='date'>
-      {todaysDate()}
+        {todaysDate()}
       </p>
     </nav>
     <div id='logoWrapper'>

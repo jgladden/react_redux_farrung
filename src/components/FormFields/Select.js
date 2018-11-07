@@ -9,7 +9,7 @@ const Select = ({name, options, fields, handleChange}) => (
     onChange={e => handleChange(e)}
     value={fields[name].value}
   >
-  {options}  
+    {options}  
   </select>
 );
 

@@ -19,8 +19,8 @@ const ListItem = props => {
       onClick={handleClick}
     >
       <div> 
-      <img src={`${imgPath}${imagename}${slide}.jpg`} />
-      <p>{title}</p>
+        <img src={`${imgPath}${imagename}${slide}.jpg`} />
+        <p>{title}</p>
       </div>
     </li>
   );

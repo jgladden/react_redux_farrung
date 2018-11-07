@@ -10,9 +10,9 @@ class WebsiteContainer extends Component {
   componentDidMount() {
     this.props.fetchPortfolio();
     import(/* webpackChunkName: 'DetailContainer' */ './Portfolio/DetailContainer')
-    .then(DetailContainer => {
-      this.setState({ DetailContainer: DetailContainer.default });
-    });
+      .then(DetailContainer => {
+        this.setState({ DetailContainer: DetailContainer.default });
+      });
   }
 
   render() {

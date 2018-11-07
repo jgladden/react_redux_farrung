@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { fetchAdmin } from 'actions'
+import { fetchAdmin } from 'actions';
 import { connect } from 'react-redux';
 import Admin from 'components/Admin';
 
@@ -17,7 +17,7 @@ class AdminContainer extends Component {
       />
     );
   }
-};
+}
 
 AdminContainer.propTypes = {
   isAuthenticated: PropTypes.bool,

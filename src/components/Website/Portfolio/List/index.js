@@ -27,7 +27,7 @@ const PortfolioList = props => {
 
   return (
     <ul id='portfolioThumbnail'>
-      {ids.map((id, index) => (
+      {ids.map(id => (
         <ListItem
           key={id}
           {...items[id]}

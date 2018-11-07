@@ -33,7 +33,7 @@ const ListFilter = ({admin, setDisplayType, setDisplayArchived}) => {
       </div>
     </div>
   );
-}
+};
 
 ListFilter.propTypes = {
   admin: PropTypes.shape({

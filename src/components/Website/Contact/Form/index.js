@@ -9,8 +9,7 @@ const Form = props => {
   const {
     status: {
       error,
-      posting,
-      success
+      posting
     },
     submitMessage, 
     handleChange, 

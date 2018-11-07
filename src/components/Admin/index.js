@@ -13,6 +13,9 @@ const Admin = ({urlParts, isAuthenticated}) => {
   if(urlParts.length === 0)
     return(<Loading />);
 
+  if(urlParts[0] !== 'admin')
+    return(<PageNotFound />);
+
   let display = '';
   if(isAuthenticated === true) {
     let SubPage = '';
