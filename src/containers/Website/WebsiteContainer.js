@@ -5,13 +5,20 @@ import { fetchPortfolio } from 'actions';
 import Website from 'components/Website';
 
 class WebsiteContainer extends Component {
+  state = { };
+
   componentDidMount() {
     this.props.fetchPortfolio();
+    import(/* webpackChunkName: 'DetailContainer' */ './Portfolio/DetailContainer')
+    .then(DetailContainer => {
+      this.setState({ DetailContainer: DetailContainer.default });
+    });
   }
 
   render() {
     return (
       <Website
+        DetailContainer={this.state.DetailContainer}
         {...this.props.section}
       />
     );

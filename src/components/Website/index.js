@@ -7,11 +7,10 @@ import Portfolio from 'components/Website/Portfolio';
 import Contact from 'components/Website/Contact';
 import Footer from 'components/Website/Footer';
 import SliderNav from 'components/Website/SliderNav';
-import DetailContainer from 'containers/Website/Portfolio/DetailContainer';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
 
-const Website = ({primary, secondary, tertiary}) => {
+const Website = ({primary, secondary, tertiary, DetailContainer}) => {
 
   if(primary === 'undefined')
     return(<Loading />);
@@ -23,7 +22,7 @@ const Website = ({primary, secondary, tertiary}) => {
   
   if(primary === 'portfolio' &&
      tertiary
-  ) detailView = 'detailView'; //lazy load this
+  ) detailView = 'detailView';
 
   return (
     <React.Fragment>
@@ -38,7 +37,7 @@ const Website = ({primary, secondary, tertiary}) => {
         <Footer />
       </section>
       <SliderNav />
-      <DetailContainer />
+      {DetailContainer ? <DetailContainer /> : <p>loading</p>}
     </React.Fragment>
   );
 };

@@ -1,22 +1,11 @@
 import { connect } from 'react-redux';
 import { setSection } from 'actions';
 import List from 'components/Website/Portfolio/List/';
-
-const getVisiblePortfolio = (items, type) => {
-  const itemsByType = typeof items !== 'undefined' && items[type] ? items[type] : {};
-  return Object.keys(itemsByType)
-    .filter(key => {
-      return itemsByType[key].display === '1';
-    })
-    .reduce((obj, key) => {
-      obj[key] = itemsByType[key];
-      return obj;
-    }, {});
-};
+import { getItemsByType } from 'reducers/portfolio';
 
 const mapStateToProps = state => ({
   type: state.section.secondary,
-  items: getVisiblePortfolio(state.portfolio.items, state.section.secondary),
+  items: getItemsByType(state),
   fetching: state.portfolio.fetching,
   error: state.portfolio.error
 });
