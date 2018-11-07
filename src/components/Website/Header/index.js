@@ -11,9 +11,9 @@ const Header = () => (
   <header>
     <nav>
       <ul>
-        <li><a href='#' data-to='#aboutWrapper'>about</a></li>
-        <li><a href='#' data-to='#portfolioWrapper'>work</a></li>
-        <li><a href='#' data-to='#connectWrapper'>connect</a></li>
+        <li><a href='#about'>about</a></li>
+        <li><a href='#work'>work</a></li>
+        <li><a href='#connect'>connect</a></li>
       </ul>
       <p id='date'>
       {todaysDate()}

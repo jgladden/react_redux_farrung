@@ -1,3 +1,4 @@
+import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import NotAuthorized from 'components/NotAuthorized';
