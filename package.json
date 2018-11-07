@@ -6,13 +6,13 @@
     "type": "git",
     "url": "https://github.com/jgladden/react_redux_farrung.git"
   },
-  "main": "src/index.js",
+  "main": "src/app.js",
   "scripts": {
     "start": "npm-run-all --parallel dev:server lint:watch",
     "dev:server": "webpack-dev-server --mode development --config webpack.base.config.js --hot --open --env.PLATFORM=local",
     "prebuild": "webpack --mode production --config webpack.prod.config.js --env.PLATFORM=production --progress",
     "build": "node server",
-    "lint": "node_modules/.bin/esw webpack.config.* src --color",
+    "lint": "node_modules/.bin/esw webpack.base.config.js src --color",
     "lint:watch": "npm run lint -- --watch",
     "test": "jest",
     "test:watch": "jest --watch"

@@ -5,7 +5,8 @@ const merge = require('webpack-merge');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-const APP_ENTRY = path.resolve(__dirname, './src/index.js');
+const APP_ENTRY = path.resolve(__dirname, './src/app.js');
+const ADMIN_ENTRY = path.resolve(__dirname, './src/admin.js');
 const OUTPUT_DIR = path.resolve(__dirname, './dist');
 const OUTPUT_FILENAME = 'js/build.js';
 const ASSETCONTEXT = 'src/assets';
@@ -19,23 +20,28 @@ const ALIAS = {
   img: path.resolve(__dirname + '/src/assets/img'),
   director: path.resolve(__dirname + '/node_modules/director/build/director')
 };
-
+//          '@babel/polyfill',
 module.exports = env => {
   const { PLATFORM } = env;
   return merge([
       {
-        entry: [
-          '@babel/polyfill', 
-          APP_ENTRY
-        ],
+        entry: {
+          app: ['@babel/polyfill', APP_ENTRY],
+          admin: ADMIN_ENTRY
+        },
         output: {
           path: OUTPUT_DIR,
           publicPath: '/',
-          filename: OUTPUT_FILENAME
+          filename: 'js/[name].js'
         },
         devtool: 'source-map',
         devServer: {
-          historyApiFallback: true,
+          historyApiFallback: {
+            rewrites: [
+              { from: /^\/$/, to: '/index.html' },
+              { from: /^\/admin/, to: '/admin.html' }
+            ]
+          },
           host: 'local.farrung.com',
           port: 8080, 
           https: true
@@ -85,9 +91,16 @@ module.exports = env => {
         },
         plugins: [
           new HtmlWebpackPlugin({
+            chunks: ['app'],
             hash: true,
             template: './src/index.html',
             filename: './index.html'
+          }),
+          new HtmlWebpackPlugin({
+            chunks: ['admin'],
+            hash: true,
+            template: './src/index.html',
+            filename: './admin.html'
           }),
           new webpack.DefinePlugin({ 
             'process.env.PLATFORM': JSON.stringify(env.PLATFORM)

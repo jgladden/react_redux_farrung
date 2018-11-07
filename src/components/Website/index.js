@@ -8,12 +8,23 @@ import Contact from 'components/Website/Contact';
 import Footer from 'components/Website/Footer';
 import SliderNav from 'components/Website/SliderNav';
 import DetailContainer from 'containers/Website/Portfolio/DetailContainer';
+import Loading from 'components/Loading';
+import PageNotFound from 'components/PageNotFound';
 
 const Website = ({primary, secondary, tertiary}) => {
+
+  if(primary === 'undefined')
+    return(<Loading />);
+
+  if(primary !== 'portfolio')
+    return(<PageNotFound />);
+
   let detailView = '';
-  if(primary === 'portfolio' && 
+  
+  if(primary === 'portfolio' &&
      tertiary
-  ) detailView = 'detailView';
+  ) detailView = 'detailView'; //lazy load this
+
   return (
     <React.Fragment>
       <section 
@@ -39,5 +50,3 @@ Website.propTypes = {
 };
 
 export default Website;
-
-

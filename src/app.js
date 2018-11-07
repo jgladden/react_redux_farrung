@@ -1,17 +1,17 @@
-import './index.scss';
+import './app.scss';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { router, updateUri } from './router';
 import { store } from './store';
-import AppContainer from './containers/AppContainer';
+import WebsiteContainer from 'containers/Website/WebsiteContainer';
 
 store.subscribe(updateUri);
 router.init();
 
 ReactDOM.render(
   <Provider store={store}>
-    <AppContainer />
+    <WebsiteContainer />
   </Provider>, 
   document.getElementById('react-application')
 );

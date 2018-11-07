@@ -4,8 +4,14 @@ import NotAuthorized from 'components/NotAuthorized';
 import NavContainer from 'containers/Admin/NavContainer';
 import ListContainer from 'containers/Admin/ListContainer';
 import Add from 'components/Admin/Add';
+import Loading from 'components/Loading';
+import PageNotFound from 'components/PageNotFound';
 
 const Admin = ({section, isAuthenticated}) => {
+
+  if(section.primary === 'undefined')
+    return(<Loading />);
+
   let display = '';
   if(isAuthenticated === true) {
     let SubPage = '';
