@@ -6,21 +6,19 @@ import AuthForm from 'components/AuthForm';
 import formUtil from 'utils/formUtil';
 import cookieUtil from 'utils/cookieUtil';
 
+const formFields = {
+  username: {
+    tests: ['(.{5,})'],
+  },
+  password: {
+    tests: ['password'],
+  }
+};
+
 class AuthFormContainer extends Component {
     
-  constructor(props) {
-    super(props);
-    this.formFields = {
-      username: {
-        tests: ['(.{5,})'],
-      },
-      password: {
-        tests: ['password'],
-      }
-    };
-    this.state = {
-      fields: formUtil.initFields(this.formFields)
-    };
+  state = {
+    fields: formUtil.initFields(formFields)
   }
 
   handleChange = e => {
@@ -37,7 +35,7 @@ class AuthFormContainer extends Component {
       this.props.submitLogin(validateForm.fieldValues);
       this.setCookie();
       this.setState({
-        fields: formUtil.initFields(this.formFields)
+        fields: formUtil.initFields(formFields)
       });
     } else {
       this.setState({fields: validateForm.fields});

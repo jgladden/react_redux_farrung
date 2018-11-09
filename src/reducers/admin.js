@@ -67,6 +67,7 @@ const admin = (state = initialState, action) => {
     let portfolio = {...state};
     portfolio.items[type][id] = values;
     return {
+      ...state,
       items: {
         ...portfolio.items
       }

@@ -4,27 +4,25 @@ import { postMessageUrl } from 'config';
 import formUtil from 'utils/formUtil';
 import Form from 'components/Website/Contact/Form';
 
+const formFields = {
+  email: {
+    tests: ['email'],
+  },
+  subject: {
+    tests: ['(.{3,})'],
+  },
+  message: {
+    tests: ['(.{10,})'],
+  }
+};
+
 class FormContainer extends Component {
     
-  constructor(props) {
-    super(props);
-    this.formFields = {
-      email: {
-        tests: ['email'],
-      },
-      subject: {
-        tests: ['(.{3,})'],
-      },
-      message: {
-        tests: ['(.{10,})'],
-      }
-    };
-    this.state = {
-      status: {},
-      fields: formUtil.initFields(this.formFields),
-    };
+  state = {
+    status: {},
+    fields: formUtil.initFields(formFields),
   }
-    
+  
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -50,7 +48,7 @@ class FormContainer extends Component {
         if(success) {
           this.setState({
             status: { success: 1 },
-            fields: formUtil.initFields(this.formFields)
+            fields: formUtil.initFields(formFields)
           });
         } else {
           this.setState({      

@@ -7,7 +7,7 @@ leaving in as example only
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import AuthFormContainer from 'containers/AuthFormContainer';
+import AuthFormContainer from 'containers/Admin/AuthFormContainer';
 
 const SignIn = props => {
   const {

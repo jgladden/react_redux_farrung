@@ -6,33 +6,28 @@ import SignIn from 'components/SignIn';
 import cookieUtil from 'utils/cookieUtil';
 
 class SignInContainer extends Component {
-    
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayLogin: false
-    };
+  state = {
+    displayLogin: false
+  } 
+
+  static getDerivedStateFromProps(props, state) {
+    const { displayLogin } = state;
+    const { isAuthenticated } = props;
+    if(isAuthenticated && displayLogin)
+      return { displayLogin: false };
+    return null;
   }
 
   toggleLoginDisplay = () => {
-    let displayLogin = this.state.displayLogin ? false : true;
-    this.setState({displayLogin});
+    const { displayLogin } = this.state;
+    this.setState({
+      displayLogin: !displayLogin
+    });
   }
 
   submitLogout = () => {
     cookieUtil.deleteCookie('AUTH', '/', '.farrung.com');
     this.props.submitLogout();
-  }
-
-  componentDidUpdate(prevProps) {
-    const {
-      isAuthenticated
-    } = this.props;
-    if(isAuthenticated && 
-       isAuthenticated !== prevProps.isAuthenticated
-    ) {
-      this.setState({displayLogin: false});
-    }
   }
 
   render() {

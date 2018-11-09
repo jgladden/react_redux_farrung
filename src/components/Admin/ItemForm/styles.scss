@@ -4,7 +4,6 @@
   margin-top: 10px;
 
   label {
-    display: block;
     margin-top: 15px;
   }
   
@@ -14,16 +13,6 @@
     font-weight: bold;
     padding-bottom: 15px;
   }
-
-  input, select, textarea {
-    border: 1px solid #ccc;
-    padding: 5px 8px;
-  }
-
-  select {
-    border-radius: 0;
-  }
-  
 
   input {
     width: 200px;

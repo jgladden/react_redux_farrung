@@ -7,12 +7,8 @@ import { removeAdminItem } from 'actions';
 import Item from 'components/Admin/List/Item';
 
 class ListItemContainer extends Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      displayEdit: false
-    };
+  state = {
+    displayEdit: false
   }
 
   deleteItem = () => {

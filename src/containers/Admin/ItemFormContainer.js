@@ -8,56 +8,54 @@ import { uniqueId } from 'utils';
 import { editAdminItemUrl, addAdminItemUrl } from 'config';
 import ItemForm from 'components/Admin/ItemForm';
 
+const formFields = {
+  id: {
+    tests: []
+  },
+  type: {
+    tests: ['^(?!\s*$|type).+']
+  },
+  title: {
+    tests: ['(.{3,})']
+  },
+  client: {
+    tests: ['^(\s*|(.{3,}))']
+  },
+  description: {
+    tests: ['(.{15,})']
+  },
+  link: {
+    tests: ['^(\s*|https?:.*)$']
+  },
+  display: {
+    tests: []
+  },
+  rating: {
+    tests: ['^([0-9]+)$']
+  },
+  day: {
+    tests: ['^([0-9]+)$']
+  },
+  month: {
+    tests: ['^([0-9]+)$']
+  },
+  year: {
+    tests: ['^([0-9]+)$']
+  },
+  imagename: {
+    tests: ['(.{2,})']
+  },
+  slidenum: {
+    tests: ['^([0-9]+)$']
+  }
+};
+
 class ItemFormContainer extends Component {
     
-  constructor(props) {
-    super(props);
-    this.formFields = {
-      id: {
-        tests: []
-      },
-      type: {
-        tests: ['^(?!\s*$|type).+']
-      },
-      title: {
-        tests: ['(.{3,})']
-      },
-      client: {
-        tests: ['^(\s*|(.{3,}))']
-      },
-      description: {
-        tests: ['(.{15,})'] 
-      },
-      link: {
-        tests: ['^(\s*|https?:.*)$'] 
-      },
-      display: {
-        tests: []
-      },
-      rating: {
-        tests: ['^([0-9]+)$']
-      },
-      day: {
-        tests: ['^([0-9]+)$']
-      },
-      month: {
-        tests: ['^([0-9]+)$']
-      },
-      year: {
-        tests: ['^([0-9]+)$']
-      },
-      imagename: {
-        tests: ['(.{2,})']
-      },
-      slidenum: {
-        tests: ['^([0-9]+)$']
-      }
-    };
-    this.editMode = props.formInitValues ? true : false;
-    this.state = {
-      status: {},
-      fields: formUtil.initFields(this.formFields, props.formInitValues)
-    };
+  state = {
+    status: {},
+    editMode: this.props.formInitValues ? true : false,
+    fields: formUtil.initFields(formFields, this.props.formInitValues)
   }
 
   handleChange = e => {
@@ -73,7 +71,7 @@ class ItemFormContainer extends Component {
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
       let values = validateForm.fieldValues;
-      if(this.editMode) {
+      if(this.state.editMode) {
         this.postEdit(values);
       } else {
         this.postAdd(values);
@@ -116,7 +114,7 @@ class ItemFormContainer extends Component {
         let error = response.data.error;
         if(!error) {
           this.props.mergeAdminItem({values});
-          const fields = formUtil.initFields(this.formFields);
+          const fields = formUtil.initFields(formFields);
           const status = { success : 1 };
           this.setState({fields,status});
         } else {
