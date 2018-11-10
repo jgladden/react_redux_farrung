@@ -1,7 +1,6 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import formUtil from 'utils/formUtil';
 import Button from 'components/Button/';
 import Text from 'components/FormFields/Text';
 import CheckBox from 'components/FormFields/CheckBox';
@@ -16,21 +15,11 @@ const ItemForm = props => {
     },
     submitForm, 
     handleChange,
-    fields
+    fields,
+    selectOptions
   } = props;
 
   const fieldParam = { fields, handleChange };
-
-  let selectOptions = selectOptions || {
-    type: ['type', 'online', 'print'].map(
-      type => <option key={type} value={type}>{type}</option>
-    ),
-    slidenum: formUtil.getSelectOptions(10, '#'),
-    rating: formUtil.getSelectOptions(10, 'rating'),
-    year: formUtil.getSelectOptions(30, 'yyyy', 'year'),
-    day: formUtil.getSelectOptions(31, 'dd', 'pre0'),
-    month: formUtil.getSelectOptions(12, 'mm', 'pre0'),  
-  };
 
   return(
     <div className='portfolioForm'>

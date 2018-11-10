@@ -1,47 +1,23 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import NotAuthorized from 'components/NotAuthorized';
 import NavContainer from 'containers/Admin/NavContainer';
 import ListContainer from 'containers/Admin/List/ListContainer';
 import Add from 'components/Admin/Add';
-import Loading from 'components/Loading';
-import PageNotFound from 'components/PageNotFound';
 
-const Admin = ({urlParts, isAuthenticated}) => {
-
-  if(urlParts.length === 0)
-    return(<Loading />);
-
-  if(urlParts[0] !== 'admin')
-    return(<PageNotFound />);
-
-  let display = '';
-  if(isAuthenticated === true) {
-    let SubPage = '';
-    switch (urlParts[1]) {
-    case 'add':
-      SubPage = Add;
-      break;
-    default: 
-      SubPage = ListContainer;
-    }
-    display = (
-      <article id='admin'>
-        <NavContainer />
-        <SubPage />
-      </article>
-    );
-  } else {
-    display = <NotAuthorized />;
-  } 
-
-  return(display);
-};
+const Admin = ({subpage}) => (
+  <article id='admin'>
+    <NavContainer />
+    {subpage === 'add' ? (
+      <Add />
+    ) : (
+      <ListContainer />
+    )}
+  </article>
+);
 
 Admin.propTypes = {
-  urlParts: PropTypes.array.isRequired,
-  isAuthenticated: PropTypes.bool
+  subpage: PropTypes.string.isRequired
 };
 
 export default Admin;

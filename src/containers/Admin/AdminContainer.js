@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import { fetchAdmin } from 'actions';
 import { connect } from 'react-redux';
 import Admin from 'components/Admin';
+import Loading from 'components/Loading';
+import PageNotFound from 'components/PageNotFound';
+import NotAuthorized from 'components/NotAuthorized';
 
 class AdminContainer extends Component {
   componentDidMount() {
@@ -10,10 +13,23 @@ class AdminContainer extends Component {
   }
 
   render() {
+    const {
+      urlParts,
+      isAuthenticated
+    } = this.props;
+
+    if(isAuthenticated !== true)
+      return(<NotAuthorized />);
+
+    if(urlParts.length === 0)
+      return(<Loading />);
+  
+    if(urlParts[0] !== 'admin')
+      return(<PageNotFound />);
+
     return (
       <Admin
-        isAuthenticated={this.props.isAuthenticated}
-        urlParts={this.props.urlParts}
+        subpage={urlParts[1]}
       />
     );
   }

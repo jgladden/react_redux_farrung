@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from 'actions';
 import Website from 'components/Website';
+import Loading from 'components/Loading';
+import PageNotFound from 'components/PageNotFound';
 
 class WebsiteContainer extends Component {
   state = { };
@@ -16,22 +18,39 @@ class WebsiteContainer extends Component {
   }
 
   render() {
+    const {
+      urlParts
+    } = this.props;
+
+    let {
+      DetailContainer
+    } = this.state;
+
+    if(urlParts.length === 0)
+      return(<Loading />);
+  
+    if(urlParts[0] !== 'portfolio')
+      return(<PageNotFound />);
+
+    let detailClass = urlParts[2] ? 
+      'detailView' : '';
+
     return (
       <Website
-        DetailContainer={this.state.DetailContainer}
-        {...this.props.route}
+        DetailContainer={DetailContainer || Loading}
+        detailClass={detailClass}
       />
     );
   }
 }
 
 WebsiteContainer.propTypes = {
-  route: PropTypes.object.isRequired,
+  urlParts: PropTypes.array.isRequired,
   fetchPortfolio: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  route: state.route
+  urlParts: state.route.urlParts
 });
 
 export default connect(

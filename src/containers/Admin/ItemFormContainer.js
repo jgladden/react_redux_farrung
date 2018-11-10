@@ -50,6 +50,17 @@ const formFields = {
   }
 };
 
+const selectOptions = {
+  type: ['type', 'online', 'print'].map(
+    type => <option key={type} value={type}>{type}</option>
+  ),
+  slidenum: formUtil.getSelectOptions(10, '#'),
+  rating: formUtil.getSelectOptions(10, 'rating'),
+  year: formUtil.getSelectOptions(30, 'yyyy', 'year'),
+  day: formUtil.getSelectOptions(31, 'dd', 'pre0'),
+  month: formUtil.getSelectOptions(12, 'mm', 'pre0'),
+};
+
 class ItemFormContainer extends Component {
     
   state = {
@@ -141,6 +152,7 @@ class ItemFormContainer extends Component {
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
         status={status}
+        selectOptions={selectOptions}
       />
     );
   }

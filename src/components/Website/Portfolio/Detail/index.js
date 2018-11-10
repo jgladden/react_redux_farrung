@@ -20,10 +20,6 @@ const Detail = props => {
     setRoute
   } = props;
 
-  const showDetail = id => {
-    setRoute(`/portfolio/${type}/${id}`);
-  };
-
   return (
     <section 
       id="portfolioDetail"
@@ -35,7 +31,7 @@ const Detail = props => {
           <div id='detailNav'>
             <p 
               id='detailNav__closeBtn'
-              onClick={() => showDetail('') }
+              onClick={setRoute(`/portfolio/${type}`)}
             >
             </p>
             <p 
@@ -46,11 +42,11 @@ const Detail = props => {
             <ul>
               <li 
                 id='detailNav__prevBtn'
-                onClick={() => showDetail(prevId)}
+                onClick={setRoute(`/portfolio/${type}/${prevId}`)}
               ></li>
               <li 
                 id='detailNav__nextBtn'
-                onClick={() => showDetail(nextId)}
+                onClick={setRoute(`/portfolio/${type}/${nextId}`)}
               ></li>
             </ul>
           </div>
