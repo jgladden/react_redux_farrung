@@ -6,6 +6,7 @@ React Boilerplate configured with babel, webpack, sass, and eslint.
 * `npm start` to run eslint on watch mode and dev-server at localhost:8080.
 * `npm run watch` to only watch for/recompile on changes.
 * `npm run build` to generate a minified, production-ready build.
+* `npm run stats` to generate stats.json, profiles build bundle, 4 nice report, https://webpack.jakoblind.no/optimize/
 * 'eslint --fix file.js' to fix eslint errors in file *see environment
 
 

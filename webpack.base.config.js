@@ -25,7 +25,7 @@ module.exports = env => {
   return merge([
     {
       entry: {
-        app: ['@babel/polyfill', APP_ENTRY],
+        app: APP_ENTRY,
         admin: ADMIN_ENTRY
       },
       output: {

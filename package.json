@@ -12,6 +12,7 @@
     "dev:server": "webpack-dev-server --mode development --config webpack.base.config.js --hot --open --env.PLATFORM=local",
     "prebuild": "webpack --mode production --config webpack.prod.config.js --env.PLATFORM=production --progress",
     "build": "node server",
+    "stats": "npx webpack --mode production --config webpack.prod.config.js --env.PLATFORM=production --profile --json > stats.json",
     "lint": "node_modules/.bin/esw webpack.base.config.js src --color",
     "lint:watch": "npm run lint -- --watch",
     "test": "jest",
@@ -39,7 +40,6 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-proposal-throw-expressions": "^7.0.0",
     "@babel/plugin-syntax-dynamic-import": "^7.0.0",
-    "@babel/polyfill": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
     "axios-mock-adapter": "^1.15.0",
@@ -69,11 +69,11 @@
     "webpack": "^4.25.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
-    "webpack-merge": "^4.1.4",
-    "webpack-visualizer-plugin": "^0.1.11"
+    "webpack-merge": "^4.1.4"
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "core-js": "^2.5.7",
     "director": "^1.2.8",
     "express": "^4.16.4",
     "react": "^16.6.0",
