@@ -24,9 +24,6 @@ class AdminContainer extends Component {
     if(urlParts.length === 0)
       return(<Loading />);
   
-    if(urlParts[0] !== 'admin')
-      return(<PageNotFound />);
-
     return (
       <Admin
         subpage={urlParts[1]}
