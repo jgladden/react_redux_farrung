@@ -31,7 +31,7 @@ const Detail = props => {
           <div id='detailNav'>
             <p 
               id='detailNav__closeBtn'
-              onClick={setRoute(`/portfolio/${type}`)}
+              onClick={() => setRoute(`/portfolio/${type}`)}
             >
             </p>
             <p 
@@ -42,11 +42,11 @@ const Detail = props => {
             <ul>
               <li 
                 id='detailNav__prevBtn'
-                onClick={setRoute(`/portfolio/${type}/${prevId}`)}
+                onClick={() => setRoute(`/portfolio/${type}/${prevId}`)}
               ></li>
               <li 
                 id='detailNav__nextBtn'
-                onClick={setRoute(`/portfolio/${type}/${nextId}`)}
+                onClick={() => setRoute(`/portfolio/${type}/${nextId}`)}
               ></li>
             </ul>
           </div>

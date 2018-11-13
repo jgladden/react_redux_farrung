@@ -1,18 +1,11 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ListItem from 'components/Website/Portfolio/ListItem';
+import ListItemContainer from 'containers/Website/Portfolio/ListItemContainer';
 import Loading from 'components/Loading';
 import Error from 'components/Error';
 
-const PortfolioList = props => { 
-  const {
-    type,
-    items,
-    fetching,
-    error,
-    setRoute
-  } = props;
+const PortfolioList = ({items, fetching, error}) => { 
 
   if(fetching) 
     return (<Loading />);
@@ -28,10 +21,9 @@ const PortfolioList = props => {
   return (
     <ul id='portfolioThumbnail'>
       {ids.map(id => (
-        <ListItem
+        <ListItemContainer
           key={id}
-          {...items[id]}
-          handleClick={() => setRoute(`/portfolio/${type}/${id}`)}
+          item={items[id]}
         />
       ))}
     </ul>
@@ -39,8 +31,6 @@ const PortfolioList = props => {
 };
 
 PortfolioList.propTypes = {
-  type: PropTypes.string.isRequired,
-  setRoute: PropTypes.func.isRequired,
   items: PropTypes.object.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.number

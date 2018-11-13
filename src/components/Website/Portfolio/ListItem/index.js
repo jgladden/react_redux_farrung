@@ -3,20 +3,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { imgPath } from 'config';
 
-const ListItem = props => {
+const ListItem = ({item, setRoute}) => {
   const {
-    handleClick, 
+    id,
+    type,
     title, 
     imagename, 
     slidenum
-  } = props;
+  } = item;
 
   const slide = slidenum === '1' ? '' : 1;
 
   return (
     <li 
       className='portfolioItem' 
-      onClick={handleClick}
+      onClick={() => setRoute(`/portfolio/${type}/${id}`)}
     >
       <div> 
         <img src={`${imgPath}${imagename}${slide}.jpg`} />
@@ -27,10 +28,14 @@ const ListItem = props => {
 };
 
 ListItem.propTypes = {
-  handleClick: PropTypes.func.isRequired,
-  imagename: PropTypes.string.isRequired,
-  slidenum: PropTypes.string.isRequired,
-  title: PropTypes.string.isRequired
+  item: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    imagename: PropTypes.string.isRequired,
+    slidenum: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+  }).isRequired,
+  setRoute: PropTypes.func.isRequired
 };
 
 export default ListItem;

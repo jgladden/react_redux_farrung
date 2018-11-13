@@ -11,22 +11,20 @@ export const getItemsByType = state => {
   return typeof items !== 'undefined' && items[type] ? items[type] : {};
 };
 
-export const getDetailProps = state => {
-  const items = state.portfolio.items;
-  const type = state.route.urlParts[1];
+export const getItemById = state => {
+  const itemsByType = getItemsByType(state);
+  const itemKeys = Object.keys(itemsByType);
+  const len = itemKeys.length;
   const id = state.route.urlParts[2];
-  const allItems = items && items[type] ? items[type] : null;
-  if(!allItems || !id)
+  if(!id || len === 0)
     return {item: {}, prevId: '', nextId: ''};
-  const arr = Object.keys(allItems);
-  const len = arr.length;
-  const pos = arr.indexOf(id);
+  const pos = itemKeys.indexOf(id);
   const p = pos === 0 ? len - 1 : pos - 1;
   const n = pos === len - 1 ? 0 : pos + 1;
   return {
-    item: allItems[id],
-    prevId: allItems[arr[p]].id,
-    nextId: allItems[arr[n]].id
+    item: itemsByType[id],
+    prevId: itemsByType[itemKeys[p]].id,
+    nextId: itemsByType[itemKeys[n]].id
   };
 };
 

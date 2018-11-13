@@ -10,8 +10,8 @@ export const getPortfolioTypes = state =>
 export const getItemsByType = state => 
   fromPortfolio.getItemsByType(state);
 
-export const getDetailProps = state => 
-  fromPortfolio.getDetailProps(state);
+export const getItemById = state => 
+  fromPortfolio.getItemById(state);
 
 export const getFilteredAdminItems = state =>
   fromAdmin.getFilteredAdminItems(state);
