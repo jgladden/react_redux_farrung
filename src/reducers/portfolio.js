@@ -21,11 +21,10 @@ export const getItemById = state => {
   const pos = itemKeys.indexOf(id);
   const p = pos === 0 ? len - 1 : pos - 1;
   const n = pos === len - 1 ? 0 : pos + 1;
-  return {
-    item: itemsByType[id],
-    prevId: itemsByType[itemKeys[p]].id,
-    nextId: itemsByType[itemKeys[n]].id
-  };
+  const item = itemsByType[id];
+  item.prevId = itemsByType[itemKeys[p]].id;
+  item.nextId = itemsByType[itemKeys[n]].id;
+  return { item };
 };
 
 const portfolio = (state = {}, action) => {

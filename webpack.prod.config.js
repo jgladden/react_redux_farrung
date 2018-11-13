@@ -26,7 +26,7 @@ const prodConfiguration = env => {
       plugins: [
         new CleanWebpackPlugin(pathsToClean, cleanOptions),
         new MiniCssExtractPlugin({
-          filename: 'css/[name].[hash].css'
+          filename: 'css/[name].css'
         }),
         new OptimizeCssAssetsPlugin()
       ],

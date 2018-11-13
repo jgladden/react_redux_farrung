@@ -4,21 +4,18 @@ import PropTypes from 'prop-types';
 import { range } from 'utils';
 import { imgPath } from 'config';
 
-const Detail = props => {
+const Detail = ({item, setRoute}) => {
   const {
-    item: {
-      id,
-      title,
-      type,
-      slidenum,
-      imagename,
-      link,
-      description
-    },
+    id,
+    title,
+    type,
+    slidenum,
+    imagename,
+    link,
+    description,
     nextId,
-    prevId,
-    setRoute
-  } = props;
+    prevId
+  } = item;
 
   return (
     <section 
@@ -93,10 +90,10 @@ Detail.propTypes = {
     slidenum: PropTypes.string,
     imagename: PropTypes.string,
     link: PropTypes.string,
-    description: PropTypes.string
+    description: PropTypes.string,
+    nextId: PropTypes.string,
+    prevId: PropTypes.string
   }).isRequired,
-  nextId: PropTypes.string,
-  prevId: PropTypes.string,
   setRoute: PropTypes.func.isRequired
 };
 
