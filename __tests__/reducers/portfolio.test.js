@@ -1,21 +1,52 @@
-import portfolio from '../../src/reducers/portfolio';
-import * as types from '../../src/actions/types';
+import portfolio from 'reducers/portfolio';
+import * as types from 'actions/types';
 
-describe('1display portfolio reducer', () => {
+const initialState = {};
+
+describe('test portfolio reducer', () => {
   test('initial state is correct', () => {
-    const action = { type: '' };
-    expect(portfolio(undefined, action)).toMatchSnapshot();
+    const action = { 
+      type: 'dummy_action' 
+    };
+    expect(portfolio({}, action))
+    .toEqual(initialState);
   });
-  test('FETCH_PORTFOLIO_REQUEST returns expected state', () => {
-    const action = { type: types.FETCH_PORTFOLIO_REQUEST };
-    expect(portfolio(undefined, action)).toMatchSnapshot();
+  test('GET_PORTFOLIO_ITEMS returns expected state', () => {
+    const action = { 
+      type: types.GET_PORTFOLIO_ITEMS 
+    };
+    expect(portfolio(undefined, action))
+    .toEqual({
+      fetching: true,
+      success: false,
+      error: null
+    });
   });
-  test('FETCH_PORTFOLIO_SUCCESS returns expected state', () => {
-    const action = { type: types.FETCH_PORTFOLIO_SUCCESS, payload: { data: 1 } };
-    expect(portfolio(undefined, action)).toMatchSnapshot();
+  test('GET_PORTFOLIO_ITEMS_SUCCESS returns expected state', () => {
+    const payload = { 'id': '22' };
+    const action = { 
+      type: types.GET_PORTFOLIO_ITEMS_SUCCESS, 
+      payload
+    };
+    expect(portfolio({}, action))
+    .toEqual({
+      success: true,
+      fetching: false,
+      error: null,
+      items: {...payload}
+    });
   });
-  test('FETCH_PORTFOLIO_FAILURE returns expected state', () => {
-    const action = { type: types.FETCH_PORTFOLIO_FAILURE, payload: Error('msg') };
-    expect(portfolio(undefined, action)).toMatchSnapshot();
+  test('GET_PORTFOLIO_ITEMS_ERROR returns expected state', () => {
+    const payload = Error('msg');
+    const action = { 
+      type: types.GET_PORTFOLIO_ITEMS_ERROR, 
+      payload
+    };
+    expect(portfolio({}, action))
+    .toEqual({
+      success: false,
+      fetching: false,
+      error: payload
+    });
   });
 });

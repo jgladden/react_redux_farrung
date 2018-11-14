@@ -31,12 +31,16 @@ const portfolio = (state = {}, action) => {
   switch (action.type) {
   case types.GET_PORTFOLIO_ITEMS: {
     return {
-      fetching: 1
+      fetching: true,
+      success: false,
+      error: null
     };
   }
   case types.GET_PORTFOLIO_ITEMS_SUCCESS: {
     return {
-      items_loaded: 1,
+      success: true,
+      fetching: false,
+      error: null,
       items: {
         ...action.payload 
       }
@@ -44,6 +48,8 @@ const portfolio = (state = {}, action) => {
   }
   case types.GET_PORTFOLIO_ITEMS_ERROR: {
     return { 
+      fetching: false,
+      success: false,
       error: action.payload
     };
   }

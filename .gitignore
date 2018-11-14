@@ -1,4 +1,4 @@
-__testsall__/*
+__tests1__/*
 dist/*
 node_modules
 .DS_Store
