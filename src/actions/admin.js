@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from './types';
-import { getAdminUrl } from 'config';
+import { getAdminUrl } from '../config';
 
 export function fetchAdmin() {
   return dispatch => {

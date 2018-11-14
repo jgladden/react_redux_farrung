@@ -1,6 +1,6 @@
 import axios from 'axios';
 import * as types from './types';
-import { getPortfolioUrl } from 'config';
+import { getPortfolioUrl } from '../config';
 
 export function fetchPortfolio() {
   return dispatch => {
