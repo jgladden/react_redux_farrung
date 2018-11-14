@@ -7,7 +7,7 @@ export function submitLogin(authObj) {
     dispatch(postAuth());
     return axios.post(postAuthUrl, authObj)
       .then(response => dispatch(
-        postAuthSuccess(response.data))
+        postAuthSuccess(response.data.isAuthenticated))
       )
       .catch(error => dispatch(
         postAuthError(error.toString()))

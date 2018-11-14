@@ -9,12 +9,12 @@ const auth = (state = initialState, action) => {
   switch (action.type) {
   case types.POST_AUTH: {
     return {
-      posting: 1
+      posting: true
     };
   }
   case types.POST_AUTH_SUCCESS: {
     return { 
-      isAuthenticated: action.payload.isAuthenticated 
+      isAuthenticated: action.payload 
     };
   }
   case types.POST_AUTH_ERROR: {
