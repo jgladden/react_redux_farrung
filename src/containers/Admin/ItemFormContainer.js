@@ -95,8 +95,16 @@ class ItemFormContainer extends Component {
     }
   }
 
+  getConfig = () => {
+    return {
+      headers: {
+        'Authorization': `bearer ${this.props.token}`
+      }
+    };      
+  }
+
   postEdit = values => {
-    axios.post(editAdminItemUrl, values)
+    axios.post(editAdminItemUrl, values, this.getConfig())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -120,7 +128,7 @@ class ItemFormContainer extends Component {
 
   postAdd = values => {
     values.id = uniqueId();
-    axios.post(addAdminItemUrl, values)
+    axios.post(addAdminItemUrl, values, this.getConfig())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -159,13 +167,18 @@ class ItemFormContainer extends Component {
 }
 
 ItemFormContainer.propTypes = {
+  token: PropTypes.string.isRequired,
   formInitValues: PropTypes.object,
   mergeAdminItem: PropTypes.func.isRequired,
   toggleEditDisplay: PropTypes.func
 };
 
+const mapStateToProps = state => ({
+  token: state.auth.token
+});
+
 export default connect(
-  null, 
+  mapStateToProps, 
   {
     mergeAdminItem
   }

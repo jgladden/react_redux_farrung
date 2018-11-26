@@ -1,8 +1,8 @@
 const domain = 'https://farrung.com';
-const api = `${domain}/api/`;
+const api = `${domain}/newapi/`;
 export const getPortfolioUrl = `${api}getPortfolio/`;
-export const getAdminUrl = `${api}getAdmin/`;
-export const postAuthUrl = `${api}authrequest/`;
+export const getAdminUrl = `${api}getAdminPortfolio/`;
+export const postAuthUrl = `${api}login/`;
 export const postMessageUrl = `${api}contact/`;
 export const addAdminItemUrl = `${api}addPortfolioItem/`;
 export const editAdminItemUrl = `${api}editPortfolioItem/`;

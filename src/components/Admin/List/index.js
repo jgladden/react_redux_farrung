@@ -46,7 +46,7 @@ List.propTypes = {
   filteredItems: PropTypes.object.isRequired,
   admin: PropTypes.shape({
     fetching: PropTypes.bool,
-    error: PropTypes.bool,
+    error: PropTypes.string,
     success: PropTypes.bool
   }).isRequired
 };

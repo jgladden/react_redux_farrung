@@ -2,10 +2,15 @@ import axios from 'axios';
 import * as types from './types';
 import { getAdminUrl } from '../config';
 
-export function fetchAdmin() {
+export function fetchAdmin(token) {
+  const config = {
+    headers: {
+      'Authorization': `bearer ${token}`
+    }
+  };
   return dispatch => {
     dispatch(getAdminItems());
-    return axios.get(getAdminUrl)
+    return axios.get(getAdminUrl, config)
       .then(response => dispatch(
         getAdminItemsSuccess(response.data))
       )

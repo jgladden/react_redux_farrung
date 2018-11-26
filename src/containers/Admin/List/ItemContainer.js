@@ -13,11 +13,17 @@ class ListItemContainer extends Component {
 
   deleteItem = () => {
     const {
+      token,
       type,
       id,
       removeAdminItem
     } = this.props;
-    axios.post(removeAdminItemUrl, {id})
+    const config = {
+      headers: {
+        'Authorization': `bearer ${token}`
+      }
+    };
+    axios.post(removeAdminItemUrl, {id}, config)
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -49,12 +55,14 @@ class ListItemContainer extends Component {
 }
 
 ListItemContainer.propTypes = {
+  token: PropTypes.string.isRequired,
   admin: PropTypes.object.isRequired,
   removeAdminItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  admin: state.admin
+  admin: state.admin,
+  token: state.auth.token
 });
 
 export default connect(

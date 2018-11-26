@@ -85,7 +85,7 @@
     "core-js": "^2.5.7",
     "director": "^1.2.8",
     "express": "^4.16.4",
-    "react": "^16.6.0",
+    "react": "^16.6.3",
     "react-dom": "^16.6.0",
     "react-redux": "^5.1.0",
     "redux": "^4.0.1",

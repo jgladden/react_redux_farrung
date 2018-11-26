@@ -33,7 +33,7 @@ const PortfolioList = ({items, fetching, error}) => {
 PortfolioList.propTypes = {
   items: PropTypes.object.isRequired,
   error: PropTypes.string,
-  fetching: PropTypes.number
+  fetching: PropTypes.bool
 };
 
 export default PortfolioList;

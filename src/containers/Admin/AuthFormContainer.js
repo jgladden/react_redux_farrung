@@ -21,6 +21,15 @@ class AuthFormContainer extends Component {
     fields: formUtil.initFields(formFields)
   }
 
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.auth.token && !prevState.token) 
+      return {
+        token: nextProps.auth.token,
+        fields: formUtil.initFields(formFields)
+      }
+    return null; 
+  }
+
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
     this.setState({ fields });
@@ -33,18 +42,15 @@ class AuthFormContainer extends Component {
     );
     if(validateForm.isValidForm) {
       this.props.submitLogin(validateForm.fieldValues);
-      this.setCookie();
-      this.setState({
-        fields: formUtil.initFields(formFields)
-      });
     } else {
       this.setState({fields: validateForm.fields});
     } 
   }
 
-  setCookie = () => {
-    let exp = new Date(+new Date + 1.44e+7);
-    cookieUtil.setCookie('AUTH', 'isAuthenticated', exp, '/', '.farrung.com', true);
+  initFields = () => {
+    this.setState({
+      fields: formUtil.initFields(formFields)
+    });
   }
 
   render() {

@@ -11,7 +11,7 @@ import AuthFormContainer from 'containers/Admin/AuthFormContainer';
 
 const SignIn = props => {
   const {
-    isAuthenticated, 
+    token, 
     submitLogout, 
     toggleLoginDisplay, 
     displayLogin, 
@@ -19,7 +19,7 @@ const SignIn = props => {
 
   return(
     <div className='login'>
-      {isAuthenticated === true ? (
+      {token !== '' ? (
         <p
           className='login__link'
           onClick={() => submitLogout()}
@@ -42,7 +42,7 @@ const SignIn = props => {
 };
 
 SignIn.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  token: PropTypes.string,
   submitLogout: PropTypes.func.isRequired,
   toggleLoginDisplay: PropTypes.func.isRequired,
   displayLogin: PropTypes.bool.isRequired,

@@ -9,7 +9,7 @@ const AuthForm = props => {
     auth: {
       posting,
       error,
-      isAuthenticated
+      token
     }, 
     submitLogin, 
     handleChange, 
@@ -22,9 +22,6 @@ const AuthForm = props => {
     <div className='loginForm'>
       {error &&
         <p className='loginForm__error'>{error}</p>
-      }
-      {isAuthenticated === false &&
-        <p className='loginForm__error'>User not found.</p>
       }
       <form onSubmit={e => submitLogin(e)}>
         <label>Atleast 8 characters.</label>
@@ -52,9 +49,9 @@ const AuthForm = props => {
 
 AuthForm.propTypes = {
   auth: PropTypes.shape({
-    posting: PropTypes.number,
+    posting: PropTypes.bool,
     error: PropTypes.string,
-    isAuthenticated: PropTypes.bool
+    token: PropTypes.string
   }).isRequired,
   fields: PropTypes.object.isRequired,
   submitLogin: PropTypes.func.isRequired,

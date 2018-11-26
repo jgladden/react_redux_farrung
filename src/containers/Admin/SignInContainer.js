@@ -6,14 +6,13 @@ import SignIn from 'components/SignIn';
 import cookieUtil from 'utils/cookieUtil';
 
 class SignInContainer extends Component {
+
   state = {
     displayLogin: false
   } 
 
-  static getDerivedStateFromProps(props, state) {
-    const { displayLogin } = state;
-    const { isAuthenticated } = props;
-    if(isAuthenticated && displayLogin)
+  static getDerivedStateFromProps(nextProps, prevState) {
+    if(nextProps.token && prevState.displayLogin)
       return { displayLogin: false };
     return null;
   }
@@ -26,14 +25,13 @@ class SignInContainer extends Component {
   }
 
   submitLogout = () => {
-    cookieUtil.deleteCookie('AUTH', '/', '.farrung.com');
     this.props.submitLogout();
   }
 
   render() {
     return (
       <SignIn
-        isAuthenticated={this.props.isAuthenticated}
+        token={this.props.token}
         submitLogout={this.submitLogout}
         displayLogin={this.state.displayLogin}
         toggleLoginDisplay={this.toggleLoginDisplay}
@@ -43,12 +41,12 @@ class SignInContainer extends Component {
 }
 
 SignInContainer.propTypes = {
-  isAuthenticated: PropTypes.bool,
+  token: PropTypes.string,
   submitLogout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.auth.isAuthenticated
+  token: state.auth.token
 });
 
 export default connect(
