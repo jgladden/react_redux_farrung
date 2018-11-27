@@ -1,8 +1,8 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loading from 'components/Loading';
-import Error from 'components/Error';
+import Loading from 'components/common/pages/Loading';
+import Error from 'components/common/pages/Error';
 import ItemContainer from 'containers/Admin/List/ItemContainer';
 import FilterContainer from 'containers/Admin/List/FilterContainer';
 

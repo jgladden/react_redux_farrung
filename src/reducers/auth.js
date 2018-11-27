@@ -6,8 +6,7 @@ let initialState = { token };
 
 const setCookie = token => {
   const exp = new Date(+new Date + 1.44e+7);
-  cookieUtil
-  .setCookie(
+  cookieUtil.setCookie(
     'AUTHTOKEN',
     token, 
     exp,
@@ -15,11 +14,10 @@ const setCookie = token => {
     '.farrung.com', 
     true
   );
-}
+};
 
 const deleteCookie = () => {
-  cookieUtil
-  .deleteCookie(
+  cookieUtil.deleteCookie(
     'AUTHTOKEN', 
     '/', 
     '.farrung.com'

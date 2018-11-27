@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Loading from 'components/Loading';
+import Loading from 'components/common/pages/Loading';
 
 const Nav = ({portfolioTypes, setRoute}) => {
   if(!portfolioTypes.length)

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { submitLogin } from 'actions';
 import AuthForm from 'components/Auth/Form';
 import formUtil from 'utils/formUtil';
-import cookieUtil from 'utils/cookieUtil';
 
 const formFields = {
   username: {
@@ -26,7 +25,7 @@ class AuthFormContainer extends Component {
       return {
         token: nextProps.auth.token,
         fields: formUtil.initFields(formFields)
-      }
+      };
     return null; 
   }
 

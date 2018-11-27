@@ -2,8 +2,8 @@ import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ListItemContainer from 'containers/Website/Portfolio/ListItemContainer';
-import Loading from 'components/Loading';
-import Error from 'components/Error';
+import Loading from 'components/common/pages/Loading';
+import Error from 'components/common/pages/Error';
 
 const PortfolioList = ({items, fetching, error}) => { 
 

@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from 'actions';
 import Website from 'components/Website';
-import Loading from 'components/Loading';
-import PageNotFound from 'components/PageNotFound';
+import Loading from 'components/common/pages/Loading';
+import PageNotFound from 'components/common/pages/PageNotFound';
 
 class WebsiteContainer extends Component {
   state = { };

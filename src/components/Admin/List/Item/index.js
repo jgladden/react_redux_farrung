@@ -2,7 +2,7 @@ import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ItemFormContainer from 'containers/Admin/ItemFormContainer';
-import Button from 'components/Button';
+import Button from 'components/common/Button';
 
 const ListItem = props => {
   const {

@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import { setRoute } from 'actions';
 import List from 'components/Website/Portfolio/List/';
 import { getItemsByType } from 'reducers';
 

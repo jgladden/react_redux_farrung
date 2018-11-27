@@ -1,11 +1,11 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import Button from 'components/Button/';
-import Text from 'components/FormFields/Text';
-import CheckBox from 'components/FormFields/CheckBox';
-import Select from 'components/FormFields/Select'; 
-import TextArea from 'components/FormFields/TextArea'; 
+import Button from 'components/common/Button/';
+import Text from 'components/common/FormFields/Text';
+import CheckBox from 'components/common/FormFields/CheckBox';
+import Select from 'components/common/FormFields/Select'; 
+import TextArea from 'components/common/FormFields/TextArea'; 
 
 const ItemForm = props => {
   const {
@@ -130,6 +130,7 @@ const ItemForm = props => {
 ItemForm.propTypes = {
   status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
+  selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired
 };
