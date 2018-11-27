@@ -1,6 +1,11 @@
 import axios from 'axios';
 import * as types from './types';
 import { postAuthUrl } from '../config';
+import {
+  parseJwt,
+  setAuthTokenCookie,
+  deleteAuthTokenCookie
+} from 'utils/authUtil';
 
 export function submitLogin(authObj) {
   return dispatch => {
@@ -8,17 +13,26 @@ export function submitLogin(authObj) {
     return axios.post(postAuthUrl, authObj)
       .then(response => {
         let error = response.data.error;
-        if(!error)
+        if(!error) {
+          let {
+            token
+          } = response.data;
+          setAuthTokenCookie(token);
           return dispatch(
-            postAuthSuccess(response.data.token)
+            postAuthSuccess(parseJwt(token))
           );
+        }
+        deleteAuthTokenCookie();      
         return dispatch(
           postAuthError(error)
         );
       })
-      .catch(error => dispatch(
-        postAuthError(error.toString()))
-      );
+      .catch(error => {
+        deleteAuthTokenCookie();
+        return dispatch(
+          postAuthError(error.toString())
+        );
+      });
   };
 }
 
@@ -36,7 +50,14 @@ export const postAuthError = payload => ({
   payload
 });
 
-export const submitLogout = () => ({
+export function submitLogout() {
+  return dispatch => {
+    deleteAuthTokenCookie();
+    dispatch(authLogout());
+  };
+}
+
+export const authLogout = () => ({
   type: types.AUTH_LOGOUT
 });
-
+ 

@@ -9,30 +9,30 @@ import NotAuthorized from 'components/Auth/NotAuthorized';
 class AdminContainer extends Component {
   componentDidMount() {
     const {
-      token,
+      username,
       fetchAdmin
     } = this.props;
-    if(token)
-      fetchAdmin(token);
+    if(username)
+      fetchAdmin();
   }
 
   componentDidUpdate(prevProps) {
     const {
-      token,
+      username,
       fetchAdmin
     } = this.props;
-    if(token && 
-       !prevProps.token
-    ) fetchAdmin(token);
+    if(username && 
+       !prevProps.username
+    ) fetchAdmin();
   }
 
   render() {
     const {
       urlParts,
-      token
+      username
     } = this.props;
 
-    if(!token)
+    if(!username)
       return(<NotAuthorized />);
 
     if(urlParts.length === 0)
@@ -47,13 +47,13 @@ class AdminContainer extends Component {
 }
 
 AdminContainer.propTypes = {
-  token: PropTypes.string,
+  username: PropTypes.string,
   urlParts: PropTypes.array.isRequired,
   fetchAdmin: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  token: state.auth.token,
+  username: state.auth.username,
   urlParts: state.route.urlParts
 });
 

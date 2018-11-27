@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { removeAdminItemUrl } from 'config';
 import { removeAdminItem } from 'actions';
+import { getJwtHeader } from 'utils/authUtil';
 import Item from 'components/Admin/List/Item';
 
 class ListItemContainer extends Component {
@@ -13,17 +14,11 @@ class ListItemContainer extends Component {
 
   deleteItem = () => {
     const {
-      token,
       type,
       id,
       removeAdminItem
     } = this.props;
-    const config = {
-      headers: {
-        'Authorization': `bearer ${token}`
-      }
-    };
-    axios.post(removeAdminItemUrl, {id}, config)
+    axios.post(removeAdminItemUrl, {id}, getJwtHeader())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -55,14 +50,12 @@ class ListItemContainer extends Component {
 }
 
 ListItemContainer.propTypes = {
-  token: PropTypes.string.isRequired,
   admin: PropTypes.object.isRequired,
   removeAdminItem: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  admin: state.admin,
-  token: state.auth.token
+  admin: state.admin
 });
 
 export default connect(

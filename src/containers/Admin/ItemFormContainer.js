@@ -4,6 +4,7 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
+import { getJwtHeader } from 'utils/authUtil';
 import { uniqueId } from 'utils';
 import { editAdminItemUrl, addAdminItemUrl } from 'config';
 import ItemForm from 'components/Admin/ItemForm';
@@ -95,16 +96,8 @@ class ItemFormContainer extends Component {
     }
   }
 
-  getConfig = () => {
-    return {
-      headers: {
-        'Authorization': `bearer ${this.props.token}`
-      }
-    };      
-  }
-
   postEdit = values => {
-    axios.post(editAdminItemUrl, values, this.getConfig())
+    axios.post(editAdminItemUrl, values, getJwtHeader())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -128,7 +121,7 @@ class ItemFormContainer extends Component {
 
   postAdd = values => {
     values.id = uniqueId();
-    axios.post(addAdminItemUrl, values, this.getConfig())
+    axios.post(addAdminItemUrl, values, getJwtHeader())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -167,18 +160,13 @@ class ItemFormContainer extends Component {
 }
 
 ItemFormContainer.propTypes = {
-  token: PropTypes.string.isRequired,
   formInitValues: PropTypes.object,
   mergeAdminItem: PropTypes.func.isRequired,
   toggleEditDisplay: PropTypes.func
 };
 
-const mapStateToProps = state => ({
-  token: state.auth.token
-});
-
 export default connect(
-  mapStateToProps, 
+  null, 
   {
     mergeAdminItem
   }
