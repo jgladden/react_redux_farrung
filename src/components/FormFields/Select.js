@@ -1,13 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formUtil from 'utils/formUtil';
 
-const Select = ({name, options, fields, handleChange}) => (
+const Select = ({
+  name, 
+  options, 
+  value, 
+  classname, 
+  handleChange}) => (
   <select
     name={name}
-    className={formUtil.fieldErrorClass(name, fields)}
+    className={classname}
     onChange={e => handleChange(e)}
-    value={fields[name].value}
+    value={value}
   >
     {options}  
   </select>
@@ -15,7 +19,8 @@ const Select = ({name, options, fields, handleChange}) => (
 
 Select.propTypes = {
   name: PropTypes.string.isRequired,
-  fields: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  classname: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   options: PropTypes.array.isRequired
 };

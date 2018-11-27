@@ -1,20 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formUtil from 'utils/formUtil';
 
-const CheckBox = ({name, fields, handleChange}) => (
+const CheckBox = ({
+  name,
+  value, 
+  classname,
+  handleChange}) => (
   <input
     type='checkbox'
-    checked={fields[name].value}
+    checked={value}
     name={name}
-    className={formUtil.fieldErrorClass(name, fields)}
+    className={classname}
     onChange={e => handleChange(e)}
   />
 );
 
 CheckBox.propTypes = {
   name: PropTypes.string.isRequired,
-  fields: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  classname: PropTypes.string,
   handleChange: PropTypes.func.isRequired
 };
 

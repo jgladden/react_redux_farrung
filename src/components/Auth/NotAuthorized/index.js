@@ -1,6 +1,6 @@
 import './styles.scss';
 import React from 'react';
-import AuthFormContainer from 'containers/Admin/AuthFormContainer';
+import AuthFormContainer from 'containers/Auth/FormContainer';
 
 const NotAuthorized = () => (
   <div id='notAuthorized'>

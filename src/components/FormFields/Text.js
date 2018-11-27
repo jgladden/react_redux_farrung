@@ -1,14 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import formUtil from 'utils/formUtil';
 
-const Text = ({type, name, fields, handleChange, placeholder}) => (
+const Text = ({
+  type, 
+  name, 
+  value, 
+  classname, 
+  handleChange, 
+  placeholder}) => (
   <input
     type={type ? type : 'text'}
-    value={fields[name].value}
+    value={value}
     name={name}
     placeholder={placeholder ? placeholder : ''}
-    className={formUtil.fieldErrorClass(name, fields)}
+    className={classname}
     onChange={e => handleChange(e)}
   />
 );
@@ -16,7 +21,8 @@ const Text = ({type, name, fields, handleChange, placeholder}) => (
 Text.propTypes = {
   type: PropTypes.string,
   name: PropTypes.string.isRequired,
-  fields: PropTypes.object.isRequired,
+  value: PropTypes.string.isRequired,
+  classname: PropTypes.string,
   handleChange: PropTypes.func.isRequired,
   placeholder: PropTypes.string
 };

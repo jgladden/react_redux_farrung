@@ -19,8 +19,6 @@ const ItemForm = props => {
     selectOptions
   } = props;
 
-  const fieldParam = { fields, handleChange };
-
   return(
     <div className='portfolioForm'>
       {error &&
@@ -30,70 +28,94 @@ const ItemForm = props => {
         <label>Type:</label>
         <Select 
           name='type'
-          options={selectOptions.type} 
-          {...fieldParam}
+          options={selectOptions.type}
+          value={fields.type.value}
+          classname={fields.type.errorClass}
+          handleChange={handleChange} 
         />
         <label>Title: <span>5+ characters</span></label>
         <Text
           name='title'
-          {...fieldParam}
+          value={fields.title.value}
+          classname={fields.title.errorClass}
+          handleChange={handleChange}
         />
         <label>Client: <span>5+ characters</span></label>
         <Text
           name='client'
-          {...fieldParam}
+          value={fields.client.value}
+          classname={fields.client.errorClass}
+          handleChange={handleChange}
         />        
         <label>Description: <span>15+ characters</span></label>
         <TextArea
           name='description'
-          {...fieldParam}
+          value={fields.description.value}
+          classname={fields.description.errorClass}
+          handleChange={handleChange}
         />
         <label>Link: <span>http://...</span></label>
         <Text
           name='link'
-          {...fieldParam}
+          value={fields.link.value}
+          classname={fields.link.errorClass}
+          handleChange={handleChange}
         />      
         <div className='portfolioForm__date'>
           <label>Created on:</label>
           <Select
             name='month'
             options={selectOptions.month}
-            {...fieldParam}
+            value={fields.month.value}
+            classname={fields.month.errorClass}
+            handleChange={handleChange}
           />
           <Select
             name='day'
             options={selectOptions.day}
-            {...fieldParam}
+            value={fields.day.value}
+            classname={fields.day.errorClass}
+            handleChange={handleChange}
           />
           <Select
             name='year'
             options={selectOptions.year}
-            {...fieldParam}
+            value={fields.year.value}
+            classname={fields.year.errorClass}
+            handleChange={handleChange}
           />
         </div>
         <label>Image name: <span>5+ characters / 513x352</span></label>
         <Text
           name='imagename'
-          {...fieldParam}
+          value={fields.imagename.value}
+          classname={fields.imagename.errorClass}
+          handleChange={handleChange}
         />
         <label>Number of images:</label>
         <Select
           name='slidenum'
           options={selectOptions.slidenum}
-          {...fieldParam}
+          value={fields.slidenum.value}
+          classname={fields.slidenum.errorClass}
+          handleChange={handleChange}
         />
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
             name='display'
-            {...fieldParam}
+            value={fields.display.value}
+            classname={fields.display.errorClass}
+            handleChange={handleChange}
           />
         </div>
         <label>Rating:</label>
         <Select 
           name='rating'
           options={selectOptions.rating}
-          {...fieldParam}
+          value={fields.rating.value}
+          classname={fields.rating.errorClass}
+          handleChange={handleChange}
         />
         <Button 
           handleClick={e => submitForm(e)} 

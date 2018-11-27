@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import SignInContainer from 'containers/Admin/SignInContainer';
+import SignInContainer from 'containers/Auth/SignInContainer';
 
 const Nav = ({setRoute, urlParts}) => {
   return (

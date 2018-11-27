@@ -17,10 +17,12 @@ const formUtil = {
   getUpdatedFields: (e, fields) => {
     const { name, value, type, checked } = e.target;
     const field = fields[name];
-    field.value = type === 'checkbox' ? checked : value;
-    field.errors = formUtil.validate(
+    let errors = formUtil.validate(
       name, value, fields
     );
+    field.value = type === 'checkbox' ? checked : value;
+    field.errors = errors;
+    field.errorClass = errors && errors.length ? 'inValidField' : '';
     return fields;
   },
 
@@ -68,10 +70,6 @@ const formUtil = {
     }
     return fieldValues;
   },
-
-  fieldErrorClass: (name, fields) => (
-    fields[name].errors && fields[name].errors.length ? 'inValidField' : ''
-  ),
 
   getSelectOptions: (size, defaultOption, type) => {
     let rangeArr;

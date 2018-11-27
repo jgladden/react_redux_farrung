@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Button from 'components/Button/';
 import Text from 'components/FormFields/Text';
+import formUtil from 'utils/formUtil';
 
 const AuthForm = props => {
   const {
@@ -16,8 +17,6 @@ const AuthForm = props => {
     fields
   } = props; 
 
-  const fieldParam = { fields, handleChange };
-
   return(
     <div className='loginForm'>
       {error &&
@@ -28,14 +27,18 @@ const AuthForm = props => {
         <Text
           name='username'
           placeholder='Username'
-          {...fieldParam}
+          classname={fields.errorClass}
+          value={fields.username.value}
+          handleChange={handleChange}
         />
         <label>Atleast 8 characters w/ number, upper & lowercase letter and special character.</label>
         <Text
           name='password'
           type='password'
+          classname={fields.errorClass}
+          value={fields.password.value}
           placeholder='Password'
-          {...fieldParam}
+          handleChange={handleChange}
         />
         <Button 
           handleClick={e => submitLogin(e)} 

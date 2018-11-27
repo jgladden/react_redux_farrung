@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import Admin from 'components/Admin';
 import Loading from 'components/Loading';
 import PageNotFound from 'components/PageNotFound';
-import NotAuthorized from 'components/NotAuthorized';
+import NotAuthorized from 'components/Auth/NotAuthorized';
 
 class AdminContainer extends Component {
   componentDidMount() {

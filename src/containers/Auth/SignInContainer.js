@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { submitLogout } from 'actions';
-import SignIn from 'components/SignIn';
+import SignIn from 'components/Auth/SignIn';
 import cookieUtil from 'utils/cookieUtil';
 
 class SignInContainer extends Component {

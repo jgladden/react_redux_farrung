@@ -16,8 +16,6 @@ const Form = props => {
     fields
   } = props;
 
-  const fieldParam = { fields, handleChange }; 
-
   return(
     <React.Fragment>
       {error &&
@@ -29,17 +27,23 @@ const Form = props => {
         <Text
           name='email'
           placeholder='EMAIL'
-          {...fieldParam}
+          value={fields.email.value}
+          classname={fields.email.errorClass}
+          handleChange={handleChange}
         />
         <Text
           name='subject'
           placeholder='SUBJECT'
-          {...fieldParam}
+          value={fields.subject.value}
+          classname={fields.subject.errorClass}
+          handleChange={handleChange}
         />
         <TextArea
           name='message'
           placeholder='MESSAGE'
-          {...fieldParam}
+          value={fields.message.value}
+          classname={fields.message.errorClass}
+          handleChange={handleChange}
         />
         <Button 
           handleClick={e => submitMessage(e)} 
