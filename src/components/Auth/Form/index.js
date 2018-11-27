@@ -26,7 +26,7 @@ const AuthForm = props => {
         <Text
           name='username'
           placeholder='Username'
-          classname={fields.errorClass}
+          classname={fields.username.errorClass}
           value={fields.username.value}
           handleChange={handleChange}
         />
@@ -34,7 +34,7 @@ const AuthForm = props => {
         <Text
           name='password'
           type='password'
-          classname={fields.errorClass}
+          classname={fields.password.errorClass}
           value={fields.password.value}
           placeholder='Password'
           handleChange={handleChange}

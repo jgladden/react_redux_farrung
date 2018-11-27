@@ -16,18 +16,25 @@ const formUtil = {
 
   getUpdatedFields: (e, fields) => {
     const { name, value, type, checked } = e.target;
-    const field = fields[name];
-    let errors = formUtil.validate(
-      name, value, fields
-    );
+    let field = fields[name];
     field.value = type === 'checkbox' ? checked : value;
-    field.errors = errors;
-    field.errorClass = errors && errors.length ? 'inValidField' : '';
+    field = formUtil.validateField(field);
     return fields;
   },
 
-  validate: (name, value, fields) => {
-    const tests = fields[name].tests;
+  validateField: (field) => {
+    let errors = formUtil.validate(field);
+    field.errors = errors;
+    field.errorClass = formUtil.getErrorClass(errors);
+    return field;
+  },
+
+  getErrorClass: errors => {
+    return errors && errors.length ? 'inValidField' : '';
+  },
+
+  validate: (field) => {
+    const {tests, value } = field;
     return !tests ? [] : tests.filter(test => 
       !formUtil.isValidField(value, test)
     ); 
@@ -52,9 +59,7 @@ const formUtil = {
     for(let key in fields) {
       let field = fields[key];
       let value = field.value;
-      field.errors = formUtil.validate(
-        key, value, fields
-      );
+      field = formUtil.validateField(field);
       returnObj.fields[key] = field;
       returnObj.fieldValues[key] = value; 
       if(field.errors.length)

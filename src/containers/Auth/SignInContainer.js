@@ -30,7 +30,7 @@ class SignInContainer extends Component {
   render() {
     return (
       <SignIn
-        token={this.props.token}
+        username={this.props.username}
         submitLogout={this.submitLogout}
         displayLogin={this.state.displayLogin}
         toggleLoginDisplay={this.toggleLoginDisplay}
@@ -40,12 +40,12 @@ class SignInContainer extends Component {
 }
 
 SignInContainer.propTypes = {
-  token: PropTypes.string,
+  username: PropTypes.string,
   submitLogout: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  token: state.auth.token
+  username: state.auth.username
 });
 
 export default connect(

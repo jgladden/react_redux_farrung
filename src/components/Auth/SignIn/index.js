@@ -11,7 +11,7 @@ import AuthFormContainer from 'containers/Auth/FormContainer';
 
 const SignIn = props => {
   const {
-    token, 
+    username, 
     submitLogout, 
     toggleLoginDisplay, 
     displayLogin, 
@@ -19,7 +19,7 @@ const SignIn = props => {
 
   return(
     <div className='login'>
-      {token !== '' ? (
+      {username && username !== '' ? (
         <p
           className='login__link'
           onClick={() => submitLogout()}
@@ -42,7 +42,7 @@ const SignIn = props => {
 };
 
 SignIn.propTypes = {
-  token: PropTypes.string,
+  username: PropTypes.string,
   submitLogout: PropTypes.func.isRequired,
   toggleLoginDisplay: PropTypes.func.isRequired,
   displayLogin: PropTypes.bool.isRequired,
