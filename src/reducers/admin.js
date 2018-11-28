@@ -1,27 +1,33 @@
 import * as types from '../actions/types';
+import { createSelector } from 'reselect';
 
-export const getFilteredAdminItems = state => {
-  const items = state.admin.items;
-  const displayType = state.admin.displayType;
-  const displayArchived = state.admin.displayArchived;
-  if(!items) return {};
-  let filteredItems = items[displayType];
-  if(displayArchived) 
-    return filteredItems;
-  return Object.keys(filteredItems)
-    .filter(key =>
-      filteredItems[key].display === '1'
-    )
-    .reduce((obj, key) => {
-      obj[key] = filteredItems[key];
-      return obj;
-    }, {});
-};
+const items = state => state.admin.items;
+const displayType = state => state.admin.displayType;
+const displayArchived = state => state.admin.displayArchived;
+
+export const getFilteredAdminItems = createSelector(
+  [items, displayType, displayArchived],
+  (items, displayType, displayArchived) => {
+    if(!items) return {};
+    let filteredItems = items[displayType];
+    if(displayArchived)
+      return filteredItems;
+    return Object.keys(filteredItems)
+      .filter(key =>
+        filteredItems[key].display === '1'
+      )
+      .reduce((obj, key) => {
+        obj[key] = filteredItems[key];
+        return obj;
+      }, {});
+  }
+);
 
 const initialState = {
   displayType: 'online',
   displayArchived: false
 };
+
 const admin = (state = initialState, action) => {
   switch (action.type) {
   case types.GET_ADMIN_ITEMS: {

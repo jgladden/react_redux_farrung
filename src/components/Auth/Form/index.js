@@ -8,8 +8,7 @@ const AuthForm = props => {
   const {
     auth: {
       posting,
-      error,
-      token
+      error
     }, 
     submitLogin, 
     handleChange, 
@@ -52,8 +51,7 @@ const AuthForm = props => {
 AuthForm.propTypes = {
   auth: PropTypes.shape({
     posting: PropTypes.bool,
-    error: PropTypes.string,
-    token: PropTypes.string
+    error: PropTypes.string
   }).isRequired,
   fields: PropTypes.object.isRequired,
   submitLogin: PropTypes.func.isRequired,
