@@ -1,15 +1,20 @@
 #adminNav {
+  margin: 10px 10px 0 10px;
   border: 1px solid #ccc;
-  border-top: none;
   padding: 10px;
   position: relative;
 
   li {
     display: inline-block;
-    color: #444;
+    color: #999;
     padding-right: 20px;
     position: relative;
     cursor: pointer;
+  }
+
+  li.isSelected {
+    cursor: auto;
+    color: #444;
   }
 
   li:after {

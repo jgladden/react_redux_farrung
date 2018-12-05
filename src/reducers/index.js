@@ -16,6 +16,9 @@ export const getItemById = state =>
 export const getFilteredAdminItems = state =>
   fromAdmin.getFilteredAdminItems(state);
 
+export const getPageSelectOptions = state =>
+  fromAdmin.getPageSelectOptions(state);
+
 export default combineReducers({
   auth,
   route,

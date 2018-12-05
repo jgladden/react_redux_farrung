@@ -13,12 +13,12 @@ const List = props => {
       fetching,
       error,
       success
-    }
+    },
+    setSort,
   } = props;
 
   return (
     <div id='adminList'>
-      <p id='adminList__heading'>Admin Portfolio List</p>
       {fetching &&
         <Loading />
       }
@@ -28,13 +28,33 @@ const List = props => {
       {success &&
         <React.Fragment>
           <FilterContainer />
-          <ul id='adminList__items'>
-            {Object.keys(filteredItems).map(id => (
-              <ItemContainer
-                key={id}
-                {...filteredItems[id]}
-              />
-            ))}
+          <p id='adminList__heading'>
+          List Portfolio Items
+          </p>
+          <ul id='listHeader'>
+            <li id='listHeader__edit'>
+            EDIT
+            </li>
+            <li 
+              id='listHeader__rating'
+              onClick={() => setSort('rating')}
+            >
+            RATING
+            </li>
+            <li
+              id='listHeader__title'
+              onClick={() => setSort('title')}
+            >
+            TITLE
+            </li>
+          </ul>
+          <ul className='listItems'>
+          {filteredItems.map(item => (
+            <ItemContainer
+              key={item.id}
+              {...item}
+            />
+          ))}
           </ul>
         </React.Fragment>
       }
@@ -43,12 +63,13 @@ const List = props => {
 };
 
 List.propTypes = {
-  filteredItems: PropTypes.object.isRequired,
+  filteredItems: PropTypes.array.isRequired,
   admin: PropTypes.shape({
     fetching: PropTypes.bool,
     error: PropTypes.string,
-    success: PropTypes.bool
-  }).isRequired
+    success: PropTypes.bool,
+  }).isRequired,
+  setSort: PropTypes.func.isRequired
 };
 
 export default List; 

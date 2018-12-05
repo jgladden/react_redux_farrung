@@ -1,5 +1,5 @@
 #adminList {
-  padding: 15px 10px;
+  padding: 0 10px 15px 10px;
   position: relative;
 
   &__heading {
@@ -7,4 +7,80 @@
     padding-bottom: 15px;
   }
 
+  #listHeader {
+    border: 1px solid #ccc;
+    padding: 10px 0;
+
+    li {
+      display: inline-block;
+      text-align: center;
+      border-left: 1px solid #ccc;
+      cursor: pointer;
+    }
+
+    li:first-child {
+      border-left: 0;
+      cursor: auto;
+    }
+
+    &__edit {
+      color: #999;
+      width: 90px;
+    }
+
+    &__rating {
+      width: 90px;
+    }
+
+    &__title {
+      padding-left: 20px;
+    }
+  }
+
+  ul.listItems li {
+      border: 1px solid #ccc;
+      border-top: 0;
+      padding: 10px 0;
+    
+  }
+
+  .itemDetails {
+    position: relative;
+    & > div {
+      display: inline-block;
+      text-align: center;
+      border-left: 1px solid #ccc;
+    }
+
+    & > div:first-child {
+      border-left: 0;
+    }
+
+    &__edit {
+      width: 90px;
+    }
+
+    &__rating {
+      width: 90px;
+    }
+
+    &__title {
+      padding-left: 20px;
+    }
+
+    &__remove {
+      position: absolute;
+      right: 10px;
+      top: 0px;
+    }
+  
+  }
+
+  .itemForm {
+    display: none;
+  }
+
+  .itemForm.display {
+    display: block
+  }
 }

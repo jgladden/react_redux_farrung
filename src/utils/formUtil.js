@@ -93,7 +93,8 @@ const formUtil = {
       rangeArr = Array(size).fill()
         .map((_, i) => i+1);
     }
-    rangeArr.unshift(defaultOption);
+    if (defaultOption)
+      rangeArr.unshift(defaultOption);
     return rangeArr.map(num => (
       <option key={num} value={num}>{num}</option>
     ));

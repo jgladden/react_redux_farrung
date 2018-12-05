@@ -9,27 +9,33 @@ const ListItem = props => {
     deleteItem,
     toggleEditDisplay,
     displayEdit,
-    title
+    title,
+    rating
   } = props;
   return (
-    <li id='adminList__item'>
-      <Button
-        id='adminList__editBtn'
-        handleClick={() => toggleEditDisplay()}
-        label={displayEdit ? 'Close' : 'Edit'}
-      />
-      <p id='adminList__title'>
-      TITLE: {title}
-      </p>
-      <div
-        id='adminList__removeBtn'
-        onClick={() => deleteItem()}
-      >
-      DELETE ITEM
+    <li>
+      <div className='itemDetails'>
+        <div className='itemDetails__edit'>
+          <Button
+            handleClick={() => toggleEditDisplay()}
+            label={displayEdit ? 'Close' : 'Edit'}
+          />
+        </div>
+        <div className='itemDetails__rating'>
+          <p>{rating}</p>
+        </div>
+        <div className='itemDetails__title'>
+          <p>{title}</p>
+        </div>
+        <div className='itemDetails__remove'>
+          <Button
+            handleClick={() => deleteItem()}
+            label='Delete'
+          />
+        </div>
       </div>
-      <div 
-        id='adminList__editForm'
-        className={displayEdit ? 'display' : ''}
+      <div
+        className={`itemForm ${displayEdit ? 'display' : ''}`}
       >
         <ItemFormContainer
           formInitValues={{...props}}
@@ -42,6 +48,7 @@ const ListItem = props => {
 
 ListItem.propTypes = {
   title: PropTypes.string.isRequired,
+  rating: PropTypes.string.isRequired,
   toggleEditDisplay: PropTypes.func.isRequired,
   displayEdit: PropTypes.bool.isRequired,
   deleteItem: PropTypes.func.isRequired

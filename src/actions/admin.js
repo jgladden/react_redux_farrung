@@ -40,6 +40,21 @@ export const setDisplayArchived = payload => ({
   payload
 });
 
+export const setSortBy = payload => ({
+  type: types.SET_SORT_BY,
+  payload
+});
+
+export const setPage = payload => ({
+  type: types.SET_PAGE,
+  payload
+});
+
+export const setItemsPerPage = payload => ({
+  type: types.SET_ITEMS_PER_PAGE,
+  payload
+});
+
 export const mergeAdminItem = payload => ({
   type: types.MERGE_ADMIN_ITEM,
   payload
