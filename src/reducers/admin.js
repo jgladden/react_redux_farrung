@@ -56,6 +56,8 @@ const itemsSorted = createSelector(
 const itemsByPage = createSelector(
   [itemsSorted, page, itemsPerPage],
   (itemsSorted, page, itemsPerPage) => {
+    itemsPerPage = parseInt(itemsPerPage);
+    page = parseInt(page);
     let max = Math.ceil(itemsSorted.length / itemsPerPage);
     page = page > max ? max : page;
     let start = (page - 1) * itemsPerPage;
@@ -112,12 +114,14 @@ const admin = (state = initialState, action) => {
   case types.SET_ITEMS_PER_PAGE: {
     return {
       ...state,
+      page: '1',
       itemsPerPage: action.payload
     };
   }
   case types.SET_DISPLAY_ARCHIVED: {
     return {
       ...state,
+      page: '1',
       displayArchived: action.payload
     };
   }
