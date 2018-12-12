@@ -6,6 +6,9 @@ import Text from 'components/common/FormFields/Text';
 import CheckBox from 'components/common/FormFields/CheckBox';
 import Select from 'components/common/FormFields/Select'; 
 import TextArea from 'components/common/FormFields/TextArea'; 
+//import AddImagesContainer from 'containers/Admin/ImageEditor/AddImagesContainer';
+//import EditImagesContainer from 'containers/Admin/ImageEditor/EditImagesContainer';
+import ImageForm from 'components/common/FormFields/ImageForm';
 
 const ItemForm = props => {
   const {
@@ -15,10 +18,11 @@ const ItemForm = props => {
     },
     submitForm, 
     handleChange,
+    editMode,
+    imageUploadIds,
     fields,
     selectOptions
   } = props;
-
   return(
     <div className='portfolioForm'>
       {error &&
@@ -100,6 +104,16 @@ const ItemForm = props => {
           classname={fields.slidenum.errorClass}
           handleChange={handleChange}
         />
+        <div 
+          className='portfolioForm__imageUploads' 
+        >
+        { !editMode && imageUploadIds.map(id => (
+          <ImageForm
+            id={id}
+            key={id}
+          />
+        ))}
+        </div>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
@@ -132,7 +146,8 @@ ItemForm.propTypes = {
   fields: PropTypes.object.isRequired,
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired
+  submitForm: PropTypes.func.isRequired,
+  editMode: PropTypes.bool.isRequired
 };
 
 export default ItemForm;

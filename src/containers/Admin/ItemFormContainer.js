@@ -6,7 +6,11 @@ import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { getJwtHeader } from 'utils/authUtil';
 import { uniqueId } from 'utils';
-import { editAdminItemUrl, addAdminItemUrl } from 'config';
+import { 
+  editAdminItemUrl, 
+  addAdminItemUrl,
+  addAdminItemFilesUrl
+} from 'config';
 import ItemForm from 'components/Admin/ItemForm';
 
 const formFields = {
@@ -66,6 +70,7 @@ class ItemFormContainer extends Component {
     
   state = {
     status: {},
+    imagesReady: this.props.formInitValues ? true : false,
     editMode: this.props.formInitValues ? true : false,
     fields: formUtil.initFields(formFields, this.props.formInitValues)
   }
@@ -83,16 +88,16 @@ class ItemFormContainer extends Component {
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
       let values = validateForm.fieldValues;
+      this.setState({ 
+        status: { 
+          posting: 1
+        }
+      });
       if(this.state.editMode) {
         this.postEdit(values);
       } else {
         this.postAdd(values);
       }
-      this.setState({ 
-        status: { 
-          posting: 1 
-        }
-      });
     }
   }
 
@@ -120,6 +125,44 @@ class ItemFormContainer extends Component {
   }
 
   postAdd = values => {
+    const ids = this.getImageUploadIds();
+    let imgData = new FormData();
+    let error = '';
+    for(let id of ids) {
+      let name = `slide${id}`;
+      let node = document.getElementById(name);
+      if(node.value === '') {
+        error = `No image for slide ${id}`;
+        break;
+      }
+      let imgName = `${values.imagename}_${id}.jpg`;
+      console.log(imgName);
+      imgData.append('file[]', node.files[0], imgName);
+    }
+    if(error) {
+      this.setState({status: { error }});
+      return;
+    } else {
+      axios.post(addAdminItemFilesUrl, imgData, getJwtHeader())
+      .then(response => {
+        let error = response.data.error;
+        if(error) {
+          this.setState({status: { error }});
+        } else {
+          this.postAddForm(values);
+        }
+      })
+      .catch(error => {
+        this.setState({
+          status: {
+            error: error.toString()
+          }
+        });
+      });
+    }
+  }
+
+  postAddForm = values => {
     values.id = uniqueId();
     axios.post(addAdminItemUrl, values, getJwtHeader())
       .then(response => {
@@ -142,10 +185,26 @@ class ItemFormContainer extends Component {
       });
   }
 
+  getImageUploadIds = () => {
+    const {
+      slidenum,
+      imagename
+    } = this.state.fields;
+    if (
+      slidenum.value === '' ||
+      imagename.value === '' ||
+      imagename.errors.length
+    ) return [];
+    return Array(
+      parseInt(slidenum.value)
+    ).fill().map((_, i) => i+1);
+  }
+
   render() {
     const {
       fields,
-      status
+      status,
+      editMode
     } = this.state;
     return (
       <ItemForm
@@ -154,6 +213,8 @@ class ItemFormContainer extends Component {
         submitForm={this.handleSubmit}
         status={status}
         selectOptions={selectOptions}
+        editMode={editMode}
+        imageUploadIds={this.getImageUploadIds()}
       />
     );
   }

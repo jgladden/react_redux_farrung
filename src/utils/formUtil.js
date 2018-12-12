@@ -4,12 +4,14 @@ const formUtil = {
 
   initFields: (fields, values = {}) => {
     const fieldsInitState = {};
-    Object.keys(fields).forEach(key =>
-      fieldsInitState[key] = {
+    Object.keys(fields).forEach(key => {
+      let val = fields[key].value;
+      val = typeof val === 'undefined' ? '' : val;
+      return fieldsInitState[key] = {
         ...fields[key], 
-        value: values[key] || '', 
+        value: values[key] || val, 
         errors: [] 
-      }
+      }}
     );
     return fieldsInitState;
   },
@@ -17,7 +19,7 @@ const formUtil = {
   getUpdatedFields: (e, fields) => {
     const { name, value, type, checked } = e.target;
     let field = fields[name];
-    field.value = type === 'checkbox' ? checked : value;
+    field.value = type === 'checkbox' ? checked ? '1' : '' : value;
     field = formUtil.validateField(field);
     return fields;
   },
@@ -61,7 +63,7 @@ const formUtil = {
       let value = field.value;
       field = formUtil.validateField(field);
       returnObj.fields[key] = field;
-      returnObj.fieldValues[key] = value; 
+      returnObj.fieldValues[key] = value;
       if(field.errors.length)
         returnObj.isValidForm = false;
     }

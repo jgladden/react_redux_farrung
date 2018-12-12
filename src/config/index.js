@@ -5,6 +5,7 @@ export const getAdminUrl = `${api}getAdminPortfolio/`;
 export const postAuthUrl = `${api}login/`;
 export const postMessageUrl = `${api}contact/`;
 export const addAdminItemUrl = `${api}addPortfolioItem/`;
+export const addAdminItemFilesUrl = `${api}addPortfolioItemFiles/`;
 export const editAdminItemUrl = `${api}editPortfolioItem/`;
 export const removeAdminItemUrl = `${api}removePortfolioItem/`;
 export const imgPath = `${domain}/images/`;
