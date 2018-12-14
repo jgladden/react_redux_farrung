@@ -2,17 +2,19 @@ import * as types from '../actions/types';
 import { createSelector } from 'reselect';
 import formUtil from 'utils/formUtil';
 
-const getItemsPerPage = state => state.admin.itemsPerPage;
+const items = state => state.admin.items;
+const displayType = state => state.admin.displayType;
+const displayArchived = state => state.admin.displayArchived;
+const sortBy = state => state.admin.sortBy;
+const sortOrder = state => state.admin.sortOrder;
+const page = state => state.admin.page;
+const itemsPerPage = state => state.admin.itemsPerPage;
 
-const getItemsByType = state => {
-    let items = state.admin.items;
-    let displayType = state.admin.displayType;
+const getItemsByType = (items, displayType) => {
     return !items ? {} :  items[displayType];
 }
 
-const getArchiveFilteredIds = state => {
-    let itemsByType = getItemsByType(state);
-    let displayArchived = state.admin.displayArchived;
+const getArchivedFilteredIds = (itemsByType, displayArchived) => {
     let ids = Object.keys(itemsByType);
     if(!displayArchived)
       ids = ids
@@ -22,12 +24,8 @@ const getArchiveFilteredIds = state => {
     return ids;
 }
 
-const getSortedIds = state => {
-    let itemsByType = getItemsByType(state);
-    let ids = getArchiveFilteredIds(state);
-    let sortBy = state.admin.sortBy;
-    let sortOrder = state.admin.sortOrder;
-    let sortedIds = ids
+const getSortedIds = (itemsByType, filteredIds, sortBy, sortOrder) => {
+    let sortedIds = filteredIds
       .slice()
       .sort((a,b) => {
         let iA = itemsByType[a][sortBy];
@@ -46,21 +44,28 @@ const getSortedIds = state => {
     return sortedIds.reverse();
 }
 
-const getItemsByPage = state => {
-    let sortedIds = getSortedIds(state);
-    let itemsPerPage = getItemsPerPage(state);
-    let page = parseInt(state.admin.page);
+const getCurrPageIds = (sortedIds, itemsPerPage, page) => {
     let max = Math.ceil(sortedIds.length / itemsPerPage);
     page = page > max ? max : page;
     let start = (page - 1) * itemsPerPage;
     let end = start + itemsPerPage;
     return sortedIds.slice(start,end);
+}
+
+export const sortedIds = createSelector(
+  [items, displayType, displayArchived, sortBy, sortOrder],
+  (items, displayType, displayArchived, sortBy, sortOrder) => {
+    const itemsByType = getItemsByType(items, displayType);
+    const filteredIds = getArchivedFilteredIds(itemsByType, displayArchived);
+    return getSortedIds(itemsByType, filteredIds, sortBy, sortOrder);
   }
+);
 
 export const getFilteredAdminItems = createSelector(
-  [getItemsByType, getItemsByPage],
-  (items, itemsByPage) => {
-    return itemsByPage
+  [sortedIds, page, itemsPerPage],
+  (sortedIds, page, itemsPerPage) => {
+    const currPageIds = getCurrPageIds(sortedIds, itemsPerPage, page);
+    return currPageIds
       .reduce((arr, key) => {
         arr.push(items[key]);
         return arr;
@@ -68,13 +73,12 @@ export const getFilteredAdminItems = createSelector(
   }
 );
 
-
 export const getPageSelectOptions = createSelector(
-  [getSortedIds, getItemsPerPage],
-  (itemsSorted, itemsPerPage) => {
-    let len = itemsSorted.length;
+  [sortedIds, itemsPerPage],
+  (sortedIds, itemsPerPage) => {
+    let len = sortedIds.length;
     if(len === 0) return '';
-    let totalPages =  Math.ceil(itemsSorted.length / itemsPerPage); 
+    let totalPages =  Math.ceil(len / itemsPerPage); 
     return formUtil.getSelectOptions(totalPages);
   }
 );
