@@ -2,42 +2,36 @@ import * as types from '../actions/types';
 import { createSelector } from 'reselect';
 import formUtil from 'utils/formUtil';
 
-const items = state => state.admin.items;
-const displayType = state => state.admin.displayType;
-const displayArchived = state => state.admin.displayArchived;
-const sortBy = state => state.admin.sortBy;
-const sortOrder = state => state.admin.sortOrder;
-const page = state => state.admin.page;
-const itemsPerPage = state => state.admin.itemsPerPage;
+const getItemsPerPage = state => state.admin.itemsPerPage;
 
-const itemsByType = createSelector(
-  [items, displayType],
-  (items, displayType) => {
+const getItemsByType = state => {
+    let items = state.admin.items;
+    let displayType = state.admin.displayType;
     return !items ? {} :  items[displayType];
-  }
-);
+}
 
-const itemsArchiveFiltered = createSelector(
-  [itemsByType, displayArchived],
-  (itemsByType, displayArchived) => {
-    let keys = Object.keys(itemsByType);
-    if(displayArchived)
-      return keys;
-    return keys
-      .filter(key =>
-        itemsByType[key].display === '1'
+const getArchiveFilteredIds = state => {
+    let itemsByType = getItemsByType(state);
+    let displayArchived = state.admin.displayArchived;
+    let ids = Object.keys(itemsByType);
+    if(!displayArchived)
+      ids = ids
+      .filter(id =>
+        itemsByType[id].display === '1'
       );
-  }
-);
+    return ids;
+}
 
-const itemsSorted = createSelector(
-  [itemsByType, itemsArchiveFiltered, sortBy, sortOrder],
-  (items, itemsArchiveFiltered, sortBy, sortOrder) => {
-    let sortedArr = itemsArchiveFiltered
+const getSortedIds = state => {
+    let itemsByType = getItemsByType(state);
+    let ids = getArchiveFilteredIds(state);
+    let sortBy = state.admin.sortBy;
+    let sortOrder = state.admin.sortOrder;
+    let sortedIds = ids
       .slice()
       .sort((a,b) => {
-        let iA = items[a][sortBy];
-        let iB = items[b][sortBy];
+        let iA = itemsByType[a][sortBy];
+        let iB = itemsByType[b][sortBy];
         if(isNaN(Number(iA))) {
           iA = iA.toUpperCase();
           iB = iB.toUpperCase();
@@ -48,26 +42,23 @@ const itemsSorted = createSelector(
         return (iA < iB) ? -1 : (iA > iB) ? 1 : 0;
       });
     if(sortOrder !== 'descending')
-      return sortedArr;
-    return sortedArr.reverse();
-  }
-);
+      return sortedIds;
+    return sortedIds.reverse();
+}
 
-const itemsByPage = createSelector(
-  [itemsSorted, page, itemsPerPage],
-  (itemsSorted, page, itemsPerPage) => {
-    itemsPerPage = parseInt(itemsPerPage);
-    page = parseInt(page);
-    let max = Math.ceil(itemsSorted.length / itemsPerPage);
+const getItemsByPage = state => {
+    let sortedIds = getSortedIds(state);
+    let itemsPerPage = getItemsPerPage(state);
+    let page = parseInt(state.admin.page);
+    let max = Math.ceil(sortedIds.length / itemsPerPage);
     page = page > max ? max : page;
     let start = (page - 1) * itemsPerPage;
     let end = start + itemsPerPage;
-    return itemsSorted.slice(start,end);
+    return sortedIds.slice(start,end);
   }
-);
 
 export const getFilteredAdminItems = createSelector(
-  [itemsByType, itemsByPage],
+  [getItemsByType, getItemsByPage],
   (items, itemsByPage) => {
     return itemsByPage
       .reduce((arr, key) => {
@@ -77,8 +68,9 @@ export const getFilteredAdminItems = createSelector(
   }
 );
 
+
 export const getPageSelectOptions = createSelector(
-  [itemsSorted, itemsPerPage],
+  [getSortedIds, getItemsPerPage],
   (itemsSorted, itemsPerPage) => {
     let len = itemsSorted.length;
     if(len === 0) return '';
@@ -86,6 +78,7 @@ export const getPageSelectOptions = createSelector(
     return formUtil.getSelectOptions(totalPages);
   }
 );
+
 
 const initialState = {
   displayType: 'online',

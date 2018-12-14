@@ -23,6 +23,8 @@ class ListItemContainer extends Component {
         let error = response.data.error;
         if(!error) {
           removeAdminItem({type, id});
+        } else {
+          console.log(error);
         }
       });
   } 

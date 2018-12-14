@@ -4,7 +4,6 @@ import { getFilteredAdminItems } from 'reducers';
 import { setSortBy } from 'actions';
 import List from 'components/Admin/List';
 
-
 class ListContainer extends Component {
   setSort = newSortBy => {
     const {
@@ -31,7 +30,6 @@ class ListContainer extends Component {
   }
 
   render() {
-console.log(this.props);
     return (
       <List
         filteredItems={this.props.filteredItems}
