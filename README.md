@@ -1,5 +1,5 @@
-# React-boilerplate
-React Boilerplate configured with babel, webpack, sass, and eslint.
+# Farrung
+Portfolio Website
 
 ## Usage
 
