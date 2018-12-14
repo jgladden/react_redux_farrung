@@ -7,7 +7,6 @@ import {
   setItemsPerPage 
 } from 'actions';
 import { 
-  getFilteredAdminItems,
   getPageSelectOptions
 } from 'reducers';
 import Filter from 'components/Admin/List/Filter';
@@ -35,9 +34,9 @@ class FilterContainer extends Component {
         setItemsPerPage={this.setItemsPerPage}
         itemsPerPageOptions={itemsPerPageOptions} 
       />
-    )
+    );
   }
-};
+}
 
 const mapStateToProps = state => ({
   admin: state.admin,

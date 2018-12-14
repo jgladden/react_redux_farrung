@@ -31,6 +31,7 @@ class ListContainer extends Component {
   }
 
   render() {
+console.log(this.props);
     return (
       <List
         filteredItems={this.props.filteredItems}
