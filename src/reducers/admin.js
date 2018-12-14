@@ -52,7 +52,7 @@ const getCurrPageIds = (sortedIds, itemsPerPage, page) => {
     return sortedIds.slice(start,end);
 }
 
-export const sortedIds = createSelector(
+const sortedIds = createSelector(
   [items, displayType, displayArchived, sortBy, sortOrder],
   (items, displayType, displayArchived, sortBy, sortOrder) => {
     const itemsByType = getItemsByType(items, displayType);
