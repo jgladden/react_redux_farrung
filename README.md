@@ -27,3 +27,5 @@ React Boilerplate configured with babel, webpack, sass, and eslint.
 * `package.json` module details and dependencies, run *npm install* after cloning git
 * `webpack.config.json` webpack configuration, various asset loaders
 
+
+
