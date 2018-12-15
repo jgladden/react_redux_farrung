@@ -11,47 +11,47 @@ const page = state => state.admin.page;
 const itemsPerPage = state => state.admin.itemsPerPage;
 
 const getItemsByType = (items, displayType) => {
-    return !items ? {} :  items[displayType];
-}
+  return !items ? {} :  items[displayType];
+};
 
 const getArchivedFilteredIds = (itemsByType, displayArchived) => {
-    let ids = Object.keys(itemsByType);
-    if(!displayArchived)
-      ids = ids
+  let ids = Object.keys(itemsByType);
+  if(!displayArchived)
+    ids = ids
       .filter(id =>
         itemsByType[id].display === '1'
       );
-    return ids;
-}
+  return ids;
+};
 
 const getSortedIds = (itemsByType, filteredIds, sortBy, sortOrder) => {
-    let sortedIds = filteredIds
-      .slice()
-      .sort((a,b) => {
-        let iA = itemsByType[a][sortBy];
-        let iB = itemsByType[b][sortBy];
-        if(isNaN(Number(iA))) {
-          iA = iA.toUpperCase();
-          iB = iB.toUpperCase();
-        } else {
-          iA = parseInt(iA);
-          iB = parseInt(iB);
-        }
-        return (iA < iB) ? -1 : (iA > iB) ? 1 : 0;
-      });
-    if(sortOrder !== 'descending')
-      return sortedIds;
-    return sortedIds.reverse();
-}
+  let sortedIds = filteredIds
+    .slice()
+    .sort((a,b) => {
+      let iA = itemsByType[a][sortBy];
+      let iB = itemsByType[b][sortBy];
+      if(isNaN(Number(iA))) {
+        iA = iA.toUpperCase();
+        iB = iB.toUpperCase();
+      } else {
+        iA = parseInt(iA);
+        iB = parseInt(iB);
+      }
+      return (iA < iB) ? -1 : (iA > iB) ? 1 : 0;
+    });
+  if(sortOrder !== 'descending')
+    return sortedIds;
+  return sortedIds.reverse();
+};
 
 
 const getCurrPageIds = (sortedIds, itemsPerPage, page) => {
-    let max = Math.ceil(sortedIds.length / itemsPerPage);
-    page = page > max ? max : page;
-    let start = (page - 1) * itemsPerPage;
-    let end = start + itemsPerPage;
-    return sortedIds.slice(start,end);
-}
+  let max = Math.ceil(sortedIds.length / itemsPerPage);
+  page = page > max ? max : page;
+  let start = (page - 1) * itemsPerPage;
+  let end = start + itemsPerPage;
+  return sortedIds.slice(start,end);
+};
 
 const sortedIds = createSelector(
   [items, displayType, displayArchived, sortBy, sortOrder],

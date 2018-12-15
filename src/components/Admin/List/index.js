@@ -49,12 +49,12 @@ const List = props => {
             </li>
           </ul>
           <ul className='listItems'>
-          {filteredItems.map(item => (
-            <ItemContainer
-              key={item.id}
-              {...item}
-            />
-          ))}
+            {filteredItems.map(item => (
+              <ItemContainer
+                key={item.id}
+                {...item}
+              />
+            ))}
           </ul>
         </React.Fragment>
       }

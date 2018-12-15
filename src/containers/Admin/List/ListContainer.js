@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFilteredAdminItems } from 'reducers';
 import { setSortBy } from 'actions';
@@ -38,6 +39,12 @@ class ListContainer extends Component {
       />
     );
   }
+}
+
+ListContainer.propTypes = {
+  setSortBy: PropTypes.func.isRequired,
+  admin: PropTypes.object.isRequired,
+  filteredItems: PropTypes.object
 };
 
 const mapStateToProps = state => ({

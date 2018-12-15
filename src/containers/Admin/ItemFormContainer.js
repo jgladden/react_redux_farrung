@@ -143,21 +143,21 @@ class ItemFormContainer extends Component {
       return;
     } else {
       axios.post(addAdminItemFilesUrl, imgData, getJwtHeader())
-      .then(response => {
-        let error = response.data.error;
-        if(error) {
-          this.setState({status: { error }});
-        } else {
-          this.postAddForm(values);
-        }
-      })
-      .catch(error => {
-        this.setState({
-          status: {
-            error: error.toString()
+        .then(response => {
+          let error = response.data.error;
+          if(error) {
+            this.setState({status: { error }});
+          } else {
+            this.postAddForm(values);
           }
+        })
+        .catch(error => {
+          this.setState({
+            status: {
+              error: error.toString()
+            }
+          });
         });
-      });
     }
   }
 

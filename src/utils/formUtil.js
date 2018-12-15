@@ -11,8 +11,8 @@ const formUtil = {
         ...fields[key], 
         value: values[key] || val, 
         errors: [] 
-      }}
-    );
+      };
+    });
     return fieldsInitState;
   },
 

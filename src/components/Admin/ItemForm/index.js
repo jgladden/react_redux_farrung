@@ -6,8 +6,6 @@ import Text from 'components/common/FormFields/Text';
 import CheckBox from 'components/common/FormFields/CheckBox';
 import Select from 'components/common/FormFields/Select'; 
 import TextArea from 'components/common/FormFields/TextArea'; 
-//import AddImagesContainer from 'containers/Admin/ImageEditor/AddImagesContainer';
-//import EditImagesContainer from 'containers/Admin/ImageEditor/EditImagesContainer';
 import ImageForm from 'components/common/FormFields/ImageForm';
 
 const ItemForm = props => {
@@ -107,12 +105,12 @@ const ItemForm = props => {
         <div 
           className='portfolioForm__imageUploads' 
         >
-        { !editMode && imageUploadIds.map(id => (
-          <ImageForm
-            id={id}
-            key={id}
-          />
-        ))}
+          { !editMode && imageUploadIds.map(id => (
+            <ImageForm
+              id={id}
+              key={id}eslint
+            />
+          ))}
         </div>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
@@ -147,7 +145,8 @@ ItemForm.propTypes = {
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
-  editMode: PropTypes.bool.isRequired
+  editMode: PropTypes.bool.isRequired,
+  imageUploadIds: PropTypes.bool.isRequired
 };
 
 export default ItemForm;

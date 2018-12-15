@@ -71,6 +71,7 @@ ListFilter.propTypes = {
     displayArchived: PropTypes.bool.isRequired,
     page: PropTypes.string.isRequired
   }).isRequired,
+  itemsPerPageOptions: PropTypes.array.isRequired,
   pageSelectOptions: PropTypes.array.isRequired,
   setDisplayType: PropTypes.func.isRequired,
   setDisplayArchived: PropTypes.func.isRequired,
