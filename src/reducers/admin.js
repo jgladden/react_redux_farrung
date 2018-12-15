@@ -63,12 +63,13 @@ const sortedIds = createSelector(
 );
 
 export const getFilteredAdminItems = createSelector(
-  [sortedIds, page, itemsPerPage],
-  (sortedIds, page, itemsPerPage) => {
+  [items, displayType, sortedIds, page, itemsPerPage],
+  (items, displayType, sortedIds, page, itemsPerPage) => {
+    const itemsByType = getItemsByType(items, displayType);
     const currPageIds = getCurrPageIds(sortedIds, itemsPerPage, page);
     return currPageIds
       .reduce((arr, key) => {
-        arr.push(items[key]);
+        arr.push(itemsByType[key]);
         return arr;
       }, []);
   }

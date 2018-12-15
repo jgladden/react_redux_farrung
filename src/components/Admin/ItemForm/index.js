@@ -146,7 +146,7 @@ ItemForm.propTypes = {
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
   editMode: PropTypes.bool.isRequired,
-  imageUploadIds: PropTypes.bool.isRequired
+  imageUploadIds: PropTypes.array.isRequired
 };
 
 export default ItemForm;

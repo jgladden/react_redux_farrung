@@ -44,7 +44,7 @@ class ListContainer extends Component {
 ListContainer.propTypes = {
   setSortBy: PropTypes.func.isRequired,
   admin: PropTypes.object.isRequired,
-  filteredItems: PropTypes.object
+  filteredItems: PropTypes.array.isRequired
 };
 
 const mapStateToProps = state => ({
