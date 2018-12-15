@@ -44,6 +44,7 @@ const getSortedIds = (itemsByType, filteredIds, sortBy, sortOrder) => {
     return sortedIds.reverse();
 }
 
+
 const getCurrPageIds = (sortedIds, itemsPerPage, page) => {
     let max = Math.ceil(sortedIds.length / itemsPerPage);
     page = page > max ? max : page;
@@ -182,3 +183,4 @@ const admin = (state = initialState, action) => {
 };
 
 export default admin;
+
