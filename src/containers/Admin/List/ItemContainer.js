@@ -21,11 +21,8 @@ class ListItemContainer extends Component {
     axios.post(removeAdminItemUrl, {id}, getJwtHeader())
       .then(response => {
         let error = response.data.error;
-        if(!error) {
+        if(!error)
           removeAdminItem({type, id});
-        } else {
-          console.log(error);
-        }
       });
   } 
 

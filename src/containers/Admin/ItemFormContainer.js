@@ -136,7 +136,6 @@ class ItemFormContainer extends Component {
         break;
       }
       let imgName = `${values.imagename}_${id}.jpg`;
-      console.log(imgName);
       imgData.append('file[]', node.files[0], imgName);
     }
     if(error) {
