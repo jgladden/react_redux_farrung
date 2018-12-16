@@ -66,14 +66,11 @@ const Detail = ({item, setRoute}) => {
         </div>
         <div id='portfolioDetailImageWrapper'>
           <ul className={`slideNum${slidenum}`}>
-            {range(slidenum).map(num => {
-              let displaynum = slidenum === '1' ? '' : num + 1;
-              return (
-                <li key={num}>
-                  <img src={`${imgPath}${imagename}${displaynum}.jpg`} />
-                </li>
-              );
-            }) }
+            {range(slidenum).map(num => (
+              <li key={num}>
+                <img src={`${imgPath}${imagename}_${num+1}.jpg`} />
+              </li>
+            ))}
           </ul>
         </div>
       </div>

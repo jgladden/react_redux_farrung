@@ -12,15 +12,13 @@ const ListItem = ({item, setRoute}) => {
     slidenum
   } = item;
 
-  const slide = slidenum === '1' ? '' : 1;
-
   return (
     <li 
       className='portfolioItem' 
       onClick={() => setRoute(`/portfolio/${type}/${id}`)}
     >
       <div> 
-        <img src={`${imgPath}${imagename}${slide}.jpg`} />
+        <img src={`${imgPath}${imagename}_${slidenum}.jpg`} />
         <p>{title}</p>
       </div>
     </li>
