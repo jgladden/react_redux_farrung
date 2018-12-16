@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { getFilteredAdminItems } from 'reducers';
 import { setSortBy } from 'actions';
-import List from 'components/Admin/List';
+import Edit from 'components/Admin/Edit';
 
-class ListContainer extends Component {
+class EditContainer extends Component {
   setSort = newSortBy => {
     const {
       setSortBy,
@@ -32,7 +32,7 @@ class ListContainer extends Component {
 
   render() {
     return (
-      <List
+      <Edit
         filteredItems={this.props.filteredItems}
         admin={this.props.admin}
         setSort={this.setSort}
@@ -41,7 +41,7 @@ class ListContainer extends Component {
   }
 }
 
-ListContainer.propTypes = {
+EditContainer.propTypes = {
   setSortBy: PropTypes.func.isRequired,
   admin: PropTypes.object.isRequired,
   filteredItems: PropTypes.array.isRequired
@@ -57,4 +57,4 @@ export default connect(
   {
     setSortBy
   }
-)(ListContainer);
+)(EditContainer);

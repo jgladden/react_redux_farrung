@@ -5,9 +5,9 @@ import { connect } from 'react-redux';
 import { removeAdminItemUrl } from 'config';
 import { removeAdminItem } from 'actions';
 import { getJwtHeader } from 'utils/authUtil';
-import Item from 'components/Admin/List/Item';
+import Item from 'components/Admin/Edit/Item';
 
-class ListItemContainer extends Component {
+class ItemContainer extends Component {
   state = {
     displayEdit: false
   }
@@ -48,7 +48,7 @@ class ListItemContainer extends Component {
   }
 }
 
-ListItemContainer.propTypes = {
+ItemContainer.propTypes = {
   admin: PropTypes.object.isRequired,
   removeAdminItem: PropTypes.func.isRequired
 };
@@ -62,4 +62,4 @@ export default connect(
   {
     removeAdminItem
   }
-)(ListItemContainer);
+)(ItemContainer);

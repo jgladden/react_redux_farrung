@@ -9,7 +9,7 @@ import {
 import { 
   getPageSelectOptions
 } from 'reducers';
-import Filter from 'components/Admin/List/Filter';
+import Filter from 'components/Admin/Edit/Filter';
 
 const itemsPerPageOptions = ['10','20','50'].map(num => (
   <option key={num} value={num}>{num}</option>

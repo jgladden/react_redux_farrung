@@ -3,10 +3,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Loading from 'components/common/pages/Loading';
 import Error from 'components/common/pages/Error';
-import ItemContainer from 'containers/Admin/List/ItemContainer';
-import FilterContainer from 'containers/Admin/List/FilterContainer';
+import ItemContainer from 'containers/Admin/Edit/ItemContainer';
+import FilterContainer from 'containers/Admin/Edit/FilterContainer';
 
-const List = props => {
+const Edit = props => {
   const {
     filteredItems,
     admin: {
@@ -62,7 +62,7 @@ const List = props => {
   );
 };
 
-List.propTypes = {
+Edit.propTypes = {
   filteredItems: PropTypes.array.isRequired,
   admin: PropTypes.shape({
     fetching: PropTypes.bool,
@@ -72,4 +72,4 @@ List.propTypes = {
   setSort: PropTypes.func.isRequired
 };
 
-export default List; 
+export default Edit; 

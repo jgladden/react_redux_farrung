@@ -1,17 +1,17 @@
 import './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import NavContainer from 'containers/Admin/NavContainer';
-import ListContainer from 'containers/Admin/List/ListContainer';
+import Nav from 'containers/Admin/NavContainer';
+import EditContainer from 'containers/Admin/Edit/EditContainer';
 import Add from 'components/Admin/Add';
 
 const Admin = ({subpage}) => (
   <article id='admin'>
-    <NavContainer />
+    <Nav />
     {subpage === 'add' ? (
       <Add />
     ) : (
-      <ListContainer />
+      <EditContainer />
     )}
   </article>
 );

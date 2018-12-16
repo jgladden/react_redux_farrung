@@ -1,10 +1,10 @@
 import  './styles.scss';
 import React from 'react';
 import PropTypes from 'prop-types';
-import ItemFormContainer from 'containers/Admin/ItemFormContainer';
+import FormContainer from 'containers/Admin/Edit/FormContainer';
 import Button from 'components/common/Button';
 
-const ListItem = props => {
+const Item = props => {
   const {
     deleteItem,
     toggleEditDisplay,
@@ -37,7 +37,7 @@ const ListItem = props => {
       <div
         className={`itemForm ${displayEdit ? 'display' : ''}`}
       >
-        <ItemFormContainer
+        <FormContainer
           formInitValues={{...props}}
           toggleEditDisplay={toggleEditDisplay}
         />
@@ -46,7 +46,7 @@ const ListItem = props => {
   );
 };
 
-ListItem.propTypes = {
+Item.propTypes = {
   title: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
   toggleEditDisplay: PropTypes.func.isRequired,
@@ -54,4 +54,4 @@ ListItem.propTypes = {
   deleteItem: PropTypes.func.isRequired
 };
 
-export default ListItem;
+export default Item;

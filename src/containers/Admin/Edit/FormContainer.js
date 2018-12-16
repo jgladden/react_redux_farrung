@@ -5,13 +5,8 @@ import { connect } from 'react-redux';
 import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { getJwtHeader } from 'utils/authUtil';
-import { uniqueId } from 'utils';
-import { 
-  editAdminItemUrl, 
-  addAdminItemUrl,
-  addAdminItemFilesUrl
-} from 'config';
-import ItemForm from 'components/Admin/ItemForm';
+import { editAdminItemUrl } from 'config';
+import Form from 'components/Admin/Edit/Form';
 
 const formFields = {
   id: {
@@ -66,12 +61,10 @@ const selectOptions = {
   month: formUtil.getSelectOptions(12, 'mm', 'pre0'),
 };
 
-class ItemFormContainer extends Component {
+class FormContainer extends Component {
     
   state = {
     status: {},
-    imagesReady: this.props.formInitValues ? true : false,
-    editMode: this.props.formInitValues ? true : false,
     fields: formUtil.initFields(formFields, this.props.formInitValues)
   }
 
@@ -93,11 +86,7 @@ class ItemFormContainer extends Component {
           posting: 1
         }
       });
-      if(this.state.editMode) {
-        this.postEdit(values);
-      } else {
-        this.postAdd(values);
-      }
+      this.postEdit(values);
     }
   }
 
@@ -124,102 +113,24 @@ class ItemFormContainer extends Component {
       });
   }
 
-  postAdd = values => {
-    const ids = this.getImageUploadIds();
-    let imgData = new FormData();
-    let error = '';
-    for(let id of ids) {
-      let name = `slide${id}`;
-      let node = document.getElementById(name);
-      if(node.value === '') {
-        error = `No image for slide ${id}`;
-        break;
-      }
-      let imgName = `${values.imagename}_${id}.jpg`;
-      imgData.append('file[]', node.files[0], imgName);
-    }
-    if(error) {
-      this.setState({status: { error }});
-      return;
-    } else {
-      axios.post(addAdminItemFilesUrl, imgData, getJwtHeader())
-        .then(response => {
-          let error = response.data.error;
-          if(error) {
-            this.setState({status: { error }});
-          } else {
-            this.postAddForm(values);
-          }
-        })
-        .catch(error => {
-          this.setState({
-            status: {
-              error: error.toString()
-            }
-          });
-        });
-    }
-  }
-
-  postAddForm = values => {
-    values.id = uniqueId();
-    axios.post(addAdminItemUrl, values, getJwtHeader())
-      .then(response => {
-        let error = response.data.error;
-        if(!error) {
-          this.props.mergeAdminItem({values});
-          const fields = formUtil.initFields(formFields);
-          const status = { success : 1 };
-          this.setState({fields,status});
-        } else {
-          this.setState({status: { error }});
-        }
-      })
-      .catch(error => {
-        this.setState({
-          status: { 
-            error: error.toString() 
-          }
-        });
-      });
-  }
-
-  getImageUploadIds = () => {
-    const {
-      slidenum,
-      imagename
-    } = this.state.fields;
-    if (
-      slidenum.value === '' ||
-      imagename.value === '' ||
-      imagename.errors.length
-    ) return [];
-    return Array(
-      parseInt(slidenum.value)
-    ).fill().map((_, i) => i+1);
-  }
-
   render() {
     const {
       fields,
-      status,
-      editMode
+      status
     } = this.state;
     return (
-      <ItemForm
+      <Form
         fields={fields}
         handleChange={this.handleChange}
         submitForm={this.handleSubmit}
         status={status}
         selectOptions={selectOptions}
-        editMode={editMode}
-        imageUploadIds={this.getImageUploadIds()}
       />
     );
   }
 }
 
-ItemFormContainer.propTypes = {
+FormContainer.propTypes = {
   formInitValues: PropTypes.object,
   mergeAdminItem: PropTypes.func.isRequired,
   toggleEditDisplay: PropTypes.func
@@ -230,4 +141,4 @@ export default connect(
   {
     mergeAdminItem
   }
-)(ItemFormContainer);
+)(FormContainer);

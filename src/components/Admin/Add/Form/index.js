@@ -8,7 +8,7 @@ import Select from 'components/common/FormFields/Select';
 import TextArea from 'components/common/FormFields/TextArea'; 
 import ImageForm from 'components/common/FormFields/ImageForm';
 
-const ItemForm = props => {
+const Form = props => {
   const {
     status: {
       posting,
@@ -16,7 +16,6 @@ const ItemForm = props => {
     },
     submitForm, 
     handleChange,
-    editMode,
     imageUploadIds,
     fields,
     selectOptions
@@ -105,7 +104,7 @@ const ItemForm = props => {
         <div 
           className='portfolioForm__imageUploads' 
         >
-          { !editMode && imageUploadIds.map(id => (
+          { imageUploadIds.map(id => (
             <ImageForm
               id={id}
               key={id}eslint
@@ -139,17 +138,16 @@ const ItemForm = props => {
   );
 };
 
-ItemForm.propTypes = {
+Form.propTypes = {
   status: PropTypes.object.isRequired,
   fields: PropTypes.object.isRequired,
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
-  editMode: PropTypes.bool.isRequired,
   imageUploadIds: PropTypes.array.isRequired
 };
 
-export default ItemForm;
+export default Form;
 
 
 

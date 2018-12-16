@@ -1,6 +1,6 @@
 import './styles.scss';
 import React from 'react';
-import ItemFormContainer from 'containers/Admin/ItemFormContainer';
+import Form from 'containers/Admin/Add/FormContainer';
 
 const Add = () => (
   <div id='adminAdd'>
@@ -8,7 +8,7 @@ const Add = () => (
     Add Portfolio Item
     </p>
     <div id='adminAdd__form'>
-      <ItemFormContainer/>
+      <Form />
     </div>
   </div>
 );
