@@ -9,8 +9,7 @@ const Detail = ({item, setRoute}) => {
     id,
     title,
     type,
-    slidenum,
-    imagename,
+    imageorder,
     link,
     description,
     nextId,
@@ -65,10 +64,10 @@ const Detail = ({item, setRoute}) => {
           }
         </div>
         <div id='portfolioDetailImageWrapper'>
-          <ul className={`slideNum${slidenum}`}>
-            {range(slidenum).map(num => (
-              <li key={num}>
-                <img src={`${imgPath}${imagename}_${num+1}.jpg`} />
+          <ul className={`slideNum${imageorder.length}`}>
+            {imageorder.map(image => (
+              <li key={image}>
+                <img src={`${imgPath}${image}`} />
               </li>
             ))}
           </ul>
@@ -84,8 +83,7 @@ Detail.propTypes = {
     id: PropTypes.string,
     title: PropTypes.string,
     type: PropTypes.string,
-    slidenum: PropTypes.string,
-    imagename: PropTypes.string,
+    imageorder: PropTypes.array,
     link: PropTypes.string,
     description: PropTypes.string,
     nextId: PropTypes.string,

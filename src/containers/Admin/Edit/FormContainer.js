@@ -12,6 +12,9 @@ const formFields = {
   id: {
     tests: []
   },
+  imageorder: {
+    tests: []
+  },
   type: {
     tests: ['^(?!\s*$|type).+']
   },
@@ -41,12 +44,6 @@ const formFields = {
   },
   year: {
     tests: ['^([0-9]+)$']
-  },
-  imagename: {
-    tests: ['(.{2,})']
-  },
-  slidenum: {
-    tests: ['^([0-9]+)$']
   }
 };
 
@@ -54,7 +51,6 @@ const selectOptions = {
   type: ['type', 'online', 'print'].map(
     type => <option key={type} value={type}>{type}</option>
   ),
-  slidenum: formUtil.getSelectOptions(10, '#'),
   rating: formUtil.getSelectOptions(10, 'rating'),
   year: formUtil.getSelectOptions(30, 'yyyy', 'year'),
   day: formUtil.getSelectOptions(31, 'dd', 'pre0'),
@@ -62,11 +58,17 @@ const selectOptions = {
 };
 
 class FormContainer extends Component {
-    
-  state = {
-    status: {},
-    fields: formUtil.initFields(formFields, this.props.formInitValues)
+
+  constructor(props) {
+      super(props);
+      this.imageList = React.createRef();
+      this.state = {
+        status: {},
+        fields: formUtil.initFields(formFields, this.props.formInitValues)
+      }
   }
+    
+
 
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
@@ -125,6 +127,7 @@ class FormContainer extends Component {
         submitForm={this.handleSubmit}
         status={status}
         selectOptions={selectOptions}
+        imageListRef={this.imageList}
       />
     );
   }

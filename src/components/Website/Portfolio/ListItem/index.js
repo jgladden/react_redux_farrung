@@ -8,8 +8,7 @@ const ListItem = ({item, setRoute}) => {
     id,
     type,
     title, 
-    imagename, 
-    slidenum
+    imageorder
   } = item;
 
   return (
@@ -18,7 +17,7 @@ const ListItem = ({item, setRoute}) => {
       onClick={() => setRoute(`/portfolio/${type}/${id}`)}
     >
       <div> 
-        <img src={`${imgPath}${imagename}_${slidenum}.jpg`} />
+        <img src={`${imgPath}${imageorder[0]}`} />
         <p>{title}</p>
       </div>
     </li>
@@ -29,8 +28,7 @@ ListItem.propTypes = {
   item: PropTypes.shape({
     id: PropTypes.string.isRequired,
     type: PropTypes.string.isRequired,
-    imagename: PropTypes.string.isRequired,
-    slidenum: PropTypes.string.isRequired,
+    imageorder: PropTypes.array.isRequired,
     title: PropTypes.string.isRequired
   }).isRequired,
   setRoute: PropTypes.func.isRequired

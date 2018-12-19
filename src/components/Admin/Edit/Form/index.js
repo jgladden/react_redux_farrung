@@ -7,6 +7,7 @@ import CheckBox from 'components/common/FormFields/CheckBox';
 import Select from 'components/common/FormFields/Select'; 
 import TextArea from 'components/common/FormFields/TextArea'; 
 import ImageForm from 'components/common/FormFields/ImageForm';
+import {imgPath} from 'config';
 
 const Form = props => {
   const {
@@ -16,10 +17,11 @@ const Form = props => {
     },
     submitForm, 
     handleChange,
-    imageUploadIds,
     fields,
-    selectOptions
+    selectOptions,
+    imageListRef
   } = props;
+
   return(
     <div className='portfolioForm'>
       {error &&
@@ -87,20 +89,15 @@ const Form = props => {
           />
         </div>
         <label>Image name: <span>5+ characters / 513x352</span></label>
-        <Text
-          name='imagename'
-          value={fields.imagename.value}
-          classname={fields.imagename.errorClass}
-          handleChange={handleChange}
-        />
-        <label>Number of images:</label>
-        <Select
-          name='slidenum'
-          options={selectOptions.slidenum}
-          value={fields.slidenum.value}
-          classname={fields.slidenum.errorClass}
-          handleChange={handleChange}
-        />
+        <div ref={imageListRef}>
+        {fields.imageorder.value.map(image => (
+          <img 
+            key={image}
+            id={image}
+            src={`${imgPath}${image}`} 
+          />
+        ))}
+        </div>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
@@ -133,7 +130,10 @@ Form.propTypes = {
   fields: PropTypes.object.isRequired,
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
-  submitForm: PropTypes.func.isRequired
+  submitForm: PropTypes.func.isRequired,
+  imageListRef: PropTypes.shape({ 
+    current: PropTypes.instanceOf(Element) 
+  }).isRequired
 };
 
 export default Form;

@@ -6,14 +6,12 @@ import { mergeAdminItem } from 'actions';
 import formUtil from 'utils/formUtil';
 import { getJwtHeader } from 'utils/authUtil';
 import { uniqueId } from 'utils';
-import { 
-  addAdminItemUrl,
-  addAdminItemFilesUrl
-} from 'config';
+import { addAdminItemUrl } from 'config';
 import Form from 'components/Admin/Add/Form';
 
 const formFields = {
   id: {
+    value: uniqueId(),
     tests: []
   },
   type: {
@@ -45,12 +43,6 @@ const formFields = {
   },
   year: {
     tests: ['^([0-9]+)$']
-  },
-  imagename: {
-    tests: ['(.{2,})']
-  },
-  slidenum: {
-    tests: ['^([0-9]+)$']
   }
 };
 
@@ -58,7 +50,6 @@ const selectOptions = {
   type: ['type', 'online', 'print'].map(
     type => <option key={type} value={type}>{type}</option>
   ),
-  slidenum: formUtil.getSelectOptions(10, '#'),
   rating: formUtil.getSelectOptions(10, 'rating'),
   year: formUtil.getSelectOptions(30, 'yyyy', 'year'),
   day: formUtil.getSelectOptions(31, 'dd', 'pre0'),
@@ -66,15 +57,24 @@ const selectOptions = {
 };
 
 class FormContainer extends Component {
-    
-  state = {
-    status: {},
-    fields: formUtil.initFields(formFields)
+
+  constructor(props) {
+      super(props);
+      this.imageList = React.createRef();
+      this.state = {
+        status: {},
+        fields: formUtil.initFields(formFields),
+        uploadedImages: []
+      }
   }
 
   handleChange = e => {
-    let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
-    this.setState({ fields });
+    if(e.target.type === 'file') {
+      this.imageUpload(e);
+    } else {
+      let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
+      this.setState({ fields });
+    }
   }
 
   handleSubmit = e => {
@@ -85,6 +85,7 @@ class FormContainer extends Component {
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
       let values = validateForm.fieldValues;
+      values.imageorder = this.getImageOrder();
       this.setState({ 
         status: { 
           posting: 1
@@ -94,53 +95,69 @@ class FormContainer extends Component {
     }
   }
 
-  postAdd = values => {
-    const ids = this.getImageUploadIds();
-    let imgData = new FormData();
-    let error = '';
-    for(let id of ids) {
-      let name = `slide${id}`;
-      let node = document.getElementById(name);
-      if(node.value === '') {
-        error = `No image for slide ${id}`;
-        break;
+  validateImage = path => {
+    return new Promise((resolve, reject) => {
+      let img = new Image();
+      img.onload = () => {
+        if(img.width === 513 && img.height === 352) {
+          resolve();
+        } else {
+          reject('Images must be 513x352.');
+        }
       }
-      let imgName = `${values.imagename}_${id}.jpg`;
-      imgData.append('file[]', node.files[0], imgName);
-    }
-    if(error) {
-      this.setState({status: { error }});
-      return;
-    } else {
-      axios.post(addAdminItemFilesUrl, imgData, getJwtHeader())
-        .then(response => {
-          let error = response.data.error;
-          if(error) {
-            this.setState({status: { error }});
-          } else {
-            this.postAddForm(values);
-          }
-        })
-        .catch(error => {
-          this.setState({
-            status: {
-              error: error.toString()
-            }
-          });
-        });
-    }
+      img.src = path;
+    });
   }
 
-  postAddForm = values => {
-    values.id = uniqueId();
-    axios.post(addAdminItemUrl, values, getJwtHeader())
+  imageUpload = e => {
+    let promises = [];
+    const fileInput = e.currentTarget;
+    const len = fileInput.files.length;
+    if(len === 0) return;
+    const id = this.state.fields.id.value;
+    this.formData = new FormData();
+    let uploadedImages = [];
+    for(let i = 0; i < len; i++) {
+      let file = fileInput.files[i];
+      let name = `${id}_${i+1}.jpg`;
+      let path = URL.createObjectURL(file);
+      this.formData.append('file[]', file, name);
+      promises.push(this.validateImage(path));
+      uploadedImages.push({name, path});
+    }
+    Promise.all(promises)
+      .then(() => {
+        this.setState({uploadedImages});
+      })
+      .catch((error) => {
+        this.setState({status: { error }});
+      });
+  }
+
+  getImageOrder = () => {
+    let parent = this.imageList.current;
+    let imageOrder = [];
+    for (let i = 0; i < parent.childNodes.length; i++) {
+      imageOrder.push(parent.childNodes[i].id);
+    }
+    return imageOrder;    
+  }
+
+  postAdd = values => {
+    for(let key in values) {
+      this.formData.append(key, values[key]);
+    }
+    axios.post(addAdminItemUrl, this.formData, getJwtHeader())
       .then(response => {
         let error = response.data.error;
         if(!error) {
           this.props.mergeAdminItem({values});
-          const fields = formUtil.initFields(formFields);
-          const status = { success : 1 };
-          this.setState({fields,status});
+          formFields.id.value = uniqueId();
+          this.setState({
+            fields: formUtil.initFields(formFields),
+            uploadedImages: [],
+            status: { success : 1 }
+          });
         } else {
           this.setState({status: { error }});
         }
@@ -154,26 +171,13 @@ class FormContainer extends Component {
       });
   }
 
-  getImageUploadIds = () => {
-    const {
-      slidenum,
-      imagename
-    } = this.state.fields;
-    if (
-      slidenum.value === '' ||
-      imagename.value === '' ||
-      imagename.errors.length
-    ) return [];
-    return Array(
-      parseInt(slidenum.value)
-    ).fill().map((_, i) => i+1);
-  }
-
   render() {
     const {
       fields,
-      status
+      status,
+      uploadedImages
     } = this.state;
+
     return (
       <Form
         fields={fields}
@@ -181,7 +185,8 @@ class FormContainer extends Component {
         submitForm={this.handleSubmit}
         status={status}
         selectOptions={selectOptions}
-        imageUploadIds={this.getImageUploadIds()}
+        imageListRef={this.imageList}
+        uploadedImages={uploadedImages}
       />
     );
   }
