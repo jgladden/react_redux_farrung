@@ -18,10 +18,18 @@ const Item = props => {
     <li>
       <div className='itemDetails'>
         <div className='itemDetails__edit'>
+        {display &&
+          <Button
+          handleClick={() => setCurrentId('')}
+          label='Close'
+        />        
+        }
+        {!display &&
           <Button
             handleClick={() => setCurrentId(id)}
-            label={display ? 'Close' : 'Edit'}
+            label='Edit'
           />
+        }
         </div>
         <div className='itemDetails__rating'>
           <p>{rating}</p>

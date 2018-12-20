@@ -97,10 +97,8 @@ class FormContainer extends Component {
         let error = response.data.error;
         if(!error) {
           this.props.mergeAdminItem({values});
-          this.props.setCurrentId('');
-          const fields = {...this.state.fields};
           const status = { success : 1 };
-          this.setState({fields,status});
+          this.setState({status});
         } else {
           this.setState({status: { error }});
         }
@@ -123,7 +121,6 @@ class FormContainer extends Component {
     orderArray[dropIndex] = orderArray[dragIndex];
     orderArray[dragIndex] = b;
     fields.imageorder.value = orderArray;
-    console.log(orderArray);
     this.setState({fields});
   }
 
