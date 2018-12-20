@@ -8,6 +8,7 @@ import { getJwtHeader } from 'utils/authUtil';
 import { uniqueId } from 'utils';
 import { addAdminItemUrl } from 'config';
 import Form from 'components/Admin/Add/Form';
+import { dragSort } from 'utils/dragSort';
 
 const formFields = {
   id: {
@@ -132,6 +133,32 @@ class FormContainer extends Component {
       .catch((error) => {
         this.setState({status: { error }});
       });
+  }
+
+  swapImageOrder = (dropName, dragName) => {
+    const {
+      uploadedImages
+    } = this.state;
+    let dropIndex, dragIndex;
+    for(let i = 0; i < uploadedImages.length; i++) {
+      if(uploadedImages[i].name === dropName)
+        dropIndex = i;
+      if(uploadedImages[i].name === dragName)
+        dragIndex = i;
+    }
+    let b = uploadedImages[dropIndex];
+    uploadedImages[dropIndex] = uploadedImages[dragIndex];
+    uploadedImages[dragIndex] = b;
+    this.setState({uploadedImages});
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    const {
+      uploadedImages
+    } = this.state;
+    if(prevState.uploadedImages.length !== uploadedImages.length) {
+      dragSort(this.imageList.current, this.swapImageOrder);
+    }
   }
 
   getImageOrder = () => {

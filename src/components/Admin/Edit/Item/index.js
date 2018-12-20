@@ -7,18 +7,20 @@ import Button from 'components/common/Button';
 const Item = props => {
   const {
     deleteItem,
-    toggleEditDisplay,
-    displayEdit,
+    setCurrentId,
+    currentId,
     title,
-    rating
+    rating,
+    id
   } = props;
+  let display = (id === currentId);
   return (
     <li>
       <div className='itemDetails'>
         <div className='itemDetails__edit'>
           <Button
-            handleClick={() => toggleEditDisplay()}
-            label={displayEdit ? 'Close' : 'Edit'}
+            handleClick={() => setCurrentId(id)}
+            label={display ? 'Close' : 'Edit'}
           />
         </div>
         <div className='itemDetails__rating'>
@@ -35,23 +37,26 @@ const Item = props => {
         </div>
       </div>
       <div
-        className={`itemForm ${displayEdit ? 'display' : ''}`}
+        className={`itemForm ${display ? 'display' : ''}`}
       >
+      {display &&
         <FormContainer
           formInitValues={{...props}}
-          toggleEditDisplay={toggleEditDisplay}
+          setCurrentId={setCurrentId}
         />
+      }
       </div>
     </li>
   );
 };
 
 Item.propTypes = {
+  id: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   rating: PropTypes.string.isRequired,
-  toggleEditDisplay: PropTypes.func.isRequired,
-  displayEdit: PropTypes.bool.isRequired,
-  deleteItem: PropTypes.func.isRequired
+  deleteItem: PropTypes.func.isRequired,
+  setCurrentId: PropTypes.func.isRequired,
+  currentId: PropTypes.string.isRequired,
 };
 
 export default Item;

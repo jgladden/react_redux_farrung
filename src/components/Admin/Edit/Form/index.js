@@ -89,15 +89,20 @@ const Form = props => {
           />
         </div>
         <label>Image name: <span>5+ characters / 513x352</span></label>
-        <div ref={imageListRef}>
-        {fields.imageorder.value.map(image => (
-          <img 
-            key={image}
-            id={image}
-            src={`${imgPath}${image}`} 
-          />
+        <ul id='dragSorter' ref={imageListRef}>
+        { fields.imageorder.value.map(image => (
+          <li
+          key={image}
+          id={image}
+          draggable='true'
+          className='dragElement'
+          >         
+            <img 
+              src={`${imgPath}${image}`} 
+            />
+          </li>
         ))}
-        </div>
+        </ul>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox

@@ -6,6 +6,7 @@ import { setSortBy } from 'actions';
 import Edit from 'components/Admin/Edit';
 
 class EditContainer extends Component {
+
   setSort = newSortBy => {
     const {
       setSortBy,

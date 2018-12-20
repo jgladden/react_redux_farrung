@@ -3,15 +3,11 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import { connect } from 'react-redux';
 import { removeAdminItemUrl } from 'config';
-import { removeAdminItem } from 'actions';
+import { removeAdminItem, setCurrentId } from 'actions';
 import { getJwtHeader } from 'utils/authUtil';
 import Item from 'components/Admin/Edit/Item';
 
 class ItemContainer extends Component {
-  state = {
-    displayEdit: false
-  }
-
   deleteItem = () => {
     const {
       type,
@@ -26,20 +22,11 @@ class ItemContainer extends Component {
       });
   } 
 
-  toggleEditDisplay = () => {
-    let {
-      displayEdit
-    } = this.state; 
-    this.setState({
-      displayEdit: !displayEdit
-    });
-  }
-
   render() {
     return (
       <Item
-        displayEdit={this.state.displayEdit}
-        toggleEditDisplay={this.toggleEditDisplay}
+        setCurrentId={this.props.setCurrentId}
+        currentId={this.props.currentId}
         deleteItem={this.deleteItem}
         admin={this.props.admin}
         {...this.props}
@@ -50,16 +37,19 @@ class ItemContainer extends Component {
 
 ItemContainer.propTypes = {
   admin: PropTypes.object.isRequired,
-  removeAdminItem: PropTypes.func.isRequired
+  removeAdminItem: PropTypes.func.isRequired,
+  setCurrentId: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({
-  admin: state.admin
+  admin: state.admin,
+  currentId: state.admin.currentId
 });
 
 export default connect(
   mapStateToProps,
   {
-    removeAdminItem
+    removeAdminItem,
+    setCurrentId
   }
 )(ItemContainer);

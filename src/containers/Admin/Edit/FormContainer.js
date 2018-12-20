@@ -7,6 +7,7 @@ import formUtil from 'utils/formUtil';
 import { getJwtHeader } from 'utils/authUtil';
 import { editAdminItemUrl } from 'config';
 import Form from 'components/Admin/Edit/Form';
+import { dragSort } from 'utils/dragSort';
 
 const formFields = {
   id: {
@@ -67,8 +68,6 @@ class FormContainer extends Component {
         fields: formUtil.initFields(formFields, this.props.formInitValues)
       }
   }
-    
-
 
   handleChange = e => {
     let fields = formUtil.getUpdatedFields(e, {...this.state.fields});
@@ -98,7 +97,7 @@ class FormContainer extends Component {
         let error = response.data.error;
         if(!error) {
           this.props.mergeAdminItem({values});
-          this.props.toggleEditDisplay();
+          this.props.setCurrentId('');
           const fields = {...this.state.fields};
           const status = { success : 1 };
           this.setState({fields,status});
@@ -113,6 +112,23 @@ class FormContainer extends Component {
           }
         });        
       });
+  }
+
+  swapImageOrder = (dropName, dragName) => {
+    const fields = {...this.state.fields};
+    let orderArray = fields.imageorder.value;
+    let dropIndex = orderArray.indexOf(dropName);
+    let dragIndex = orderArray.indexOf(dragName);
+    let b = orderArray[dropIndex];
+    orderArray[dropIndex] = orderArray[dragIndex];
+    orderArray[dragIndex] = b;
+    fields.imageorder.value = orderArray;
+    console.log(orderArray);
+    this.setState({fields});
+  }
+
+  componentDidMount() {
+    dragSort(this.imageList.current, this.swapImageOrder);
   }
 
   render() {
@@ -136,7 +152,7 @@ class FormContainer extends Component {
 FormContainer.propTypes = {
   formInitValues: PropTypes.object,
   mergeAdminItem: PropTypes.func.isRequired,
-  toggleEditDisplay: PropTypes.func
+  setCurrentId: PropTypes.func.isRequired
 };
 
 export default connect(

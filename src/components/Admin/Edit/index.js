@@ -14,7 +14,7 @@ const Edit = props => {
       error,
       success
     },
-    setSort,
+    setSort
   } = props;
 
   return (

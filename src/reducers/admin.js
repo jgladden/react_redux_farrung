@@ -88,6 +88,7 @@ export const getPageSelectOptions = createSelector(
 
 const initialState = {
   displayType: 'online',
+  currentId: '',
   sortBy: 'title',
   sortOrder: 'ascending',
   page: '1',
@@ -97,6 +98,12 @@ const initialState = {
 
 const admin = (state = initialState, action) => {
   switch (action.type) {
+  case types.SET_CURRENT_ID: {
+    return {
+      ...state,
+      currentId: action.payload
+    };
+  }
   case types.SET_SORT_BY: {
     const {
       sortBy,

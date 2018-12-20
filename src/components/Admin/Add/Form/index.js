@@ -96,15 +96,20 @@ const Form = props => {
           accept='.jpg'
           onChange={handleChange}
         />
-        <div ref={imageListRef}>
+        <ul id='dragSorter' ref={imageListRef}>
         { uploadedImages.map(image => (
-          <img 
-            key={image.name}
-            src={image.path} 
-            id={image.name}
-          />
+          <li
+          key={image.name}
+          id={image.name}
+          draggable='true'
+          className='dragElement'
+          >         
+            <img 
+              src={image.path} 
+            />
+          </li>
         ))}
-        </div>
+        </ul>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox

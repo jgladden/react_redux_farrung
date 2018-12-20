@@ -30,6 +30,11 @@ export const getAdminItemsError = payload => ({
   payload
 });
 
+export const setCurrentId = payload => ({
+  type: types.SET_CURRENT_ID,
+  payload
+});
+
 export const setDisplayType = payload => ({
   type: types.SET_DISPLAY_TYPE,
   payload
