@@ -7,6 +7,7 @@ import CheckBox from 'components/common/FormFields/CheckBox';
 import Select from 'components/common/FormFields/Select'; 
 import TextArea from 'components/common/FormFields/TextArea'; 
 import ImageForm from 'components/common/FormFields/ImageForm';
+import ImageEditorContainer from 'containers/Admin/ImageEditorContainer';
 
 const Form = props => {
   const {
@@ -18,8 +19,10 @@ const Form = props => {
     handleChange,
     fields,
     selectOptions,
-    imageListRef,
-    uploadedImages
+    images,
+    imagename,
+    onImagesUpdate,
+    onImagesError
   } = props;
   return(
     <div className='portfolioForm'>
@@ -87,29 +90,12 @@ const Form = props => {
             handleChange={handleChange}
           />
         </div>
-        <label>Images .jpg, 513x352</label>
-        <input 
-          type='file'
-          id={`images`} 
-          name={`images`}
-          multiple
-          accept='.jpg'
-          onChange={handleChange}
+        <ImageEditorContainer
+          images={images}
+          imagename={fields.id.value}
+          onImagesUpdate={onImagesUpdate}
+          onImagesError={onImagesError}
         />
-        <ul id='dragSorter' ref={imageListRef}>
-        { uploadedImages.map(image => (
-          <li
-          key={image.name}
-          id={image.name}
-          draggable='true'
-          className='dragElement'
-          >         
-            <img 
-              src={image.path} 
-            />
-          </li>
-        ))}
-        </ul>
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
@@ -143,10 +129,11 @@ Form.propTypes = {
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
-  uploadedImages: PropTypes.array.isRequired,
-  imageListRef: PropTypes.shape({ 
-    current: PropTypes.instanceOf(Element) 
-  }).isRequired
+  images: PropTypes.array.isRequired,
+  imagename: PropTypes.string.isRequired,
+  onImagesUpdate: PropTypes.func.isRequired,
+  onImagesError: PropTypes.func.isRequired
+
 };
 
 export default Form;

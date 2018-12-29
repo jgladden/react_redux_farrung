@@ -7,7 +7,6 @@ import formUtil from 'utils/formUtil';
 import { getJwtHeader } from 'utils/authUtil';
 import { editAdminItemUrl } from 'config';
 import Form from 'components/Admin/Edit/Form';
-import { dragSort } from 'utils/dragSort';
 
 const formFields = {
   id: {
@@ -62,11 +61,29 @@ class FormContainer extends Component {
 
   constructor(props) {
       super(props);
-      this.imageList = React.createRef();
+      let images = this.getImages();
       this.state = {
         status: {},
+        images,
         fields: formUtil.initFields(formFields, this.props.formInitValues)
       }
+  }
+
+  getImages = () => {
+    const {
+      imageorder
+    } = this.props.formInitValues;
+    return imageorder.reduce((acc,img) => 
+      acc.concat({name: img})
+    ,[]);
+  }
+
+  onImagesUpdate = images => {
+    this.setState({images});
+  }
+
+  onImagesError = error => {
+    this.setState({status: { error }});
   }
 
   handleChange = e => {
@@ -82,6 +99,7 @@ class FormContainer extends Component {
     this.setState({fields: validateForm.fields});
     if(validateForm.isValidForm) {
       let values = validateForm.fieldValues;
+      values = this.processImages(values);
       this.setState({ 
         status: { 
           posting: 1
@@ -91,8 +109,27 @@ class FormContainer extends Component {
     }
   }
 
+  processImages = values => {
+    values.imageorder = [];
+    values.imagestoremove = [];
+    this.formData = new FormData();
+    this.state.images.forEach(image => {
+      if(image.file) 
+        this.formData.append('file[]', image.file, image.name);
+      if(image.remove) {
+        values.imagestoremove.push(image.name);
+      } else {
+        values.imageorder.push(image.name);
+      }
+    });
+    return values;
+  }
+
   postEdit = values => {
-    axios.post(editAdminItemUrl, values, getJwtHeader())
+    for(let key in values) {
+      this.formData.append(key, values[key]);
+    };
+    axios.post(editAdminItemUrl, this.formData, getJwtHeader())
       .then(response => {
         let error = response.data.error;
         if(!error) {
@@ -112,25 +149,10 @@ class FormContainer extends Component {
       });
   }
 
-  swapImageOrder = (dropName, dragName) => {
-    const fields = {...this.state.fields};
-    let orderArray = fields.imageorder.value;
-    let dropIndex = orderArray.indexOf(dropName);
-    let dragIndex = orderArray.indexOf(dragName);
-    let b = orderArray[dropIndex];
-    orderArray[dropIndex] = orderArray[dragIndex];
-    orderArray[dragIndex] = b;
-    fields.imageorder.value = orderArray;
-    this.setState({fields});
-  }
-
-  componentDidMount() {
-    dragSort(this.imageList.current, this.swapImageOrder);
-  }
-
   render() {
     const {
       fields,
+      images,
       status
     } = this.state;
     return (
@@ -140,7 +162,10 @@ class FormContainer extends Component {
         submitForm={this.handleSubmit}
         status={status}
         selectOptions={selectOptions}
-        imageListRef={this.imageList}
+        images={images}
+        imagename={fields.id.value}
+        onImagesUpdate={this.onImagesUpdate}
+        onImagesError={this.onImagesError}
       />
     );
   }

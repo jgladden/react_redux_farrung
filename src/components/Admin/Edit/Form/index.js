@@ -7,7 +7,7 @@ import CheckBox from 'components/common/FormFields/CheckBox';
 import Select from 'components/common/FormFields/Select'; 
 import TextArea from 'components/common/FormFields/TextArea'; 
 import ImageForm from 'components/common/FormFields/ImageForm';
-import {imgPath} from 'config';
+import ImageEditorContainer from 'containers/Admin/ImageEditorContainer';
 
 const Form = props => {
   const {
@@ -19,7 +19,10 @@ const Form = props => {
     handleChange,
     fields,
     selectOptions,
-    imageListRef
+    images,
+    imagename,
+    onImagesUpdate,
+    onImagesError
   } = props;
 
   return(
@@ -88,21 +91,12 @@ const Form = props => {
             handleChange={handleChange}
           />
         </div>
-        <label>Image name: <span>5+ characters / 513x352</span></label>
-        <ul id='dragSorter' ref={imageListRef}>
-        { fields.imageorder.value.map(image => (
-          <li
-          key={image}
-          id={image}
-          draggable='true'
-          className='dragElement'
-          >         
-            <img 
-              src={`${imgPath}${image}`} 
-            />
-          </li>
-        ))}
-        </ul>
+        <ImageEditorContainer
+          images={images}
+          imagename={fields.id.value}
+          onImagesUpdate={onImagesUpdate}
+          onImagesError={onImagesError}
+        />
         <div className='portfolioForm__displayOption'>
           <label>Display:</label>
           <CheckBox
@@ -136,9 +130,10 @@ Form.propTypes = {
   selectOptions: PropTypes.object.isRequired,
   handleChange: PropTypes.func.isRequired,
   submitForm: PropTypes.func.isRequired,
-  imageListRef: PropTypes.shape({ 
-    current: PropTypes.instanceOf(Element) 
-  }).isRequired
+  images: PropTypes.array.isRequired,
+  imagename: PropTypes.string.isRequired,
+  onImagesUpdate: PropTypes.func.isRequired,
+  onImagesError: PropTypes.func.isRequired
 };
 
 export default Form;
