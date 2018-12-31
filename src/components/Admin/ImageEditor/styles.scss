@@ -15,6 +15,7 @@
     width: 200px;
     margin: 10px 0;
     cursor: move;
+    position: relative;
 
     img {
       width: 100%;
@@ -22,5 +23,19 @@
   }
   .dragElement.onDrag {
     opacity: 0.4;
+  }
+  .btnRemoveImage {
+    background: #ccc;
+    border-radius: 20px;
+    width: 20px;
+    height: 20px;
+    color: #777;
+    border: 2px solid #aaa;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font: bold 10px arial;
   }
 }

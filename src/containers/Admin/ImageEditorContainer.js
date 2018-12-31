@@ -6,10 +6,6 @@ import { dragSort } from 'utils/dragSort';
 
 class ImageEditorContainer extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   validateImage = path => {
     return new Promise((resolve, reject) => {
       let img = new Image();
@@ -47,9 +43,7 @@ class ImageEditorContainer extends Component {
   }
 
   onImageRemove = e => {
-    const {
-      images
-    } = this.props;
+    let images = this.props.images.slice();
     let nameToRemove = e.currentTarget.parentNode.id;
     for(let i = 0; i < images.length; i++) {
       let image = images[i];

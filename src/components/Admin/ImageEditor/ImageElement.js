@@ -9,10 +9,15 @@ const ImageElement = ({name, path, onImageRemove}) => (
     draggable='true'
     className='dragElement'
   >      
-    <p onClick={onImageRemove}>remove</p>   
     <img 
       src={path ? path : `${imgPath}${name}`} 
     />
+    <button
+      className='btnRemoveImage'
+      onClick={onImageRemove}
+    >
+    X
+    </button> 
   </li>
 );
 
