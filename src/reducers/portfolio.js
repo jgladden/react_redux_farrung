@@ -15,9 +15,19 @@ export const getPortfolioTypes = createSelector(
 export const getItemsByType = createSelector(
   [items, type],
   (items, type) => {
-    return typeof items !== 'undefined' && items[type] ? items[type] : {};
+    return items && items[type] ? items[type] : {};
   }
 );
+
+export const getItemsSortedByRating = createSelector(
+  [getItemsByType],
+  (itemsByType) => {
+    return Object.keys(itemsByType)
+    .map(key => itemsByType[key])
+    .sort((a,b) => parseInt(b.rating) - parseInt(a.rating));
+  }
+);
+
 
 export const getItemById = createSelector(
   [getItemsByType, id],
