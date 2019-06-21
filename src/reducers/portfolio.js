@@ -39,7 +39,7 @@ export const getItemById = createSelector(
         return item;
       }
     })[0];
-    if(!item) return {item: {}};
+    if(!item) return {};
     const p = itemIndex === 0 ? itemsLength - 1 : itemIndex - 1;
     const n = itemIndex === itemsLength - 1 ? 0 : itemIndex + 1;
     item.prevId = items[p].id;
