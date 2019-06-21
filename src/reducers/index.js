@@ -7,8 +7,8 @@ import admin, * as fromAdmin from './admin';
 export const getPortfolioTypes = state => 
   fromPortfolio.getPortfolioTypes(state);
 
-export const getItemsSortedByRating = state => 
-  fromPortfolio.getItemsSortedByRating(state);
+export const getSortedItems = state => 
+  fromPortfolio.getSortedItems(state);
 
 export const getItemById = state => 
   fromPortfolio.getItemById(state);

@@ -1,5 +1,7 @@
 import './styles.scss';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setRoute } from 'actions';
 import PropTypes from 'prop-types';
 import { imgPath } from 'config';
 
@@ -34,5 +36,10 @@ ListItem.propTypes = {
   setRoute: PropTypes.func.isRequired
 };
 
-export default ListItem;
+export default connect(
+  null,
+  {
+    setRoute
+  }
+)(ListItem);
 

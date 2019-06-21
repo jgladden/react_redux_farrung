@@ -1,5 +1,8 @@
 import './styles.scss';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setRoute } from 'actions';
+import { getPortfolioTypes } from 'reducers';
 import PropTypes from 'prop-types';
 import Loading from 'components/common/pages/Loading';
 
@@ -26,4 +29,14 @@ Nav.propTypes = {
   setRoute: PropTypes.func.isRequired
 };
 
-export default Nav;
+const mapStateToProps = state => ({
+  portfolioTypes: getPortfolioTypes(state)
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    setRoute
+  }
+)(Nav);
+

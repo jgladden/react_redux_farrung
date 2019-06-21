@@ -19,7 +19,7 @@ export const getItemsByType = createSelector(
   }
 );
 
-export const getItemsSortedByRating = createSelector(
+export const getSortedItems = createSelector(
   [getItemsByType],
   (itemsByType) => {
     return Object.keys(itemsByType)
@@ -28,21 +28,23 @@ export const getItemsSortedByRating = createSelector(
   }
 );
 
-
 export const getItemById = createSelector(
-  [getItemsByType, id],
-  (itemsByType, id) => {
-    const itemKeys = Object.keys(itemsByType);
-    const len = itemKeys.length;
-    if(!id || len === 0)
-      return {item: {}, prevId: '', nextId: ''};
-    const pos = itemKeys.indexOf(id);
-    const p = pos === 0 ? len - 1 : pos - 1;
-    const n = pos === len - 1 ? 0 : pos + 1;
-    const item = itemsByType[id];
-    item.prevId = itemsByType[itemKeys[p]].id;
-    item.nextId = itemsByType[itemKeys[n]].id;
-    return { item };
+  [getSortedItems, id],
+  (items, id) => {
+    const itemsLength = items.length;
+    let itemIndex = null;
+    const item = items.filter((item, idx) => {
+      if(item.id === id) {
+        itemIndex = idx;
+        return item;
+      }
+    })[0];
+    if(!item) return {item: {}};
+    const p = itemIndex === 0 ? itemsLength - 1 : itemIndex - 1;
+    const n = itemIndex === itemsLength - 1 ? 0 : itemIndex + 1;
+    item.prevId = items[p].id;
+    item.nextId = items[n].id;
+    return item;
   }
 );
 
