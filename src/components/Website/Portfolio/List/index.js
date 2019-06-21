@@ -13,17 +13,15 @@ const PortfolioList = ({items, fetching, error}) => {
   if(error)
     return (<Error error={error} />);
 
-  const ids = Object.keys(items);
-
-  if(!ids.length)
+  if(!items.length)
     return(<p>No items found.</p>);
 
   return (
     <ul id='portfolioThumbnail'>
-      {ids.map(id => (
+      {items.map(item => (
         <ListItemContainer
-          key={id}
-          item={items[id]}
+          key={item.id}
+          item={item}
         />
       ))}
     </ul>
@@ -31,7 +29,7 @@ const PortfolioList = ({items, fetching, error}) => {
 };
 
 PortfolioList.propTypes = {
-  items: PropTypes.object.isRequired,
+  items: PropTypes.array.isRequired,
   error: PropTypes.string,
   fetching: PropTypes.bool
 };
