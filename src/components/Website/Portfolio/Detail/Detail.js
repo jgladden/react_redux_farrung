@@ -1,7 +1,9 @@
 import './styles.scss';
 import React from 'react';
+import { connect } from 'react-redux';
+import { setRoute } from 'actions';
+import { getItemById } from 'reducers';
 import PropTypes from 'prop-types';
-import { range } from 'utils';
 import { imgPath } from 'config';
 
 const Detail = ({item, setRoute}) => {
@@ -92,4 +94,14 @@ Detail.propTypes = {
   setRoute: PropTypes.func.isRequired
 };
 
-export default Detail;
+const mapStateToProps = state => ({
+  item: getItemById(state)
+});
+
+export default connect(
+  mapStateToProps,
+  {
+    setRoute
+  }
+)(Detail);
+

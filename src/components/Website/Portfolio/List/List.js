@@ -1,7 +1,9 @@
 import './styles.scss';
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import ListItemContainer from 'containers/Website/Portfolio/ListItemContainer';
+import { getSortedItems } from 'reducers';
+import ListItem from 'components/Website/Portfolio/ListItem/ListItem';
 import Loading from 'components/common/pages/Loading';
 import Error from 'components/common/pages/Error';
 
@@ -19,7 +21,7 @@ const PortfolioList = ({items, fetching, error}) => {
   return (
     <ul id='portfolioThumbnail'>
       {items.map(item => (
-        <ListItemContainer
+        <ListItem
           key={item.id}
           item={item}
         />
@@ -34,4 +36,14 @@ PortfolioList.propTypes = {
   fetching: PropTypes.bool
 };
 
-export default PortfolioList;
+const mapStateToProps = state => ({
+  items: getSortedItems(state),
+  fetching: state.portfolio.fetching,
+  error: state.portfolio.error
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(PortfolioList);
+

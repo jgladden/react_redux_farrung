@@ -1,7 +1,7 @@
 import './styles.scss';
 import React from 'react';
-import NavContainer from 'containers/Website/Portfolio/NavContainer';
-import ListContainer from 'containers/Website/Portfolio/ListContainer';
+import PortfolioNav from 'components/Website/Portfolio/Nav/Nav';
+import PortfolioList from 'components/Website/Portfolio/List/List';
 
 const Portfolio = () => (
   <article id="portfolioWrapper">
@@ -10,8 +10,8 @@ const Portfolio = () => (
     <h2>a picture is worth a thousand words</h2>
     <h3>cliche for a reason</h3>
     <div id="portfolio">
-      <NavContainer />
-      <ListContainer />
+      <PortfolioNav />
+      <PortfolioList />
     </div>
   </article>
 );
