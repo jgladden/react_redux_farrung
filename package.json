@@ -84,7 +84,7 @@
     "axios": "^0.19.0",
     "core-js": "^2.5.7",
     "director": "^1.2.8",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "react": "^16.7.0-alpha.0",
     "react-dom": "^16.7.0-alpha.0",
     "react-redux": "^5.1.0",
